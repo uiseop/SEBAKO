@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+<!--    {{ user.profile.korName }} 님 반갑습니다.-->
+
+    {% for blog in blogs.all %}
+    <h1>{{blog.title}}</h1>
+    <p>{{blog.body|truncatewords:45}}<a href="accounts/{{blog.id}}/">Read More</a> </p>
+    <p>{{blog.created_at}}</p>
+    <br><br>
+    {% endfor %}
+</head>
+<body>
+
+</body>
+</html>

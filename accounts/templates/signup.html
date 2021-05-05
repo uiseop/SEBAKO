@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signUp</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>회원가입</h1>
+    <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        아이디 : <input name="username" type="text">
+        <br>
+        비밀번호 : <input name="password1" type="password">
+        비밀번호 확인 : <input name="password2" type="password">
+        <br>
+        한글이름 : <input name="kor" type="text">
+        영문이름 : <input name="eng" type="text">
+        주소 : <input name="address" type="text">
+        이메일 : <input name="email" type="email">
+        전화번호 : <input name="tel" type="text">
+        <br><br>
+        <input type="submit" class="btn btn-primanry" value="sign up">
+    </form>
+</div>
+</body>
+</html>
