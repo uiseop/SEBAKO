@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-<!--    {{ user.profile.korName }} 님 반갑습니다.-->
-
+    {% if user.is_active %}
+    {{ user.profile.korName }} 님 반갑습니다.
+    {% else %}
+    로그인 해 주세요
+    {% endif %}
     {% for blog in blogs.all %}
     <h1>{{blog.title}}</h1>
     <p>{{blog.body|truncatewords:45}}<a href="accounts/{{blog.id}}/">Read More</a> </p>

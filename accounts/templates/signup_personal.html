@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEBACO-개인회원가입</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
 </head>
 <body>
     <!-- 가입하기 버튼을 누른 뒤 어디로? -->
@@ -12,41 +14,9 @@
     <hr>
     <div align="right">  
         
-        <a href="main.html">HOME</a>
+        <a href="home.html">HOME</a>
     </div>
-    
-    <!-- <div align = "center">
-        <form>
-            
-            <h1>회원 가입</h1>
 
-            회원 구분 <select name="name">
-        
-                <option value="개인회원">개인회원</option>
-                <option value="기업회원">기업회원</option>
-        
-            </select>
-            <br>
-
-            <br/>이름 <input type="text" id="Name"  required>
-            <br/>ID <input type="text" id="ID" required>
-            <br/>PW <input type="password" id="PW" required>
-            <br/>PW 확인 <input type="password" id="PW Check" required>
-            <br/>이메일 <input type="email" name="Email" required>
-
-            <br/>성별
-            <input type="radio" name="gender" value="male" checked>남자
-            <input type="radio" name="gender" value="female">여자
-        
-            <br/>전화번호 <input type="tel" name="Tel">
-            <br/>생일 <input type="date" name="birthday">
-            <br/><br/>
-            <input type="submit" value="확인">
-            <input type="reset" value="취소">
-            
-    
-        </form><p><br/></p>
-    </div> -->
 <div align="center">
     <div id="content">
         <!--회원가입 -->
@@ -54,7 +24,8 @@
             <h1>개인회원 가입</h1>
             <input type="hidden" name="historyCert" id="historyCert" />
     
-    <form action="/Account/regist/write-proc" id="frm-reg" method="post" name="frm-reg">
+    <form action="{% url 'signup' %}" id="frm-reg" method="POST" name="frm-reg">
+        {% csrf_token %}
         <input id="dev_Ident_e" name="UserIdentE" type="hidden" value="" />
         <input id="dev_certGubun" name="CertPathType" type="hidden" value="GGREG" />
         <input id="dev_db_name" name="DbName" type="hidden" value="GG" />
@@ -115,20 +86,26 @@
                                         <td colspan="2" class="tLine"><div></div></td>
                                     </tr>
                                     <tr>
+                                        <th>아이디</th>
+                                        <td>
+                                            <input type="text" name="username" class="tBox" title="아이디" id="dev_u_id" maxlength="12" />
+                                            <p class="compul"></p>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
                                         <th>한글이름</th>
                                         <td>
-                                            <input type="text" name="Name" class="tBox" title="이름" id="dev_u_name" maxlength="12" />
+                                            <input type="text" name="korName" class="tBox" title="이름" id="dev_u_korname" maxlength="12" />
                                             <p class="compul"></p>
-                                            <input id="dev_namechkStat" name="dev_namechkStat" type="hidden" value="" />
                                         </td>
                                         
                                     </tr>
                                     <tr>
                                         <th>영문이름</th>
                                         <td>
-                                            <input type="text" name="Name" class="tBox" title="이름" id="dev_u_name" maxlength="12" />
+                                            <input type="text" name="engName" class="tBox" title="이름" id="dev_u_engname" maxlength="12" />
                                             <p class="compul"></p>
-                                            <input id="dev_namechkStat" name="dev_namechkStat" type="hidden" value="" />
                                         </td>
                                     </tr>
                     
@@ -154,7 +131,7 @@
                                     <tr>
                                         <th>비밀번호 <a href="javascript:;"><span class="iconPwdQues" id="dev_pwd_help_icon"></span></a></th>
                                         <td>
-                                            <input type="password" name="UserPwd" class="tBox tPwd" id="dev_pwd1" maxlength="16" placeholder="8~16자 영문, 숫자, 특수문자" title="비밀번호" />
+                                            <input type="password" name="password1" class="tBox tPwd" id="dev_pwd1" maxlength="16" placeholder="8~16자 영문, 숫자, 특수문자" title="비밀번호" />
                                             <input type="hidden" name="birthcheck" id="dev_birthcheck" value="" />
                                             <p class="compul" id="PwdSafeResult"></p>
                                             <input id="dev_pwdchkStat" name="dev_pwdchkStat" type="hidden" value="" />
@@ -163,7 +140,7 @@
                                     <tr>
                                         <th>비밀번호 확인</th>
                                         <td>
-                                            <input type="password" name="UserPwd2" id="dev_pwconfirm" class="tBox tPwd" maxlength="16" title="비밀번호확인" />
+                                            <input type="password" name="password2" id="dev_pwconfirm" class="tBox tPwd" maxlength="16" title="비밀번호확인" />
                                             <p class="compul" id="dev_chk_pwd_confirm"></p>
                                         </td>
                                     </tr>
@@ -216,7 +193,7 @@
                                             </li>
 
                                             <li><b>Github</b>
-                                                <input type="text" name="Sns" class="tBox" title="SNS" id="dev_u_sns" maxlength="50" />
+                                                <input type="text" name="GitSns" class="tBox" title="SNS" id="dev_u_sns" maxlength="50" />
                                                 <p class="compul"></p>
                                                 <input id="dev_snschkStat" name="dev_snschkStat" type="hidden" value="" />
                                             </li>
@@ -293,7 +270,7 @@
                     </div>
                     <div class="info_confirm" id="boxJoinConfirm" style="display: none;">입력한 정보를 다시 확인해주세요.</div>
                     <div class="btnBx">
-                        <a href="#" id="btn_submit">가입하기</a>
+                        <input type="submit" value="가입하기">
                     </div>
                 </div>
                 <!-- 회원가입폼 끝 //-->

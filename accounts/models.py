@@ -20,3 +20,10 @@ class Profile(models.Model):
     address = models.CharField(max_length=50, verbose_name='주소')
     email = models.EmailField(max_length=50, verbose_name='이메일')
     phone = models.CharField(max_length=13, verbose_name='전화번호')
+
+    # created_at = models.DateField(auto_now_add=True)
+
+    # sns = models.CharField(max_length=50, verbose_name='SNS주소')
+
+    def __str__(self):
+        return f'{self.user}'
