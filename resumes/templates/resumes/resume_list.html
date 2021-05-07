@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for object in object_list %}
+<!--{{ object.'title','regiNum','issure','dateAcq'-->
+자격증명 : {{ object.title }}
+자격증번호 : {{ object.regiNum }}
+발급처 : {{ object.issure }}
+취득일 : {{ object.dateAcq }}
+
+생성일 : {{ object.created_at }}
+수정일 : {{ object.updated_at }}
+
+<a href="{% url 'resume:detail' object.id %}">자격증 상세보기</a>
+<a href="{% url 'resume:update' object.id %}">자격증 수정하기</a>
+<a href="{% url '"
+</body>
+</html>

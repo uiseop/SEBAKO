@@ -26,4 +26,5 @@ urlpatterns = [
     # path('accounts/new/', accounts.views.new, name='new'),
     # path('accounts/create/', accounts.views.create, name='create'),
     path('index/', accounts.views.index, name='index'),
+    path('resume/', include('resumes.urls')),
 ]

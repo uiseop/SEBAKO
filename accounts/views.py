@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+
 from accounts.models import Blog, Profile
 
 
@@ -78,3 +80,5 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+

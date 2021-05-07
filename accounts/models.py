@@ -28,16 +28,3 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user}'
 
-class Resume(models.Model):
-    title = models.CharField(max_length=30, verbose_name='자격증명')
-    regiNum = models.CharField(max_length=30, verbose_name='자격증번호')
-    issure = models.CharField(max_length=30, verbose_name='발급처')
-    dateAcq = models.DateField()
-
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
-
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'[{self.user}] {self.title}'
