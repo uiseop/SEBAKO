@@ -11,18 +11,18 @@ from accounts.models import Blog, Profile
 
 def home(request):
     blogs = Blog.objects
-    return render(request, 'home2.html', {'blogs': blogs})
+    return render(request, 'accounts/home2.html', {'blogs': blogs})
     # return render(request, 'zzsignup.html')
 
 
 def detail(request, pk):
     # blog_detail = get_object_or_404(Blog, pk=pk)
     blog_detail = Blog.objects.get(pk=pk)
-    return render(request, 'detail.html', {'blog': blog_detail})
+    return render(request, 'accounts/detail.html', {'blog': blog_detail})
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'accounts/index.html')
 
 
 def signup(request):
@@ -58,8 +58,8 @@ def signup(request):
             auth.login(request, user)
             return redirect('home')
 
-        return render(request, 'signup_personal.html')
-    return render(request, 'signup_personal.html')
+        return render(request, 'accounts/signup_personal.html')
+    return render(request, 'accounts/signup_personal.html')
 
 
 def login(request):
@@ -71,10 +71,10 @@ def login(request):
             auth.login(request, user)
             return redirect('home')
         else:
-            return render(request, 'login.html', {'error': 'username or password is incorrect'})
+            return render(request, 'accounts/login.html', {'error': 'username or password is incorrect'})
 
     else:
-        return render(request, 'login.html')
+        return render(request, 'accounts/login.html')
 
 
 def logout(request):
