@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-xl-8 col-md-8">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="수정하기">
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
+</body>
+</html>
