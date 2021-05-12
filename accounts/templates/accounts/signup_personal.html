@@ -6,7 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEBACO-개인회원가입</title>
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
+
 </head>
 <body>
     <!-- 가입하기 버튼을 누른 뒤 어디로? -->
@@ -24,7 +35,7 @@
             <h1>개인회원 가입</h1>
             <input type="hidden" name="historyCert" id="historyCert" />
     
-    <form action="{% url 'signup' %}" id="frm-reg" method="POST" name="frm-reg">
+    <form action="{% url 'signup_personal' %}" id="frm-reg" method="POST" name="frm-reg">
         {% csrf_token %}
         <input id="dev_Ident_e" name="UserIdentE" type="hidden" value="" />
         <input id="dev_certGubun" name="CertPathType" type="hidden" value="GGREG" />
@@ -34,12 +45,7 @@
         <input id="MemberType" name="MemberType" type="hidden" value="M" />            
         <!--// 동의 -->
                 <div class="inner">
-                    <!-- 
-                        <div class="user_join_agree">
-                        <input type="checkbox" name="user_all_agree" id="agreeChkAll" value="">
-                        <label for="agreeChkAll">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</label>
-                        </div> 
-                    -->
+                    
                     <div class="join_dot"></div>
                     <div class="user_join_agree agrSelect">
                         <input type="checkbox" name="Agree5" id="agreeChk_5" value="on">
