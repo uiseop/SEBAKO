@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-xl-4 col-md-4">
+        <div class="card" style="width : 30rem;">
+            <div class="resume-body">
+                <h5 class="resume-title">{{object.title}}</h5>
+                <p class="resume-text">{{object.regiNum}}</p>
+                <p class="resume-text">{{object.issure}}</p>
+                <p class="resume-text">{{object.dataAcq}}</p>
+
+            </div>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">생성일 : {{object.created_at}}</li>
+                <li class="list-group-item">수정일 : {{objcet.updated_at}}</li>
+            </ul>
+
+            <div class="resume-body">
+                <a href="{% url 'resumes:update' object.id %}" class="resume-link">수정하기</a>
+                <a href="{% url 'resumes:delete' object.id %}" class="resume-link">삭제하기</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col"></div>
+</div>
+</body>
+</html>
