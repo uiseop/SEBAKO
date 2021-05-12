@@ -25,22 +25,25 @@ def detail(request, pk):
 def index(request):
     return render(request, 'accounts/index.html')
 
+
 def signup(request):
-   return render(request, 'accounts/signup.html')
+    return render(request, 'accounts/signup.html')
+
 
 def signup_company(request):
     return render(request, 'accounts/signup_company.html')
 
+
 def signup_personal(request):
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
-            messages.info(request,'이미 가입한 아이디입니다')
+            messages.info(request, '이미 가입한 아이디입니다')
             return redirect('accounts:signup_personal')
         # redirect는 함수 명 적어.
 
         if request.POST['password1'] == request.POST['password2']:
             if len(request.POST['password1']) < 8:
-                messages.info(request,'비밀 짧아')
+                messages.info(request, '비밀 짧아')
                 return redirect('accounts:signup_personal')
 
             user = User.objects.create_user(
@@ -82,15 +85,15 @@ def login(request):
     else:
         return render(request, 'accounts/login.html')
 
+
 def login_personal(request):
-       return render(request, 'login_personal.html')
+    return render(request, 'accounts/login_personal.html')
+
 
 def login_company(request):
-       return render(request, 'login_company.html')
+    return render(request, 'accounts/login_company.html')
 
 
 def logout(request):
     auth.logout(request)
     return redirect('home')
-
-

@@ -23,8 +23,16 @@ class Profile(models.Model):
 
     created_at = models.DateField(auto_now_add=True)
 
-    # sns = models.CharField(max_length=50, verbose_name='SNS주소')
+    AddSNS = models.ManyToManyField('SNS', blank=True, related_name='domain')
 
     def __str__(self):
         return f'{self.user}'
+
+class SNS(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
+    url = models.URLField("Site URL")
+
+    class Meta:
+        verbose_name_plural = "SNS"
 

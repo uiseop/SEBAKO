@@ -57,7 +57,13 @@
                 {{ user.profile.address }} · {{ user.profile.phone }} ·
                 <a href="mailto:|{{ user.profie.email }}">{{ user.profile.email }}</a>
             </div>
-            <p class="lead mb-5">간단한 자기소개서 작성</p>
+            {% if intro_list.all %}
+            {% for intro in intro_list.all %}
+            <p class="lead mb-5">{{intro.text}}</p>
+            {% endfor %}
+            {% else %}
+            <p class="lead mb-5">간단한 자기소개서 작성하여 봅시다</p>
+            {% endif %}
             <div class="social-icons">
                 <!--                        소셜 주소가 있을경우 우리는 github만 사용-->
                 <a class="social-icon" href="#"><i class="fab fa-instagram"></i></a>
@@ -75,6 +81,28 @@
     <section class="resume-section" id="certificate">
         <div class="resume-section-content">
             <h2 class="mb-5">Certificate ( 자격증 작성하는 곳 )</h2>
+            {% if resume_list.all %}
+            {% for resume in resume_list.all %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">{{resume.title}}</h3>
+                    <div class="subheading mb-3">·{{resume.issure}}  ·{{resume.dateAcq}}</div>
+
+                    <p>{{resume.regiNum}}</p>
+                </div>
+                <div class="flex-shrink-0"><span class="text-primary">{{resume.dateAcq}} - Present</span></div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">자격증 명</h3>
+                    <div class="subheading mb-3">·자격증 발급처  ·자격증 취득일</div>
+                    <p>당신의 이력서를 보다 안전하고 편리하게 관리해드립니다</p>
+                </div>
+                <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
+            </div>
+            {% endif %}
             <br>
             <br>
             <a type="button" class="btn btn-primary" href="#">수정하기</a>

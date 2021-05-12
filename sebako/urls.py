@@ -28,7 +28,8 @@ urlpatterns = [
     path('accounts/<int:pk>/',accounts.views.detail, name='detail'),
     # path('accounts/new/', accounts.views.new, name='new'),
     # path('accounts/create/', accounts.views.create, name='create'),
-    path('index/', accounts.views.index, name='index'),
+    # path('index/', accounts.views.index, name='index'),
+    path('singlepage/',include('singlepage.urls')),
     path('resume/', include('resumes.urls')),
 ]
 

@@ -33,7 +33,7 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
                         {% if user.is_active %}
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/index/">내 정보</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.id}}/">내 정보</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
                         {% endif %}
