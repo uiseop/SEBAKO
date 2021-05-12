@@ -22,11 +22,11 @@
 {% endif %}
 
 <!-- 가입하기 버튼을 누른 뒤 어디로? -->
-<center><h1>SEBACO RESUME MANAGEMENT SYSTEM</h1></center>
+<center><h3>SEBACO RESUME MANAGEMENT SYSTEM</h3></center>
 <hr>
 <div align="right">
 
-    <a href="main.html">HOME</a>
+    <a href="home2.html">HOME</a>
 </div>
 
 <!-- <div align = "center">
@@ -65,7 +65,7 @@
     <div id="content">
         <!--회원가입 -->
         <div class="monLeave monUserJoin joinPerson">
-            <h1>개인회원 가입</h1>
+            <!-- <h3>개인회원가입</h3> -->
             <input type="hidden" name="historyCert" id="historyCert"/>
 
             <form action="{% url 'signup' %}" id="frm-reg" method="POST" name="frm-reg">
@@ -80,7 +80,8 @@
                                                                                                value="GG"/><input
                     id="dev_u_ident" name="UserIdent" type="hidden" value=""/><input id="dev_cert_idx" name="CertIndex"
                                                                                      type="hidden" value=""/><input
-                    id="MemberType" name="MemberType" type="hidden" value="M"/>            <!--// 동의 -->
+                    id="MemberType" name="MemberType" type="hidden" value="M"/>            
+                    <!--// 동의 -->
                 <div class="inner">
                     <!-- <div class="user_join_agree">
                         <input type="checkbox" name="user_all_agree" id="agreeChkAll" value=""><label for="agreeChkAll">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</label>

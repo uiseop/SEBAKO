@@ -2,6 +2,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 # Create your views here.
 from accounts.models import Blog, Profile
@@ -22,8 +23,13 @@ def detail(request, pk):
 def index(request):
     return render(request, 'index.html')
 
-
 def signup(request):
+   return render(request, 'signup.html')
+
+def signup_company(request):
+    return render(request, 'signup_company.html')
+
+def signup_personal(request):
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
             messages.info(request,'이미 가입한 아이디입니다')
@@ -73,6 +79,12 @@ def login(request):
 
     else:
         return render(request, 'login.html')
+
+def login_personal(request):
+       return render(request, 'login_personal.html')
+
+def login_company(request):
+       return render(request, 'login_company.html')
 
 
 def logout(request):

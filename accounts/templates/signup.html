@@ -1,28 +1,78 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+    
 <head>
-    <meta charset="UTF-8">
-    <title>signUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
+
+    <title>회원가입 구분</title>
+
+
+
+	<script language="javascript">
+	function check(){
+		var form = document.form1;
+		//첫번째 라디오 버튼을 선택한 경우
+		if(form.ex[0].checked == true){
+			//현재 폼의 action 값을 signup_personal.html이라는 파일로 만든다
+			form.action="signup/signup_personal";
+		}
+		//두번째 라디오 버튼을 선택한 경우
+		else if(form.ex[1].checked == true){
+			form.action = "accounts/signup_company";
+		}
+		
+		form.submit();
+	}
+	</script>
+
 </head>
 <body>
+<center>
+    <div class="container">
+        <h3>회원가입 </h3><br>
+        <!-- <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            아이디 : <input name="username" type="text">
+            <br>
+            비밀번호 : <input name="password1" type="password">
+            비밀번호 확인 : <input name="password2" type="password">
+            <br>
+            한글이름 : <input name="kor" type="text">
+            영문이름 : <input name="eng" type="text">
+            주소 : <input name="address" type="text">
+            이메일 : <input name="email" type="email">
+            전화번호 : <input name="tel" type="text">
+            <br><br>
+            <input type="submit" class="btn btn-primanry" value="sign up">
+        </form> -->
 
-<div class="container">
-    <h1>회원가입</h1>
-    <form method="POST" action="{% url 'signup' %}">
-        {% csrf_token %}
-        아이디 : <input name="username" type="text">
-        <br>
-        비밀번호 : <input name="password1" type="password">
-        비밀번호 확인 : <input name="password2" type="password">
-        <br>
-        한글이름 : <input name="kor" type="text">
-        영문이름 : <input name="eng" type="text">
-        주소 : <input name="address" type="text">
-        이메일 : <input name="email" type="email">
-        전화번호 : <input name="tel" type="text">
-        <br><br>
-        <input type="submit" class="btn btn-primanry" value="sign up">
-    </form>
-</div>
+        <form name="form1" method="POST" action="{% url 'signup' %}" id="frm-reg">
+            <!-- <input type = "radio" name="ex" value="1" action checked> 개인회원
+            <input type = "radio" name="ex" value="2" > 기업회원 -->
+
+            <a href="{% url 'signup_personal'%}" >개인회원</a>
+            <a href="{% url 'signup_company'%}" >기업회원</a>
+        
+            <!-- &nbsp;&nbsp; <a href = "javascript:check()" class="btn btn-primary">확인</a> -->
+        </form>
+
+        
+    </div>
+</center>
 </body>
 </html>

@@ -1,58 +1,32 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-    
-    <!-- <link rel="stylesheet" type="text/css" href="https://contents.albamon.kr/webpack/dist/css/common_account-sv-202004071012.css" />
-    <link rel="stylesheet" type="text/css" href="https://contents.albamon.kr/webpack/dist/css/join-sv-202103240937.css" />
-
-    <script type="text/javascript" src="/Scripts/js/jq/jquery.js"></script>
-    <script type="text/javascript" src="/Scripts/js/mon_interest_js.js"></script>
-    <script type="text/javascript" src="/Scripts/js/layout/layout.totsearch.js"></script>
-    <script type="text/javascript" src="/Scripts/js/layout/layout.common.js?20210505"></script>
-    <script type="text/javascript" src="/Scripts/js/Mon_Layer_Position.js"></script>
-    <script type="text/javascript" src="/Scripts/js/layout/layout.footer.js"></script>
-    <script type="text/javascript" src="/Scripts/js/mon_cookie.js"></script>
-    <script type="text/javascript" src="/Scripts/js/main_loc.js"></script>
-    <script type="text/javascript" src="/Scripts/js/mon_sm_akc.js"></script>
-    
-    <script type="text/javascript" src="/Scripts/mon/lib/jkmon/mon.pc.min.js?202105052"></script>
-    <script type="text/javascript" src="/Scripts/JS/DSTracker/dslog.js?d=20190801" id="dslog_tag"></script>
-    <script type="text/javascript">
-        window.dsValDic = {};
-        window.dsTypeDic = {};
-        window.dsHelper = {
-            registVal: function (key, value) {
-                window.dsValDic[key] = value;
-            },
-            getVal: function (key) {
-                return window.dsValDic[key];
-            },
-            removeVal: function (key) {
-                delete (window.dsValDic[key]);
-            },
-            clearVal: function () {
-                window.dsValDic = {}
-            },
-            registType: function (type) {
-                window.dsTypeDic[type] = type;
-            },
-            removeType: function (type) {
-                delete (window.dsTypeDic[type]);
-            },
-            clearType: function (type) {
-                window.disTypeDic = {};
-            }
-        };
-    </script> -->
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEBACO-기업회원가입</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
+
+   
+    
 </head>
 <body>
      <!-- 가입하기 버튼을 누른 뒤 어디로? -->
     <center><h1>SEBACO RESUME MANAGEMENT SYSTEM</h1></center>
     <hr>
     <div align="right">  
-        <a href="main.html">HOME</a>
+        <a href="home2.html">HOME</a>
     </div>
 
     <div align="center">
@@ -110,9 +84,7 @@
 
                     <!--// 기업회원 -->
                     <div class="inner">
-                        <div class="user_join_agree">
-                            <input type="checkbox" name="user_all_agree" id="agreeChkAll" value="" /><label for="agreeChkAll">필수동의 항목 및 개인정보 수집 및 이용 동의(선택), 광고성 정보 이메일/SMS 수신 동의(선택)에 일괄 동의합니다.</label>
-                        </div>
+                        
                         <div class="join_dot"></div>
                         <div class="user_join_agree agrSelect">
                             <input type="checkbox" name="user_service_agree" id="user_service_agree" value="" /><label for="user_service_agree">서비스 이용약관 동의<span>(필수)</span></label>
@@ -180,7 +152,7 @@
                                         <tr>
                                             <th>아이디</th>
                                             <td>
-                                                <input type="text" name="UserId" id="dev_idchk" class="tBox tPwd" maxlength="16" placeholder="6~16자 영문, 숫자" title="아이디" disabled>
+                                                <input type="text" name="UserId" id="dev_idchk" class="tBox tPwd" maxlength="16" placeholder="6~16자 영문, 숫자" title="아이디" >
                                                 
                                                 <p class="compul"></p>
                                                 <input id="dev_idchkStat" name="dev_idchkStat" type="hidden" value="" />
@@ -189,7 +161,7 @@
                                         <tr id="area_password">
                                             <th>비밀번호 <a href="javascript:void(0);"><span class="iconPwdQues" id="dev_pwd_help_icon"></span></a></th>
                                             <td>
-                                                <input type="password" name="UserPwd" id="dev_pwd1" class="tBox tPwd" maxlength="16" placeholder="8~16자 영문, 숫자, 특수문자" title="비밀번호" disabled>
+                                                <input type="password" name="UserPwd" id="dev_pwd1" class="tBox tPwd" maxlength="16" placeholder="8~16자 영문, 숫자, 특수문자" title="비밀번호" >
                                                 <input type="hidden" name="birthcheck" id="dev_birthcheck" />
                                                 
                                                 <p class="compul" id="PwdSafeResult"></p>
@@ -199,7 +171,7 @@
                                         <tr>
                                             <th>비밀번호 확인</th>
                                             <td>
-                                                <input type="password" name="UserPwd2" id="dev_pwconfirm" class="tBox tPwd" maxlength="16" title="비밀번호확인" disabled>
+                                                <input type="password" name="UserPwd2" id="dev_pwconfirm" class="tBox tPwd" maxlength="16" title="비밀번호확인" >
                                                 
                                                 <p class="compul" id="dev_chk_pwd_confirm"></p>
                                             </td>
@@ -207,12 +179,20 @@
                                         <tr>
                                             <th>전화번호</th>
                                             <td>
-                                                <select name="Phone1" id="Phone1" class="tBox joinBx tPhone tPhone_local" title="전화번호국번" data-val="" disabled></select> -
+                                                <select name="Phone1" id="Phone1" class="tBox joinBx tPhone tPhone_local" title="전화번호국번" data-val="" >
+                                                    <option value="010">010</option>
+                                                    <option value="010">02</option>
+                                                    <option value="011">011</option>
+                                                    <option value="016">016</option>
+                                                    <option value="017">017</option>
+                                                    <option value="018">018</option>
+                                                    <option value="019">019</option>
+                                                </select> -
                                                 <span id="dev_phone_area">
-                                                    <input type="text" name="Phone2" id="Phone2" class="tBox tPhone tphone_2" title="전화번호 앞자리" maxlength="4" disabled> -
-                                                    <input type="text" name="Phone3" id="Phone3" class="tBox tPhone tphone_2" title="전화번호 뒷자리" maxlength="4" disabled>
+                                                    <input type="text" name="Phone2" id="Phone2" class="tBox tPhone tphone_2" title="전화번호 앞자리" maxlength="4" > -
+                                                    <input type="text" name="Phone3" id="Phone3" class="tBox tPhone tphone_2" title="전화번호 뒷자리" maxlength="4" >
                                                 </span>
-                                                <input name="C_Phone_SelfInput" title="전화번호 직접 입력" class="tBox" id="dev_phone_selfInput" style="width: 121px; display: none; -ms-ime-mode: disabled;" type="text" maxlength="30" disabled>
+                                                <input name="C_Phone_SelfInput" title="전화번호 직접 입력" class="tBox" id="dev_phone_selfInput" style="width: 121px; display: none; -ms-ime-mode: ;" type="text" maxlength="30" >
                                                 
                                                 <p class="compul" id="txtPhone"></p>
                                                 <input id="dev_phoneChkStat" name="dev_phoneChkStat" type="hidden" value="" />
@@ -221,8 +201,8 @@
                                         <tr>
                                             <th>이메일</th>
                                             <td>
-                                                <input type="text" name="EmailId" id="dev_M_Email" maxlength="25" class="tBox tEmail tEmail_gi" title="이메일아이디" disabled> @ <input type="text" name="EmailDomain" id="dev_mail_etc" maxlength="25" class="tBox tEmail" title="이메일계정" disabled>
-                                                <select name="C_Email_Cp" id="dev_email_Cp" class="tBox joinBx tEmail tEmail_gi" title="이메일 서비스업체 선택" data-val="" disabled>
+                                                <input type="text" name="EmailId" id="dev_M_Email" maxlength="25" class="tBox tEmail tEmail_gi" title="이메일아이디" > @ <input type="text" name="EmailDomain" id="dev_mail_etc" maxlength="25" class="tBox tEmail" title="이메일계정" >
+                                                <select name="C_Email_Cp" id="dev_email_Cp" class="tBox joinBx tEmail tEmail_gi" title="이메일 서비스업체 선택" data-val="" >
                                                     <option value="">선택하세요</option>
                                                     <option value="naver.com">naver.com</option>
                                                     <option value="hanmail.net">hanmail.net</option>
@@ -244,10 +224,10 @@
                                         <tr>
                                             <th>사업자등록번호</th>
                                             <td>
-                                                <input type="text" name="CorporateRegistrationNumber1" id="CorporateRegistrationNumber1" class="tBox tPhone" title="사업자등록번호" maxlength="3" disabled> -
-                                                <input type="text" name="CorporateRegistrationNumber2" id="CorporateRegistrationNumber2" class="tBox tPhone" title="사업자등록번호" maxlength="2" disabled> -
-                                                <input type="text" name="CorporateRegistrationNumber3" id="CorporateRegistrationNumber3" class="tBox tPhone" title="사업자등록번호" maxlength="5" disabled>
-                                                <img src="https://contents.albamon.kr/monimg/common/btn/btn_confirm_ok.png?201608161634" alt="확인" id="btn_CertifyCorporateRegistrationNumber" disabled>
+                                                <input type="text" name="CorporateRegistrationNumber1" id="CorporateRegistrationNumber1" class="tBox tPhone" title="사업자등록번호" maxlength="3" > -
+                                                <input type="text" name="CorporateRegistrationNumber2" id="CorporateRegistrationNumber2" class="tBox tPhone" title="사업자등록번호" maxlength="2" > -
+                                                <input type="text" name="CorporateRegistrationNumber3" id="CorporateRegistrationNumber3" class="tBox tPhone" title="사업자등록번호" maxlength="5" >
+                                                <img src="https://contents.albamon.kr/monimg/common/btn/btn_confirm_ok.png?201608161634" alt="확인" id="btn_CertifyCorporateRegistrationNumber" >
                                                 <p class="compul" id="txtCRegNum"></p>
                                                 <p class="busi_txt">
                                                     ※ 사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.<br>
@@ -262,7 +242,7 @@
                                         <tr>
                                             <th>회사/점포명</th>
                                             <td>
-                                                <input type="text" name="CName" id="CName" class="tBox" title="회사/점포명" maxlength="25" autocomplete="off" disabled>
+                                                <input type="text" name="CName" id="CName" class="tBox" title="회사/점포명" maxlength="25" autocomplete="off" >
                                                 <div class="autoSearch" id="dev_keywordResultList" style="display:none;"></div>
                                                 <p class="compul" id="txtCName"></p>
                                                 <input type="hidden" name="bradnKeywordCode" id="dev_brandKeywordCode">
@@ -274,7 +254,7 @@
                                         <tr>
                                             <th>대표자명</th>
                                             <td>
-                                                <input type="text" name="CorporateBossName" id="CorporateBossName" class="tBox" title="대표자명" maxlength="20" disabled>
+                                                <input type="text" name="CorporateBossName" id="CorporateBossName" class="tBox" title="대표자명" maxlength="20" >
                                                 <p class="compul" id="txtCBossName"></p>
                                                 <input id="dev_bossNamechkStat" name="dev_bossNamechkStat" type="hidden" value="" />
 
@@ -283,9 +263,9 @@
                                         <tr>
                                             <th class="tbPt">회사/점포주소</th>
                                             <td>
-                                                <input type="text" name="ZipCode" id="ZipCode" title="회사/점포주소" class="tBox tConfirmNum" readonly disabled>
-                                                <img class="btnConfirmNum" id="btn_searchAddress" src="https://contents.albamon.kr/monimg/common/btn/btn_addr_sch.png?201608161634" alt="주소검색" disabled>
-                                                <input type="text" name="Full_Addr" id="Full_Addr" title="회사/점포주소" class="tBox tConfirmNum_2" onchange="$.map_reg.map_auto_reg(document.form, '', 'coinfo', '' ,'');" readonly disabled>
+                                                <input type="text" name="ZipCode" id="ZipCode" title="회사/점포주소" class="tBox tConfirmNum" readonly >
+                                                <img class="btnConfirmNum" id="btn_searchAddress" src="https://contents.albamon.kr/monimg/common/btn/btn_addr_sch.png?201608161634" alt="주소검색" >
+                                                <input type="text" name="Full_Addr" id="Full_Addr" title="회사/점포주소" class="tBox tConfirmNum_2" onchange="$.map_reg.map_auto_reg(document.form, '', 'coinfo', '' ,'');" readonly >
                                                 <p class="compul" id="txtAddr"></p>
                                                 <input id="dev_addrchkStat" name="dev_addrchkStat" type="hidden" value="" />
                                             </td>
@@ -296,7 +276,7 @@
                                         <tr>
                                             <td colspan="2" class="howAlbamon h_gi">
                                                 <span>[선택]</span> SEBACO를 어떻게 알게 되셨나요?
-                                                <select class="tBox joinBx tHow" disabled="" id="known_route" name="SelectedKnownRouteValue" style="width:350px;" title="알바몬을 어떻게 알게 되셨나요"><option value="">선택하세요</option>
+                                                <select class="tBox joinBx tHow" ="" id="known_route" name="SelectedKnownRouteValue" style="width:350px;" title="알바몬을 어떻게 알게 되셨나요"><option value="">선택하세요</option>
                                                 <option value="A01">주요 포털사이트 검색</option>
                                                 <option value="A13">앱스토어 검색</option>
                                                 <option value="A03">라디오광고</option>
@@ -356,7 +336,7 @@
                     </div>
                         <div class="info_confirm" id="area_submit_noti"></div>
                         <div class="btnBx">
-                                <a href="javascript:void(0);" id="btn_join">가입하기</a>
+                            <input type="submit" value="가입하기">
                         </div>
                     </div>
                     <!-- 기업회원 끝 //-->
