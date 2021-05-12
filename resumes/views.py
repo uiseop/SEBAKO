@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -15,6 +15,16 @@ class ResumeCreate(CreateView): # 자격증 생성할때 사용,채워야할 필
     fields = ['title','regiNum','issure','dateAcq']
     template_name_suffix = '_create'
     success_url = '/index'
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        if form.is_valid():
+            # 올바르다면 form : 모델폼
+            form.instance.save()
+            return redirect('/')
+        else:
+            # 올바르지 않다면
+            return self.render_to_response({'form': form})
 
 class ResumeUpdate(UpdateView):
     model = Resume

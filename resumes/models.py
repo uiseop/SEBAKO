@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
+
+
 class Resume(models.Model):
     title = models.CharField(max_length=30, verbose_name='자격증명')
     regiNum = models.CharField(max_length=30, verbose_name='자격증번호')
@@ -17,3 +20,9 @@ class Resume(models.Model):
 
     def __str__(self):
         return f'[{self.user}] {self.title}'
+
+    def get_absolute_url(self):
+        return reverse('resumes:resume_detail', args=[self.id])
+
+    class Meta:
+        ordering = ['-created_at']
