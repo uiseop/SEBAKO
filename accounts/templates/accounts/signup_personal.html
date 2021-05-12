@@ -35,7 +35,7 @@
             <h1>개인회원 가입</h1>
             <input type="hidden" name="historyCert" id="historyCert" />
     
-    <form action="{% url 'signup_personal' %}" id="frm-reg" method="POST" name="frm-reg">
+    <form action="{% url 'accounts:signup_personal' %}" id="frm-reg" method="POST" name="frm-reg">
         {% csrf_token %}
         <input id="dev_Ident_e" name="UserIdentE" type="hidden" value="" />
         <input id="dev_certGubun" name="CertPathType" type="hidden" value="GGREG" />

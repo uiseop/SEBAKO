@@ -5,22 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-{% for object in objects_list %}
+<p>이곳은 자격증 리스트 뷰입니다</p>
+
 <!--{{ object.'title','regiNum','issure','dateAcq'-->
-자격증명 : {{ object.title }}
-자격증번호 : {{ object.regiNum }}
-발급처 : {{ object.issure }}
-취득일 : {{ object.dateAcq }}
+<div class="col"></div>
+<div class="col-5">
+    {% for resume in objects %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 panel panel-default">
+            <p>자격증명 : {{ resume.title }}</p>
+            <p>자격증번호 : {{ resume.regiNum }}</p>
+            <p>발급처 : {{ resume.issure }}</p>
+            <p>취득일 : {{ resume.dateAcq }}</p>
 
-생성일 : {{ object.created_at }}
-수정일 : {{ object.updated_at }}
+            <p>생성일 : {{ resume.created_at }}</p>
+            <p>수정일 : {{ resume.updated_at }}</p>
+<!--            url.py 에 app_name부분 이 url '이름: ' 이름부분-->
+<!--            pk값은 views에서 넘겨준 값, 위 for 문안에 선언한 변수명의 id로 받아오겠다는 뜻-->
+            <a href="{% url 'resumes:resume_delete' pk=resume.id %}" class="btn btn-outline-danger btn-sm float-right">삭제하기</a>
+            <a href="{% url 'resumes:resume_update' pk=resume.id %}" class="btn btn-outline-danger btn-sm float-right">수정하기</a>
+        </div>
+        {% endfor %}
+    </div>
 
-
-<a href="{% url 'resume:detail' object.id %}">자격증 상세보기</a>
-<a href="{% url 'resume:update' object.id %}">자격증 수정하기</a>
-<a href="{% url 'resume:delete' object.id %}">자격증 삭제하기</a>
-
-{% endfor %}
 
 </body>
 </html>

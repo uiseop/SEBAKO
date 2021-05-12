@@ -45,28 +45,14 @@
 <center>
     <div class="container">
         <h3>회원가입 </h3><br>
-        <!-- <form method="POST" action="{% url 'signup' %}">
-            {% csrf_token %}
-            아이디 : <input name="username" type="text">
-            <br>
-            비밀번호 : <input name="password1" type="password">
-            비밀번호 확인 : <input name="password2" type="password">
-            <br>
-            한글이름 : <input name="kor" type="text">
-            영문이름 : <input name="eng" type="text">
-            주소 : <input name="address" type="text">
-            이메일 : <input name="email" type="email">
-            전화번호 : <input name="tel" type="text">
-            <br><br>
-            <input type="submit" class="btn btn-primanry" value="sign up">
-        </form> -->
 
-        <form name="form1" method="POST" action="{% url 'signup' %}" id="frm-reg">
+
+        <form name="form1" method="POST" action="{% url 'accounts:signup' %}" id="frm-reg">
             <!-- <input type = "radio" name="ex" value="1" action checked> 개인회원
             <input type = "radio" name="ex" value="2" > 기업회원 -->
 
-            <a href="{% url 'signup_personal'%}" >개인회원</a>
-            <a href="{% url 'signup_company'%}" >기업회원</a>
+            <a href="{% url 'accounts:signup_personal'%}" >개인회원</a>
+            <a href="{% url 'accounts:signup_company'%}" >기업회원</a>
         
             <!-- &nbsp;&nbsp; <a href = "javascript:check()" class="btn btn-primary">확인</a> -->
         </form>
