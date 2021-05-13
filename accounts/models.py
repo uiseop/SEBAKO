@@ -14,6 +14,7 @@ class Blog(models.Model):
         return self.body[:100]
 
 class Profile(models.Model):
+    is_user = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='아이디')
     korName = models.CharField(max_length=30, verbose_name='한글이름')
     engName = models.CharField(max_length=30, verbose_name='영문이름')
@@ -35,4 +36,14 @@ class SNS(models.Model):
 
     class Meta:
         verbose_name_plural = "SNS"
+
+class Company(models.Model):
+    is_company = models.BooleanField(default=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='아이디')
+    phone = models.CharField(max_length=13, verbose_name='전화번호')
+    email = models.EmailField(max_length=50, verbose_name='이메일')
+    regiNum = models.IntegerField(verbose_name='사업자번호')
+    compName = models.CharField(max_length=30, verbose_name='기관명')
+
+    employee = models.ManyToManyField('Profile', blank=True, related_name='employer')
 
