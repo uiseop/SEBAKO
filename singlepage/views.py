@@ -29,3 +29,7 @@ def PageDetail(request,pk):
     resume_list = resumes.filter(user_id=pk)
 
     return render(request, 'singlepage/index.html',{'user': user, 'intro_list':intro_list,'experience_list':experience_list,'education_list':education_list,'resume_list':resume_list})
+
+def ChangePicture(request,pk):
+    user = User.objects.get(id=pk)
+    return render(request, 'singlepage/picture_popup.html')
