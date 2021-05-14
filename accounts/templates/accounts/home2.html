@@ -32,13 +32,15 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">요청하기</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">관리하기</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
                 {% if user.profile.is_user %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.id}}/">내 정보</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.id}}/">인증관리</a></li>
                 {% endif %}
                 {% else %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
@@ -52,12 +54,12 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-10 align-self-end">
-                <h1 class="text-uppercase text-white font-weight-bold">SEBACO RESUME MANAGEMENT SYSTEM</h1>
+                <h1 class=" text-white font-weight-bold">당신의 경력을 더욱 쉽고 간편하게 <br></h1>
                 <hr class="divider my-4"/>
             </div>
             <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">이력 안심관리 시스템</p>
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">내 이력서 관리하기</a>
+                <p class="text-white-75 font-weight-light mb-5">학력 · 자격증 · 자기소개서 · 아르바이트 경험까지<br>당신의 이력을 관리해드립니다</p>
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Learn More</a>
             </div>
         </div>
     </div>
@@ -67,10 +69,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h2 class="text-white mt-0">기업에 요청해보세요!</h2>
+                <h2 class="text-white mt-0">We've got what you need!</h2>
                 <hr class="divider light my-4"/>
-                <p class="text-white-50 mb-4">기업에 당신의 이력 인증을 요청해보세요</p>
-                <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">요청하기</a>
+                <p class="text-white-75 mb-4">세바코는 당신의 이력을 검증 및 관리해드립니다. 각종 자격증부터 아르바이트 경험까지. 당신의 경력을 자동으로 인증해줍니다.
+               또한, 함께 일했던 동료들과의 소통의 창구가 되어줄것입니다.</p>
+                <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">get started</a>
             </div>
         </div>
     </div>
@@ -84,7 +87,7 @@
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
                     <i class="fas fa-4x fa-gem text-primary mb-4"></i>
-                    <h3 class="h4 mb-2">Sturdy Themes</h3>
+                    <h3 class="h4 mb-2" style="font:'Noto Serif KR',serif;">인증된 이력사항</h3>
                     <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
                 </div>
             </div>
