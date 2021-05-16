@@ -45,7 +45,7 @@ class Education(models.Model): # 학력 작성 필드
 
 
 class Resume(models.Model): # 자격증 작성 필드
-    title = models.CharField(max_length=30, verbose_name='자격증명')
+    title = models.CharField(max_length=30, verbose_name=' ')
     regiNum = models.CharField(max_length=30, verbose_name='자격증번호')
     issure = models.CharField(max_length=30, verbose_name='발급처')
     dateAcq = models.DateField(verbose_name='취득일')

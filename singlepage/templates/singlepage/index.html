@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>{{ user.profile.korName }}의 발자취</title>
+    <title>{{ person.profile.korName }}의 발자취</title>
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
 
-<!--    이미지 변경 팝업 JavaScripts-->
+    <!--    이미지 변경 팝업 JavaScripts-->
     <script>
         function popup(){
             var url = "picture_popup/";
@@ -25,18 +25,41 @@
             var option = "width = 500, height = 500, top = 100, left = 200, location = no"
             window.open(url, name, option);
         }
+
     </script>
 </head>
 <body id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
+    {% if user.id == person.id %}
     <a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
-        <span class="d-block d-lg-none">{{ user.profile.korName }}</span>
-        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2"
-                                             src="{% static 'assets/img/face.png' %}" alt="..."/></span>
+        <span class="d-block d-lg-none">{{ person.profile.korName }}</span>
+        <span class="d-none d-lg-block">
+            {% if person.profile.image %}
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                 src="{{person.profile.image.url}}"/></span>
+        {% else %}
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+             src="{% static 'assets/img/face.png' %}" alt="..."/></span>
+        {% endif %}
     </a>
+    {% else %}
+    <div class="navbar-brand js-scroll-trigger">
+        <span class="d-block d-lg-none">{{ person.profile.korName }}</span>
+        <span class="d-none d-lg-block">
+            {% if person.profile.image %}
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                 src="{{person.profile.image.url}}"/></span>
+        {% else %}
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+             src="{% static 'assets/img/face.png' %}" alt="..."/></span>
+        {% endif %}
+        {% endif %}
+    </div>
 
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
             class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -49,7 +72,9 @@
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
             <br><br>
-            <li class="nav-item"><a style="float:center" class="nav-link" href="#">로그아웃</a>  <a style="float:center" class="nav-link" href="/">처음화면</a></li>
+            <li class="nav-item"><a style="float:center" class="nav-link" href="#">로그아웃</a> <a style="float:center"
+                                                                                               class="nav-link"
+                                                                                               href="/">처음화면</a></li>
         </ul>
 
     </div>
@@ -60,12 +85,12 @@
     <section class="resume-section" id="about">
         <div class="resume-section-content">
             <h1 class="mb-0">
-                {{ user.profile.korName }}
-                <span class="text-primary">{{ user.profile.engName }}</span>
+                {{ person.profile.korName }}
+                <span class="text-primary">{{ person.profile.engName }}</span>
             </h1>
             <div class="subheading mb-5">
-                {{ user.profile.address }} · {{ user.profile.phone }} ·
-                <a href="mailto:|{{ user.profie.email }}">{{ user.profile.email }}</a>
+                {{ person.profile.address }} · {{ person.profile.phone }} ·
+                <a href="mailto:|{{ person.profie.email }}">{{ person.profile.email }}</a>
             </div>
             {% if intro_list.all %}
             {% for intro in intro_list.all %}
@@ -96,7 +121,7 @@
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">{{resume.title}}</h3>
-                    <div class="subheading mb-3">·{{resume.issure}}  ·{{resume.dateAcq}}</div>
+                    <div class="subheading mb-3">·{{resume.issure}} ·{{resume.dateAcq}}</div>
 
                     <p>{{resume.regiNum}}</p>
                 </div>
@@ -107,7 +132,7 @@
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">자격증 명</h3>
-                    <div class="subheading mb-3">·자격증 발급처  ·자격증 취득일</div>
+                    <div class="subheading mb-3">·자격증 발급처 ·자격증 취득일</div>
                     <p>당신의 이력서를 보다 안전하고 편리하게 관리해드립니다</p>
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
@@ -115,7 +140,7 @@
             {% endif %}
             <br>
             <br>
-            <a type="button" class="btn btn-primary" href="#">수정하기</a>
+            <a type="button" class="btn btn-primary" href="{% url 'singlepage:addSNS' pk=person.id %}">수정하기</a>
         </div>
     </section>
     <hr class="m-0"/>

@@ -1,6 +1,11 @@
+from datetime import datetime
+from uuid import uuid4
+
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+from django.urls import reverse
+
 
 class Blog(models.Model):
     title = models.CharField(max_length=200)
@@ -25,13 +30,17 @@ class Profile(models.Model):
     created_at = models.DateField(auto_now_add=True)
 
     AddSNS = models.ManyToManyField('SNS', blank=True, related_name='domain')
+    image = models.ImageField(upload_to='profile/images/user', blank=True, verbose_name='프로필 사진')
+
+    def get_absolute_url(self):
+        return reverse('singlepage:page_detail', args=[self.id])
 
     def __str__(self):
         return f'{self.user}'
 
 class SNS(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     url = models.URLField("Site URL")
 
     class Meta:
@@ -46,4 +55,17 @@ class Company(models.Model):
     compName = models.CharField(max_length=30, verbose_name='기관명')
 
     employee = models.ManyToManyField('Profile', blank=True, related_name='employer')
+
+
+def get_file_path(instance, filename):
+    # 현재 날짜를 지정된 형식으로 포맷
+    ymd_path = datetime.now().strftime('%Y/%m/%d')
+    # 파일명을 고유한 문자열로 암호화하기 위해 사용
+    uuid_name = uuid4().hex
+    return '/'.join(['upload_file/',ymd_path,uuid_name])
+
+
+upload_images = models.ImageField(upload_to=get_file_path, null=True, blank=True, verbose_name='프로필 사진')
+filename = models.CharField(max_length=64, null=True, verbose_name='첨부파일명')
+
 
