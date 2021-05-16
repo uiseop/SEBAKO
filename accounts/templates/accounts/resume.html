@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이력서 작성</title>
+
+    <div id="parah"></div>
+    <script>
+        var arrInput = new Array(0);
+          var arrInputValue = new Array(0);
+         
+        function addInput() {
+          arrInput.push(arrInput.length);
+          arrInputValue.push("");
+          display();
+        }
+         
+        function display() {
+          document.getElementById('parah').innerHTML="";
+          for (intI=0;intI<arrInput.length;intI++) {
+            document.getElementById('parah').innerHTML+=createInput(arrInput[intI], arrInputValue[intI]);
+          }
+        }
+         
+        function saveValue(intId,strValue) {
+          arrInputValue[intId]=strValue;
+        }  
+         
+        function createInput(id,value) {
+          return "<input type='text' id='test "+ id +"' onChange='javascript:saveValue("+ id +",this.value)' value='"+ 
+         
+        value +"'><br>";
+        }
+         
+        function deleteInput() {
+          if (arrInput.length > 0) { 
+             arrInput.pop(); 
+             arrInputValue.pop();
+          }
+          display(); 
+        }
+    </script>
+    
+</head>
+
+<body>
+    <div id="container">
+        <div id="content">
+        <form id="ResumeForm" method="post" name="ResumeForm">
+            <div class="rsSimpleWrite">
+                <h1 class="skip">이력서 작성</h1>
+                 <!--// 추천이력서 제목 레이어-->
+                <div id="m1" class="rsSec rsSecPersonal edit">
+                    
+                    <table summary="이표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl devUserInfo">
+                        
+                        <colgroup>
+                            <col width="165px">
+                            <col width="*">
+                        </colgroup>
+                        
+                    <table> 
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form action="" method="post">
+                                    <div>
+                                        <input type="file"/>
+                                    </div>
+                                    <input type="submit" name="" id="">
+                                    <img src="" alt="">   
+                                </form>
+                               
+                                <p class="photo">
+                                        <img src="" alt="프로필사진" id="ProfileImg" height="180" width="140">
+                                </p>
+                                <p class="btn">
+                                    <a href="#" class="button rsBtnEdit devPhotoEditBtn">수정</a>
+                                    <a href="#" class="button rsBtnDel_1 devPhotoDelBtn">삭제</a>
+                                </p>
+                                <p class="btn hide">
+                                    <a href="#" class="button rsBtnPhotoRegi devPhotoRegistBtn">사진등록</a>
+                                </p>
+                
+                        </tr>   
+                    </tbody>
+                    </table>
+                </div>
+
+                <div id="m2" class="rsSec rsSecTitle devTitle">
+                    <h2><label for="lb_title_1">이력서 제목</label></h2>
+                    <fieldset>
+                        <legend>이력서 제목 작성</legend>
+                        <input data-val="true"  id="lb_title_1" name="M_Resume_Title" placeholder="내 이력서를 돋보이게 하는 PR 한마디(최소 5자 필수)" style="width:735px;" type="text" value="" />
+                        
+                    </fieldset>
+                </div>
+
+                <div id="m3" class="rsSec rsSecSchool devEdu">
+                    <h2><span>학력 정보</span></h2>
+                    <fieldset>
+                        <legend>학력사항 </legend>
+                        <table summary="이 표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl">        
+                            <!-- <caption><span class="skip">학력</span></caption> -->
+                            <colgroup>
+                                <col width="22%">
+                                <col width="78%">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th class="mTit">최종학력</th>
+                                    <td>
+                                        <select data-val="true" id="School_Type" name="School_Type" style="width:130px;" title="학력 선택"><option value="">학교</option>
+                                            <option value="-1">초등학교</option>
+                                            <option value="0">중학교</option>
+                                            <option value="1">고등학교</option>
+                                            <option value="2">대학(2,3년제)</option>
+                                            <option selected="selected" value="3">대학(4년제)</option>
+                                            <option value="4">대학원</option>
+                                        </select>
+                                        <select data-val="true" id="Grad_Stat" name="Grad_Stat" style="width:130px;" title="학력상태 선택"><option value="">상태</option>
+                                            <option value="10">졸업</option>
+                                            <option selected="selected" value="5">재학</option>
+                                            <option value="2">중퇴</option>
+                                            <option value="3">휴학</option>
+                                            <option value="9">수료</option>
+                                        </select>                    
+                                    </td>
+                                </tr>
+                                <tr class="subList devEduDetail">
+                                    <td colspan="2">
+                                        <table summary="이 표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl">
+                                            <!-- <caption><span class="skip">학력상세입력</span></caption> -->
+                                            <colgroup>
+                                                <col width="22%">
+                                                <col width="78%">
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="sTit loc">학력상세</th>
+                                                    <td class="detail">
+                                                            <input type="checkbox" name="Edu_View_Stat" id="lb_school_1" value="1"  ><label for="lb_school_1" >고등학교</label>
+                                                            <input type="checkbox" name="Edu_View_Stat" id="lb_school_2" value="2"  ><label for="lb_school_2" >대학(2,3년제)</label>
+                                                            <input type="checkbox" name="Edu_View_Stat" id="lb_school_3" value="3" checked="checked" ><label for="lb_school_3" >대학(4년제)</label>
+                                                            <input type="checkbox" name="Edu_View_Stat" id="lb_school_4" value="4"  class="hide"><label for="lb_school_4" class="hide">대학원</label>
+                                                            <p></p>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <br>
+                                                    <tr class="devEduHighSchool hide">
+                                                        <th class="sTit loc">고등학교</th>
+                                                        <td class="devEduAdd">                                        
+                                                            <div class="highschoolWp">
+                                                                <input Value="1" data-val="true" id="HighSchool_School_Type" name="HighSchool.School_Type" type="hidden" value="" />
+                                                                <select id="HighSchool_S_Year" name="HighSchool.S_Year" style="width:113px;" title="입학년도 선택">
+                                                                    <option value="">년도</option>
+                                                                    <option value="2021">2021</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2019">2019</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2013">2013</option>
+                                                                    <option value="2012">2012</option>
+                                                                    <option value="2011">2011</option>
+                                                                    <option value="2010">2010</option>
+                                                                    <option value="2009">2009</option>
+                                                                    <option value="2008">2008</option>
+                                                                    <option value="2007">2007</option>
+                                                                    <option value="2006">2006</option>
+                                                                    <option value="2005">2005</option>
+                                                                    <option value="2004">2004</option>
+                                                                    <option value="2003">2003</option>
+                                                                    <option value="2002">2002</option>
+                                                                    <option value="2001">2001</option>
+                                                                    <option value="2000">2000</option>
+                                                                    <option value="1999">1999</option>
+                                                                    <option value="1998">1998</option>
+                                                                    <option value="1997">1997</option>
+                                                                    <option value="1996">1996</option>
+                                                                    <option value="1995">1995</option>
+                                                                    <option value="1994">1994</option>
+                                                                    <option value="1993">1993</option>
+                                                                    <option value="1992">1992</option>
+                                                                    <option value="1991">1991</option>
+                                                                    <option value="1990">1990</option>
+                                                                    <option value="1989">1989</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1984">1984</option>
+                                                                    <option value="1983">1983</option>
+                                                                    <option value="1982">1982</option>
+                                                                    <option value="1981">1981</option>
+                                                                    <option value="1981">1980</option>
+                                                            
+                                                                </select>                                            ~
+                                                                <select id="HighSchool_E_Year" name="HighSchool.E_Year" style="width:113px;" title="졸업년도 선택">
+                                                                    <option value="">년도</option>
+                                                                    <option value="2021">2022</option>
+                                                                    <option value="2021">2021</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2019">2019</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2013">2013</option>
+                                                                    <option value="2012">2012</option>
+                                                                    <option value="2011">2011</option>
+                                                                    <option value="2010">2010</option>
+                                                                    <option value="2009">2009</option>
+                                                                    <option value="2008">2008</option>
+                                                                    <option value="2007">2007</option>
+                                                                    <option value="2006">2006</option>
+                                                                    <option value="2005">2005</option>
+                                                                    <option value="2004">2004</option>
+                                                                    <option value="2003">2003</option>
+                                                                    <option value="2002">2002</option>
+                                                                    <option value="2001">2001</option>
+                                                                    <option value="2000">2000</option>
+                                                                    <option value="1999">1999</option>
+                                                                    <option value="1998">1998</option>
+                                                                    <option value="1997">1997</option>
+                                                                    <option value="1996">1996</option>
+                                                                    <option value="1995">1995</option>
+                                                                    <option value="1994">1994</option>
+                                                                    <option value="1993">1993</option>
+                                                                    <option value="1992">1992</option>
+                                                                    <option value="1991">1991</option>
+                                                                    <option value="1990">1990</option>
+                                                                    <option value="1989">1989</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1984">1984</option>
+                                                                    <option value="1983">1983</option>
+                                                                    <option value="1982">1982</option>
+                                                                    <option value="1981">1981</option>
+                                                                    <option value="1981">1980</option>
+                                                                </select>
+                                                                <input class="devAcInput" id="HighSchool_School_Name" name="HighSchool.School_Name" placeholder="학교명" style="width:221px; margin-right:5px;" title="학교 입력" type="text" value="" />
+                                                                <div class="autoSearch hide devAcWrap">
+                                                                    <ul class="devAcResult"></ul>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                        <tr class="devEduCollege hide">
+                                                            <th class="sTit loc">대학교(2,3년)</th>
+                                                            <td>
+                                                                <div class="schoolWp devEduAdd">
+                                                                    <input Value="2" data-val="true" id="College_0__School_Type" name="College[0].School_Type" type="hidden" value="" />
+                                                                    <select id="College_0__S_Year" name="College[0].S_Year" style="width:113px;" title="입학년도 선택"><option value="">년도</option>
+                                                                        <option value="2021">2021</option>
+                                                                        <option value="2020">2020</option>
+                                                                        <option value="2019">2019</option>
+                                                                        <option value="2018">2018</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2016">2016</option>
+                                                                        <option value="2015">2015</option>
+                                                                        <option value="2014">2014</option>
+                                                                        <option value="2013">2013</option>
+                                                                        <option value="2012">2012</option>
+                                                                        <option value="2011">2011</option>
+                                                                        <option value="2010">2010</option>
+                                                                        <option value="2009">2009</option>
+                                                                        <option value="2008">2008</option>
+                                                                        <option value="2007">2007</option>
+                                                                        <option value="2006">2006</option>
+                                                                        <option value="2005">2005</option>
+                                                                        <option value="2004">2004</option>
+                                                                        <option value="2003">2003</option>
+                                                                        <option value="2002">2002</option>
+                                                                        <option value="2001">2001</option>
+                                                                        <option value="2000">2000</option>
+                                                                        <option value="1999">1999</option>
+                                                                        <option value="1998">1998</option>
+                                                                        <option value="1997">1997</option>
+                                                                        <option value="1996">1996</option>
+                                                                        <option value="1995">1995</option>
+                                                                        <option value="1994">1994</option>
+                                                                        <option value="1993">1993</option>
+                                                                        <option value="1992">1992</option>
+                                                                        <option value="1991">1991</option>
+                                                                        <option value="1990">1990</option>
+                                                                        <option value="1989">1989</option>
+                                                                        <option value="1988">1988</option>
+                                                                        <option value="1987">1987</option>
+                                                                        <option value="1986">1986</option>
+                                                                        <option value="1985">1985</option>
+                                                                        <option value="1984">1984</option>
+                                                                        <option value="1983">1983</option>
+                                                                        <option value="1982">1982</option>
+                                                                        <option value="1981">1981</option>
+                                                                        <option value="1980">1980</option>
+                                                                    </select>
+                                                                            ~
+                                                                    <select id="College_0__E_Year" name="College[0].E_Year" style="width:113px;" title="졸업년도 선택"><option value="">년도</option>
+                                                                        <option value="2021">2021</option>
+                                                                        <option value="2020">2020</option>
+                                                                        <option value="2019">2019</option>
+                                                                        <option value="2018">2018</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2016">2016</option>
+                                                                        <option value="2015">2015</option>
+                                                                        <option value="2014">2014</option>
+                                                                        <option value="2013">2013</option>
+                                                                        <option value="2012">2012</option>
+                                                                        <option value="2011">2011</option>
+                                                                        <option value="2010">2010</option>
+                                                                        <option value="2009">2009</option>
+                                                                        <option value="2008">2008</option>
+                                                                        <option value="2007">2007</option>
+                                                                        <option value="2006">2006</option>
+                                                                        <option value="2005">2005</option>
+                                                                        <option value="2004">2004</option>
+                                                                        <option value="2003">2003</option>
+                                                                        <option value="2002">2002</option>
+                                                                        <option value="2001">2001</option>
+                                                                        <option value="2000">2000</option>
+                                                                        <option value="1999">1999</option>
+                                                                        <option value="1998">1998</option>
+                                                                        <option value="1997">1997</option>
+                                                                        <option value="1996">1996</option>
+                                                                        <option value="1995">1995</option>
+                                                                        <option value="1994">1994</option>
+                                                                        <option value="1993">1993</option>
+                                                                        <option value="1992">1992</option>
+                                                                        <option value="1991">1991</option>
+                                                                        <option value="1990">1990</option>
+                                                                        <option value="1989">1989</option>
+                                                                        <option value="1988">1988</option>
+                                                                        <option value="1987">1987</option>
+                                                                        <option value="1986">1986</option>
+                                                                        <option value="1985">1985</option>
+                                                                        <option value="1984">1984</option>
+                                                                        <option value="1983">1983</option>
+                                                                        <option value="1982">1982</option>
+                                                                    </select>
+
+                                                                    <div class="sName">
+                                                                        <input class="devAcInput" id="College_0__School_Name" name="College[0].School_Name" placeholder="학교명" style="width:221px; margin-right:5px;" title="학교 입력" type="text" value="" />
+                                                                        <br>
+                                                                        <input id="College_0__Major" name="College[0].Major" placeholder="전공" style="width:220px; margin-right:5px;" title="전공 입력" type="text" value="" />
+                                                                        <input id="College_0__Major" name="College[0].Major" placeholder="전공" style="width:220px; margin-right:5px;" title="전공 입력" type="text" value="" />
+                                                                        <br>
+                                                                    </div>
+                                                                </div>
+                                                                <p></p>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                        <tr class="devEduUniversity">
+                                                            <th class="sTit loc">대학교(4년)</th>
+                                                            <td>
+                                                                    <div class="schoolWp devEduAdd">
+                                                                        <input Value="3" data-val="true" id="University_0__School_Type" name="University[0].School_Type" type="hidden" value="3" />
+                                                                        <select id="University_0__S_Year" name="University[0].S_Year" style="width:113px;" title="입학년도 선택">
+                                                                            <option value="">년도</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2018">2018</option>
+                                                                            <option value="2017">2017</option>
+                                                                            <option value="2016">2016</option>
+                                                                            <option value="2015">2015</option>
+                                                                            <option value="2014">2014</option>
+                                                                            <option value="2013">2013</option>
+                                                                            <option value="2012">2012</option>
+                                                                            <option value="2011">2011</option>
+                                                                            <option value="2010">2010</option>
+                                                                            <option value="2009">2009</option>
+                                                                            <option value="2008">2008</option>
+                                                                            <option value="2007">2007</option>
+                                                                            <option value="2006">2006</option>
+                                                                            <option value="2005">2005</option>
+                                                                            <option value="2004">2004</option>
+                                                                            <option value="2003">2003</option>
+                                                                            <option value="2002">2002</option>
+                                                                            <option value="2001">2001</option>
+                                                                            <option value="2000">2000</option>
+                                                                            <option value="1999">1999</option>
+                                                                            <option value="1998">1998</option>
+                                                                            <option value="1997">1997</option>
+                                                                            <option value="1996">1996</option>
+                                                                            <option value="1995">1995</option>
+                                                                            <option value="1994">1994</option>
+                                                                            <option value="1993">1993</option>
+                                                                            <option value="1992">1992</option>
+                                                                            <option value="1991">1991</option>
+                                                                            <option value="1990">1990</option>
+                                                                            <option value="1989">1989</option>
+                                                                            <option value="1988">1988</option>
+                                                                            <option value="1987">1987</option>
+                                                                            <option value="1986">1986</option>
+                                                                            <option value="1985">1985</option>
+                                                                            <option value="1984">1984</option>
+                                                                            <option value="1983">1983</option>
+                                                                            <option value="1982">1982</option>
+                                                                            <option value="1981">1981</option>
+                                                                            <option value="1980">1980</option>
+                                                        
+                                                                        </select>
+                                                                        ~
+                                                                        <select id="University_0__E_Year" name="University[0].E_Year" style="width:113px;" title="졸업년도 선택">
+                                                                            <option value="">년도</option>
+                                                                            <option value="0">현재</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2018">2018</option>
+                                                                            <option value="2017">2017</option>
+                                                                            <option value="2016">2016</option>
+                                                                            <option value="2015">2015</option>
+                                                                            <option value="2014">2014</option>
+                                                                            <option value="2013">2013</option>
+                                                                            <option value="2012">2012</option>
+                                                                            <option value="2011">2011</option>
+                                                                            <option value="2010">2010</option>
+                                                                            <option value="2009">2009</option>
+                                                                            <option value="2008">2008</option>
+                                                                            <option value="2007">2007</option>
+                                                                            <option value="2006">2006</option>
+                                                                            <option value="2005">2005</option>
+                                                                            <option value="2004">2004</option>
+                                                                            <option value="2003">2003</option>
+                                                                            <option value="2002">2002</option>
+                                                                            <option value="2001">2001</option>
+                                                                            <option value="2000">2000</option>
+                                                                            <option value="1999">1999</option>
+                                                                            <option value="1998">1998</option>
+                                                                            <option value="1997">1997</option>
+                                                                            <option value="1996">1996</option>
+                                                                            <option value="1995">1995</option>
+                                                                            <option value="1994">1994</option>
+                                                                            <option value="1993">1993</option>
+                                                                            <option value="1992">1992</option>
+                                                                            <option value="1991">1991</option>
+                                                                            <option value="1990">1990</option>
+                                                                            <option value="1989">1989</option>
+                                                                            <option value="1988">1988</option>
+                                                                            <option value="1987">1987</option>
+                                                                            <option value="1986">1986</option>
+                                                                            <option value="1985">1985</option>
+                                                                            <option value="1984">1984</option>
+                                                                            <option value="1983">1983</option>
+                                                                            <option value="1982">1982</option>
+                                                                            <option value="1981">1981</option>
+                                                                            <option value="1980">1980</option>
+                                                                        
+                                                                        </select>
+                                                                        <div class="sName">
+                                                                            <input class="devAcInput" id="University_0__School_Name" name="University[0].School_Name" placeholder="학교명" style="width:221px; margin-right:5px;" title="학교 입력" type="text" value="" />
+                                                                            <br>
+                                                                            <input id="University_0__Major" name="University[0].Major" placeholder="전공" style="width:220px; margin-right:5px;" title="전공 입력" type="text" value="" />
+                                                                            <input id="University_0__Major" name="University[0].Major" placeholder="전공" style="width:220px; margin-right:5px;" title="전공 입력" type="text" value="" />
+                                                                            
+                                                                        </div>
+                                                                        <br>
+                                                                    </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="devEduGraduateSchool hide">
+                                                            <th class="sTit loc">대학원</th>
+                                                            <td>
+                                                                <div class="schoolWp devEduAdd">
+                                                                    <input Value="4" data-val="true" id="GraduateSchool_0__School_Type" name="GraduateSchool[0].School_Type" type="hidden" value="" />
+                                                                    <select id="GraduateSchool_0__S_Year" name="GraduateSchool[0].S_Year" style="width:113px;" title="입학년도 선택"><option value="">년도</option>
+                                                                        <option value="2021">2021</option>
+                                                                        <option value="2020">2020</option>
+                                                                        <option value="2019">2019</option>
+                                                                        <option value="2018">2018</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2016">2016</option>
+                                                                        <option value="2015">2015</option>
+                                                                        <option value="2014">2014</option>
+                                                                        <option value="2013">2013</option>
+                                                                        <option value="2012">2012</option>
+                                                                        <option value="2011">2011</option>
+                                                                        <option value="2010">2010</option>
+                                                                        <option value="2009">2009</option>
+                                                                        <option value="2008">2008</option>
+                                                                        <option value="2007">2007</option>
+                                                                        <option value="2006">2006</option>
+                                                                        <option value="2005">2005</option>
+                                                                        <option value="2004">2004</option>
+                                                                        <option value="2003">2003</option>
+                                                                        <option value="2002">2002</option>
+                                                                        <option value="2001">2001</option>
+                                                                        <option value="2000">2000</option>
+                                                                        <option value="1999">1999</option>
+                                                                        <option value="1998">1998</option>
+                                                                        <option value="1997">1997</option>
+                                                                        <option value="1996">1996</option>
+                                                                        <option value="1995">1995</option>
+                                                                        <option value="1994">1994</option>
+                                                                        <option value="1993">1993</option>
+                                                                        <option value="1992">1992</option>
+                                                                        <option value="1991">1991</option>
+                                                                        <option value="1990">1990</option>
+                                                                        <option value="1989">1989</option>
+                                                                        <option value="1988">1988</option>
+                                                                        <option value="1987">1987</option>
+                                                                        <option value="1986">1986</option>
+                                                                        <option value="1985">1985</option>
+                                                                        <option value="1984">1984</option>
+                                                                        <option value="1983">1983</option>
+                                                                        <option value="1982">1982</option>
+                                                                        <option value="1981">1981</option>
+                                                                        <option value="1980">1980</option>
+                                                                    </select>
+                                                                    ~
+                                                                    <select id="GraduateSchool_0__E_Year" name="GraduateSchool[0].E_Year" style="width:113px;" title="졸업년도 선택"><option value="">년도</option>
+                                                                        <option value="2021">2021</option>
+                                                                        <option value="2020">2020</option>
+                                                                        <option value="2019">2019</option>
+                                                                        <option value="2018">2018</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2016">2016</option>
+                                                                        <option value="2015">2015</option>
+                                                                        <option value="2014">2014</option>
+                                                                        <option value="2013">2013</option>
+                                                                        <option value="2012">2012</option>
+                                                                        <option value="2011">2011</option>
+                                                                        <option value="2010">2010</option>
+                                                                        <option value="2009">2009</option>
+                                                                        <option value="2008">2008</option>
+                                                                        <option value="2007">2007</option>
+                                                                        <option value="2006">2006</option>
+                                                                        <option value="2005">2005</option>
+                                                                        <option value="2004">2004</option>
+                                                                        <option value="2003">2003</option>
+                                                                        <option value="2002">2002</option>
+                                                                        <option value="2001">2001</option>
+                                                                        <option value="2000">2000</option>
+                                                                        <option value="1999">1999</option>
+                                                                        <option value="1998">1998</option>
+                                                                        <option value="1997">1997</option>
+                                                                        <option value="1996">1996</option>
+                                                                        <option value="1995">1995</option>
+                                                                        <option value="1994">1994</option>
+                                                                        <option value="1993">1993</option>
+                                                                        <option value="1992">1992</option>
+                                                                        <option value="1991">1991</option>
+                                                                        <option value="1990">1990</option>
+                                                                        <option value="1989">1989</option>
+                                                                        <option value="1988">1988</option>
+                                                                        <option value="1987">1987</option>
+                                                                        <option value="1986">1986</option>
+                                                                        <option value="1985">1985</option>
+                                                                        <option value="1984">1984</option>
+                                                                        <option value="1983">1983</option>
+                                                                        <option value="1982">1982</option>
+                                                                        <option value="1981">1981</option>
+                                                                        <option value="1980">1980</option>                                                  
+                                                                    </select>
+                                                                    <select data-val="true" id="GraduateSchool_0__Grad_Degree" name="GraduateSchool[0].Grad_Degree" style="width:120px;" title="학위 선택"><option value="">학위</option>
+                                                                        <option value="2">석사</option>
+                                                                        <option value="3">박사</option>
+                                                                        <option value="4">석박사통합</option>
+                                                                    </select>
+                                                                    <div class="sName">
+                                                                        <input class="devAcInput" id="GraduateSchool_0__School_Name" name="GraduateSchool[0].School_Name" placeholder="학교명" style="width:221px; margin-right:5px;" title="학교 입력" type="text" value="" />
+                                                                        <br>
+                                                                        <input id="GraduateSchool_0__Major" name="GraduateSchool[0].Major" placeholder="전공" style="width:220px; margin-right:5px;" title="전공 입력" type="text" value="" />
+                                                                        <button type="button" class="rsBtn rsBtnDel_3 devEduDelBtn hide" data-val="4">삭제</button>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                        
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+
+                <div id="m4" class="rsSec rsSecCareer devCareer">
+                    <h2>경력사항</h2> 
+                    <fieldset>
+                        <legend>경력사항 </legend>
+                        <table summary="이 표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl">
+                            <!-- <caption><span class="skip">경력사항</span></caption> -->
+                            <colgroup>
+                                <col width="22%">
+                                <col width="78%">
+                            </colgroup>
+                            <tbody>
+                                
+                                
+                                    <tr class="subList devCareerAdd hide">
+                                        <td colspan="2">
+                    
+                                            <input type="hidden" class="devDefaultValueEmpty" value="empty" />
+                    
+                                            <table summary="이표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl">
+                                               
+                                                <colgroup>
+                                                    <col width="22%">
+                                                    <col width="78%">
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="sTit"><label for="cr_cname_0"><span class="sq">필수사항</span>회사명</label></th>
+                                                        <td>
+                                                            <input autocomplete="off" data-val="true" data-val-required="C_Name 필드가 필요합니다." id="cr_cname_0" maxlength="25" name="Career[0].C_Name" style="width:405px;" type="text" value="" /><button class="rsBtn rsBtnReset devCareerInitBtn" type="button">초기화</button><button type="button" class="rsBtn rsBtnDel_3 devCareerDelBtn hide">삭제</button>
+                                                            <div class="autoSearch" id="dev_keywordResultList_0" style="display:none;"></div>
+                                                            <input id="cr_KeywordCode_0" name="Career[0].Keyword_Code" type="hidden" value="" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="sTit"><span class="sq">필수사항</span>근무기간</th>
+                                                        <td>
+                                                            <p class="term">
+                                                                <input checked="checked" type="radio" value="1" /><label for="Career_0__IsWorkOver">1개월 이상 근무</label>
+                                                                <select style="width:80px;" title="년도 선택">
+                                                                    <option value="">년도</option>
+                                                                    <option value="2021">2021</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2019">2019</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2013">2013</option>
+                                                                    <option value="2012">2012</option>
+                                                                    <option value="2011">2011</option>
+                                                                    <option value="2010">2010</option>
+                                                                    <option value="2009">2009</option>
+                                                                    <option value="2008">2008</option>
+                                                                    <option value="2007">2007</option>
+                                                                    <option value="2006">2006</option>
+                                                                    <option value="2005">2005</option>
+                                                                    <option value="2004">2004</option>
+                                                                    <option value="2003">2003</option>
+                                                                    <option value="2002">2002</option>
+                                                                    <option value="2001">2001</option>
+                                                                    <option value="2000">2000</option>
+                                                                    <option value="1999">1999</option>
+                                                                    <option value="1998">1998</option>
+                                                                    <option value="1997">1997</option>
+                                                                    <option value="1996">1996</option>
+                                                                    <option value="1995">1995</option>
+                                                                    <option value="1994">1994</option>
+                                                                    <option value="1993">1993</option>
+                                                                    <option value="1992">1992</option>
+                                                                    <option value="1991">1991</option>
+                                                                    <option value="1990">1990</option>
+                                                                    <option value="1989">1989</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1984">1984</option>
+                                                                    <option value="1983">1983</option>
+                                                                    <option value="1982">1982</option>
+                                                                    <option value="1981">1981</option>
+                                                                    <option value="1980">1980</option>                                               
+                                                                </select>
+                                                                <select style="width:60px;" title="월 선택">
+                                                                    <option value="">월</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                    <option value="08">08</option>
+                                                                    <option value="09">09</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                                ~
+                                                                <select style="width:80px;" title="년도 선택">
+                                                                    <option value="">년도</option>
+                                                                    <option value="2021">2021</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2019">2019</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2013">2013</option>
+                                                                    <option value="2012">2012</option>
+                                                                    <option value="2011">2011</option>
+                                                                    <option value="2010">2010</option>
+                                                                    <option value="2009">2009</option>
+                                                                    <option value="2008">2008</option>
+                                                                    <option value="2007">2007</option>
+                                                                    <option value="2006">2006</option>
+                                                                    <option value="2005">2005</option>
+                                                                    <option value="2004">2004</option>
+                                                                    <option value="2003">2003</option>
+                                                                    <option value="2002">2002</option>
+                                                                    <option value="2001">2001</option>
+                                                                    <option value="2000">2000</option>
+                                                                    <option value="1999">1999</option>
+                                                                    <option value="1998">1998</option>
+                                                                    <option value="1997">1997</option>
+                                                                    <option value="1996">1996</option>
+                                                                    <option value="1995">1995</option>
+                                                                    <option value="1994">1994</option>
+                                                                    <option value="1993">1993</option>
+                                                                    <option value="1992">1992</option>
+                                                                    <option value="1991">1991</option>
+                                                                    <option value="1990">1990</option>
+                                                                    <option value="1989">1989</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1984">1984</option>
+                                                                    <option value="1983">1983</option>
+                                                                    <option value="1982">1982</option>
+                                                                    <option value="1981">1981</option>
+                                                                    <option value="1980">1980</option>
+                                                                </select>
+                                                                <select style="width:60px;" title="월 선택">
+                                                                    <option value="">월</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                    <option value="08">08</option>
+                                                                    <option value="09">09</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                                <span class="work_1">
+                                                                    <input id="Career_0__In_Office_Stat" name="Career[0].In_Office_Stat" type="checkbox" value="true" />
+                                                                    <input name="Career[0].In_Office_Stat" type="hidden" value="false" />
+                                                                    <label for="Career_0__In_Office_Stat">재직중</label>
+                                                                </span>
+                                                            </p>
+                                                            <p class="term">
+                                                                <input id="Career_0___IsWorkOver" name="Career[0].IsWorkOver" type="radio" value="0" />
+                                                                <label for="Career_0___IsWorkOver">1개월 미만 근무</label>
+                                                                <select disabled="disabled" style="width:80px;" title="년도 선택">
+                                                                    <option value="">년도</option>
+                                                                    <option value="2021">2021</option>
+                                                                    <option value="2020">2020</option>
+                                                                    <option value="2019">2019</option>
+                                                                    <option value="2018">2018</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2013">2013</option>
+                                                                    <option value="2012">2012</option>
+                                                                    <option value="2011">2011</option>
+                                                                    <option value="2010">2010</option>
+                                                                    <option value="2009">2009</option>
+                                                                    <option value="2008">2008</option>
+                                                                    <option value="2007">2007</option>
+                                                                    <option value="2006">2006</option>
+                                                                    <option value="2005">2005</option>
+                                                                    <option value="2004">2004</option>
+                                                                    <option value="2003">2003</option>
+                                                                    <option value="2002">2002</option>
+                                                                    <option value="2001">2001</option>
+                                                                    <option value="2000">2000</option>
+                                                                    <option value="1999">1999</option>
+                                                                    <option value="1998">1998</option>
+                                                                    <option value="1997">1997</option>
+                                                                    <option value="1996">1996</option>
+                                                                    <option value="1995">1995</option>
+                                                                    <option value="1994">1994</option>
+                                                                    <option value="1993">1993</option>
+                                                                    <option value="1992">1992</option>
+                                                                    <option value="1991">1991</option>
+                                                                    <option value="1990">1990</option>
+                                                                    <option value="1989">1989</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1984">1984</option>
+                                                                    <option value="1983">1983</option>
+                                                                    <option value="1982">1982</option>
+                                                                    <option value="1981">1981</option>
+                                                                    <option value="1980">1980</option>
+                                                                </select>
+                                                                <select style="width:60px;" title="월 선택">
+                                                                    <option value="">월</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                                <select disabled="disabled" style="width:60px;" title="일 선택">
+                                                                    <option value="">일</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="17">17</option>
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="26">26</option>
+                                                                    <option value="27">27</option>
+                                                                    <option value="28">28</option>
+                                                                    <option value="29">29</option>
+                                                                    <option value="30">30</option>
+                                                                    <option value="31">31</option>
+                                                                </select>
+                                                                <span class="work_2">일 동안 근무</span>
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="sTit"><label for="Career_0__C_Text">담당업무</label></th>
+                                                        <td>
+                                                            <textarea cols="5" rows="10" style="width: 480px; height: 86px; margin: 0px;">
+                                                            </textarea>
+                                                            <p class="cont devCareerTextCount"><em>0</em> / 500</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                <tr class="devCareerBtn hide">
+                                    <td colspan="2"><p class="btnAdd"><button type="button" class="rsBtn rsBtnCar devCareerAddBtn">경력사항추가</button></p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+
+
+                <!--<div id="m10" class="rsSec rsSecForeign devLngg hide">
+                    <h2>어학능력</h2>
+                    <fieldset>
+                        <legend>어학능력</legend>
+                        
+                        <input type="hidden" class="devDefaultValueEmpty" value="empty"/>
+                        <table summary="이표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl devLnggAdd">
+                        
+                        <colgroup>
+                            <col width="22%">
+                            <col width="78%">
+                        </colgroup>
+                <tbody>
+                    <tr>
+                        <th class="sTit"><label for="Lngg_0__Lang1_Name"><span class="sq">필수사항</span>어학</label></th>
+                        <td>
+                            <select style="width:235px;margin-right:5px" title="언어선택">
+                                <option value="">어학명</option>
+                                <option value="1">그리스어</option>
+                                <option value="2">네덜란드어</option>
+                                <option value="3">노르웨이어</option>
+                                <option value="4">독일어</option>
+                                <option value="5">러시아어</option>
+                                <option value="6">루마니아어</option>
+                                <option value="7">마인어</option>
+                                <option value="8">몽고어</option>
+                                <option value="9">미얀마어</option>
+                                <option value="10">베트남어</option>
+                                <option value="11">세르비아어</option>
+                                <option value="12">스웨덴어</option>
+                                <option value="13">스페인어</option>
+                                <option value="14">슬로바키아어</option>
+                                <option value="15">아랍어</option>
+                                <option value="16">영어</option>
+                                <option value="17">유고어</option>
+                                <option value="18">이란(페르시아)어</option>
+                                <option value="19">이탈리아어</option>
+                                <option value="20">일본어</option>
+                                <option value="21">중국어</option>
+                                <option value="22">체코어</option>
+                                <option value="23">태국어</option>
+                                <option value="24">터키어</option>
+                                <option value="25">포르투갈어</option>
+                                <option value="26">폴란드어</option>
+                                <option value="27">프랑스어</option>
+                                <option value="28">헝가리어</option>
+                                <option value="29">히브리어</option>
+                                <option value="30">힌디어</option>
+                                <option value="31">기타</option>
+                            </select>
+    
+                            <input name="Lngg[0].Experience_Stat" type="checkbox" value="true" />
+                            <input name="Lngg[0].Experience_Stat" type="hidden" value="false" />
+                            <label for="Lngg_0__Experience_Stat">어학연수 경험있음</label>                    
+                            <p class="foreignExp">
+                                <input class="hide" placeholder="어학연수 경험을 입력해 주세요. (ex- 2012~2013 : 캐나다 OOO 대학교 교환학생)" style="width:548px;" title="어학연수경험 입력" type="text" value="" />
+                            </p>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="sTit"><span class="sq">필수사항</span>구사능력</th>
+                        <td>
+                            
+                                <input type="radio" name="" id="" value="(상)회화능숙">(상)회화능숙
+                                <input type="radio" name="" id="" value="(중)일상대화">(중)일상대화
+                                <input type="radio" name="" id="" value="(하)간단대화">(하)간단대화
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="sTit loc">공인시험</th>
+                        <td>
+                            <p class="foreignAdd"><button type="button" class="rsBtn rsBtnAdd devLnngExamAddBtn">추가</button></p>
+                            <div class="examWp devLnggExamAdd hide">
+                                <select id="Lngg_0__LnggExam_0__Pub_Exam_Code" name="Lngg[0].LnggExam[0].Pub_Exam_Code" style="width:144px;" title="공인시험 입력"><option value="">선택</option>
+        </select>
+                                <div class="etcWp devLnggExamEtc hide" style="position:absolute; top:31px; left:0;">
+                                    <input id="Lngg_0__LnggExam_0__Pub_Exam_Direct_Input" name="Lngg[0].LnggExam[0].Pub_Exam_Direct_Input" type="hidden" value="" />
+                                    <p class="tit"><label for="Lngg_0__LnggExam_0__Pub_Exam_Direct_Input_Temp">직접입력</label></p>
+                                    <p><input id="Lngg_0__LnggExam_0__Pub_Exam_Direct_Input_Temp" name="Lngg[0].LnggExam[0].Pub_Exam_Direct_Input_Temp" placeholder="입력해 주세요" style="width:116px;" type="text" value="" /><button type="button" class="rsBtn rsBtnRegi_1 devLnngExamEtcAddBtn">등록</button></p>
+                                    <p class="closeBtn"><button type="button" class="rsBtn rsBtnDel devLnngExamEtcDelBtn">삭제</button></p>
+                                </div>
+        
+        
+                                <select class="hide" disabled="disabled" id="Lngg_0__LnggExam_0__Point_Level" name="Lngg[0].LnggExam[0].Point_Level" style="width:140px;" title="점수 입력"><option value="">점수/등급</option>
+        </select>
+                                <input id="Lngg_0__LnggExam_0__Point_Level" name="Lngg[0].LnggExam[0].Point_Level" placeholder="점수/등급" style="width:140px;" title="점수 입력" type="text" value="" />
+                                <select id="Lngg_0__LnggExam_0__Get_Year" name="Lngg[0].LnggExam[0].Get_Year" style="width:96px;" title="년도 선택"><option value="">취득년도</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+        <option value="2014">2014</option>
+        <option value="2013">2013</option>
+        <option value="2012">2012</option>
+        <option value="2011">2011</option>
+        <option value="2010">2010</option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
+        <option value="1999">1999</option>
+        <option value="1998">1998</option>
+        <option value="1997">1997</option>
+        <option value="1996">1996</option>
+        <option value="1995">1995</option>
+        <option value="1994">1994</option>
+        <option value="1993">1993</option>
+        <option value="1992">1992</option>
+        <option value="1991">1991</option>
+        <option value="1990">1990</option>
+        <option value="1989">1989</option>
+        <option value="1988">1988</option>
+        <option value="1987">1987</option>
+        <option value="1986">1986</option>
+        <option value="1985">1985</option>
+        <option value="1984">1984</option>
+        <option value="1983">1983</option>
+        <option value="1982">1982</option>
+        <option value="1981">1981</option>
+        <option value="1980">1980</option>
+        <option value="1979">1979</option>
+        <option value="1978">1978</option>
+        <option value="1977">1977</option>
+        <option value="1976">1976</option>
+        <option value="1975">1975</option>
+        <option value="1974">1974</option>
+        <option value="1973">1973</option>
+        <option value="1972">1972</option>
+        <option value="1971">1971</option>
+        <option value="1970">1970</option>
+        <option value="1969">1969</option>
+        <option value="1968">1968</option>
+        <option value="1967">1967</option>
+        <option value="1966">1966</option>
+        <option value="1965">1965</option>
+        <option value="1964">1964</option>
+        <option value="1963">1963</option>
+        <option value="1962">1962</option>
+        <option value="1961">1961</option>
+        <option value="1960">1960</option>
+        <option value="1959">1959</option>
+        <option value="1958">1958</option>
+        <option value="1957">1957</option>
+        <option value="1956">1956</option>
+        <option value="1955">1955</option>
+        <option value="1954">1954</option>
+        <option value="1953">1953</option>
+        <option value="1952">1952</option>
+        <option value="1951">1951</option>
+        <option value="1950">1950</option>
+        </select>
+                                
+                                <button type="button" class="rsBtn rsBtnDel_3 devLnggExamDelBtn">삭제</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <p class="btnAdd"><button type="button" class="rsBtn rsBtnforeign devLnggAddBtn">어학능력추가</button></p>
+                    </fieldset>
+                    
+                    
+       
+            
+                </div>-->
+
+                <div id="m11" class="rsSec rsSecLicnese devLcns hide">
+                    <h2>자격증</h2>
+                    <fieldset>
+                        <legend>자격증</legend>
+                            
+                            <table summary="이표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl devLcnsAdd">
+                                
+                                <colgroup>
+                                    <col width="22%">
+                                    <col width="78%">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th class="sTit"><label for="Lcns_0__Lc_Name">자격증</label></th>
+                                        <td>
+                                           
+                                            <input class="" type="text" value="" />
+                  
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="">자격증 번호</label></th>
+                                        <td>
+                                            <input type="text" name="" id="">
+                                        </td>
+                                    </tr>
+                            
+                                    <tr>
+                                        <th class="sTit"><label for="">발행처</label></th>
+                                        <td>
+                                            <p>
+                                                <input type="text" name="" id="">
+                                                <select style="width:85px;" title="연도 선택">
+                                                    <option value="">년도</option>
+                                                    <option value="2021">2021</option>
+                                                    <option value="2020">2020</option>
+                                                    <option value="2019">2019</option>
+                                                    <option value="2018">2018</option>
+                                                    <option value="2017">2017</option>
+                                                    <option value="2016">2016</option>
+                                                    <option value="2015">2015</option>
+                                                    <option value="2014">2014</option>
+                                                    <option value="2013">2013</option>
+                                                    <option value="2012">2012</option>
+                                                    <option value="2011">2011</option>
+                                                    <option value="2010">2010</option>
+                                                    <option value="2009">2009</option>
+                                                    <option value="2008">2008</option>
+                                                    <option value="2007">2007</option>
+                                                    <option value="2006">2006</option>
+                                                    <option value="2005">2005</option>
+                                                    <option value="2004">2004</option>
+                                                    <option value="2003">2003</option>
+                                                    <option value="2002">2002</option>
+                                                    <option value="2001">2001</option>
+                                                    <option value="2000">2000</option>
+                                                    <option value="1999">1999</option>
+                                                    <option value="1998">1998</option>
+                                                    <option value="1997">1997</option>
+                                                    <option value="1996">1996</option>
+                                                    <option value="1995">1995</option>
+                                                    <option value="1994">1994</option>
+                                                    <option value="1993">1993</option>
+                                                    <option value="1992">1992</option>
+                                                    <option value="1991">1991</option>
+                                                    <option value="1990">1990</option>
+                                                    <option value="1989">1989</option>
+                                                    <option value="1988">1988</option>
+                                                    <option value="1987">1987</option>
+                                                    <option value="1986">1986</option>
+                                                    <option value="1985">1985</option>
+                                                    <option value="1984">1984</option>
+                                                    <option value="1983">1983</option>
+                                                    <option value="1982">1982</option>
+                                                    <option value="1981">1981</option>
+                                                    <option value="1980">1980</option>
+                                                    </select> 년 취득    
+                                                
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <p class="btnAdd"><button type="button" class="rsBtn rsBtnLicense devLcnsAddBtn">자격증추가</button></p>
+                    </fieldset>
+                </div>
+
+                <div id="m12" class="rsSec rsSecComputer devOaCaa hide">
+                    <h2>컴퓨터 활용능력</h2>
+                   
+                    <fieldset>
+                    
+                            <input type="hidden" class="devDefaultValueEmpty" value="empty" />
+                        
+                        <legend>컴퓨터 활용능력</legend>
+                        <div class="oaWp">
+                            
+                            <div class="oaList devOaList">
+                                <table class="pptWp">
+                                    
+                                    <tr>
+                                        <th>파워포인트</th>
+                                        <td>
+                                            <ul class="level">
+                                                <input type="radio" name="" id="" value="(상)">(상)
+                                                <input type="radio" name="" id="" value="(중)">(중)
+                                                <input type="radio" name="" id="" value="(하)">(하)
+                                            </ul>
+                                        </td>
+
+                                    </tr>
+                                
+                                    <tr>
+                                        <th>워드/한글</th>
+                                        <td>
+                                            <ul class="level">
+                                            
+                                                <input type="radio" name="" id="" value="(상)">(상)
+                                                <input type="radio" name="" id="" value="(중)">(중)
+                                                <input type="radio" name="" id="" value="(하)">(하)
+                                                
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>엑셀</dt>
+                                        <td>
+                                            <ul class="level">
+                                            
+                                                <input type="radio" name="" id="" value="(상)">(상)
+                                                <input type="radio" name="" id="" value="(중)">(중)
+                                                <input type="radio" name="" id="" value="(하)">(하)
+                                                
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                        
+                                    
+                                </table>
+                                
+                            </div>
+                        </div>
+                        <div class="itWp">
+                            <p class="tit">IT/디자인 능력</p>
+                            <ul class="devCaaList">
+                                <input data-val="true" type="checkbox" value="true" /><input type="hidden" value="false" /><label for="">프로그래밍</label><br>
+                                <input data-val="true" type="checkbox" value="true" /><input type="hidden" value="false" /><label for="">웹디자인툴</label><br>
+                                <input data-val="true" type="checkbox" value="true" /><input type="hidden" value="false" /><label for="">편집디자인툴</label><br>
+                                <input data-val="true" type="checkbox" value="true" /><input type="hidden" value="false" /><label for="">동영상편집툴</label><br>
+                                <input data-val="true" type="checkbox" value="true" /><input type="hidden" value="false" /><label for="">3D 프로그램</label><br>
+                                <input data-val="true" type="checkbox" value="true" /><input type="hidden" value="false" /><label for="">웹에디터</label><br>
+                                <input data-val="true" type="checkbox" value="true" /><input type="hidden" value="false" /><label for="">기타  </label>
+                                <input class="hide" style="width:200px;" title="기타 입력" type="text" value="" />
+                                
+                            </ul>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="m13" class="rsSec rsSecActive devAward hide">
+                    <h2>수상&middot;수료&middot;활동내역</h2>
+                    
+                    <fieldset>
+                        <input type="hidden" class="devDefaultValueEmpty" value="empty" />
+                        <legend>수상&middot;수료&middot;활동내역</legend>
+                        <div class="activeWp">
+                            <textarea cols="5" id="Award_M_Licence_Text" name="Award.M_Licence_Text" placeholder="자신이 수상한 내역, 교육기관 수료내용, 각종 활동 내용을 입력해 주세요 
+                                ex- OO교육원 : 웹마스터 교육 수료 / 자원봉사 : 아이티 난민구호 모금운동" rows="10" style="width:700px; height:140px;" title="수상/수료/활동내역 입력">
+                            </textarea>
+                            <p class="cont devAwardTextCount"><em>0</em> / 1000</p>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="m14" class="rsSec rsSecPortfolio devPortfolio hide">
+                    <h2>포트폴리오, 경력기술서, 증명서 등 첨부파일을 등록</h2>
+                    <fieldset>
+                        <legend>포트폴리오, 경력기술서, 증명서 첨부파일</legend>
+                        <div class="portfolioWp">
+                            <table summary="이표는 파일제목 등록일 용량을 항목을 포함하고 있습니다." class="portfolioList ">
+                                
+                                <colgroup>
+                                    <col width="80px">
+                                    <col width="*">
+                                    <col width="160px">
+                                    <col width="160px">
+                                </colgroup>
+                                
+                                <tbody>
+                                    
+                                        <tr>
+                                            
+                                            <td>
+                                                
+                                                <input type="file" name="" id="">
+                                                <input type="button" name="" id="" value="추가">
+                                        
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </fieldset>
+                    
+                    
+        
+                </div>
+
+                <div id="m15" class="snsfield">
+                    <h2>SNS</h2>
+                   
+                    <fieldset>
+                        <legend>SNS</legend>
+                        <colgroup>
+                            <col width="22%">
+                            <col width="78%">
+                        </colgroup>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>INSTAGRAM</th>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>GITHUB</th>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>TWITTER</th>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>FACEBOOK</th>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>   
+                            </tbody>
+                        </table>
+            
+                    </fieldset>
+                </div>
+
+                <div>
+                    <fieldset>
+                        <legend>기타 추가사항</legend>
+                        <table>
+                            <tr>
+                                <th>병역사항</th>
+                                <td>
+                                    <input type="radio" value="2" ><label for="lb_military_1">미필</label>
+                                    <input type="radio" value="4" ><label for="lb_military_2">군필</label>
+                                    <input type="radio" value="1" ><label for="lb_military_3">면제</label>
+                                    <input class="hide" placeholder="병역내용을 입력해 주세요 (선택입력사항)" style="width:290px;" title="병역내용 입력" type="text" value="" />
+                                </td>
+                            </tr>
+                        </table>
+                        
+                    </fieldset>
+                </div>
+
+                <div class="rsSec rsSecOpen devResumeOpen">
+                    
+        <!--// 이력서 공개설정 -->
+        <div class="openWrap">
+            <legend>이력서 공개설정 </legend>
+            <div class="openAgree">
+                <p><input data-val="true" data-val-required="M_Want_Job_Stat 필드가 필요합니다." id="lb_openagree_1" name="ResumeOpen.M_Want_Job_Stat" type="checkbox" value="true" /><input name="ResumeOpen.M_Want_Job_Stat" type="hidden" value="false" /><label for="lb_openagree_1">본 이력서를 인재정보에 <em>등록</em>합니다.</label></p>
+                <ul class="openTip">
+                    <li>이력서가 인재정보에 공개되며, 기업으로부터 알바제의를 받을 수 있습니다.</li>
+                    <li><em class="txtBl">안심번호 서비스</em>를 이용하시면 실제 휴대폰번호를 공개하지 않고 이력서를 공개하실 수 있습니다.</li>
+                    <li>희망 업직종으로 바(bar)를 선택한 경우에만 바(bar) 기업으로부터 알바제의를 받을 수 있습니다.</li>
+                    <li>연락처 비공개를 선택하시면 <em class="txtBl">연락처를 제외</em>한 이력서를 공개하여 알바제의만 받을 수 있는 서비스입니다.</li> 
+                </ul>
+            </div>
+        </div>
+        <div class="openAgreeList devResumeOpenAgreeList hide">
+            <table summary="이표는 제목 입력폼 항목을 포함하고 있습니다." class="rsTbl devResumeOpenPeriod hide">
+                <caption><span class="skip">이력서 공개설정</span></caption>
+                <colgroup>
+                    <col width="21%">
+                    <col width="79%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th><span class="sq">필수사항</span>공개기간</th>
+                        <td>
+                            <input id="OpenCloseDateNow" name="OpenCloseDateNow" type="hidden" value="2021-05-13" />
+                            <ul>
+                                <li><input type="radio" id="lb_day_5" name="ResumeOpen.OpenCloseDateTerm" value="90"  /><label for="lb_day_5">90일</label></li>
+                                <li><input type="radio" id="lb_day_4" name="ResumeOpen.OpenCloseDateTerm" value="60"  /><label for="lb_day_4">60일</label></li>
+                                <li><input type="radio" id="lb_day_3" name="ResumeOpen.OpenCloseDateTerm" value="30"  /><label for="lb_day_3">30일</label></li>
+        
+                            </ul>
+                            <p class="closetime devResumeOpenCloseTime hide">공개종료일 : <span class="throughArrow devNowDate" style="display:none;">~</span> <span class="devchgDate">~</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="sq">필수사항</span>휴대폰</th>
+                        <td>
+                            <div class="relaxWp">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="SafeNumUse" id="SafeNumUse_On" value="01" >
+                                        <label for="SafeNumUse_On">안심번호 사용</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="SafeNumUse" id="SafeNumUse_Off" value="02" checked="checked">
+                                        <label for="SafeNumUse_Off">실제번호 사용</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="SafeNumUse" id="SafeNumUse_N" value="03" >
+                                        <label for="SafeNumUse_N">연락처 비공개(알바제의만)</label>
+                                        <input type="hidden" name="ResumeOpen.ResumeForSuggest" id="ResumeForSuggest" value="0" />
+                                    </li>
+                                </ul>
+                                
+                                
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="devAddInfoSection">
+                        <th>추가 연락처</th>
+                        <td>
+                            <ul class="openItem_2">
+                                <input id="SafeNum" name="SafeNum" type="hidden" value="" />
+                                <input id="isTempSave" name="isTempSave" type="hidden" value="0" />
+        
+                                    <li><input type="checkbox" id="lb_email_2" name="ResumeOpen.AL_Hidden_Stat[2]" class=""   value="true"><input id="ResumeOpen_AL_Hidden_Stat_2_" name="ResumeOpen.AL_Hidden_Stat[2]" type="hidden" value="false" /><label for="lb_email_2">이메일</label></li>
+                                    <li><input type="checkbox" id="lb_page_2" name="ResumeOpen.AL_Hidden_Stat[4]" class="devDisabled" disabled="disabled"  value="true"><input id="ResumeOpen_AL_Hidden_Stat_4_" name="ResumeOpen.AL_Hidden_Stat[4]" type="hidden" value="false" /><label for="lb_page_2">홈페이지</label></li>
+                                    <li class=hide><input type="checkbox" id="lb_tel_2" name="ResumeOpen.AL_Hidden_Stat[0]"  value="true"><input id="ResumeOpen_AL_Hidden_Stat_0_" name="ResumeOpen.AL_Hidden_Stat[0]" type="hidden" value="false" /><label for="lb_tel_2">유선전화</label></li>
+        <input id="ResumeOpen_AL_Hidden_Stat_3_" name="ResumeOpen.AL_Hidden_Stat[3]" type="hidden" value="true" /><input id="dev_AL_Hidden_Stat_1" name="ResumeOpen.AL_Hidden_Stat[1]" type="hidden" value="true" />                    </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>기업에게<br>전하고 싶은 말</th>
+                        <td>
+                            <div class="txWp">
+                                <textarea placeholder="오전, 오후 둘 다 근무 가능합니다. (오후 6시 이후에만 연락 가능)" name="ResumeOpen.Injae_Open_Msg" id="dev_Injae_Open_Msg"></textarea>
+                                <p class="">(<em>0</em>/50자)</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+                </div>
+
+                <p class="regiBtn">
+                        <button type="button" class="tempBtn devResumeTempRegBtn">임시저장</button>
+                        <button type="button" class="wBtn devResumeRegBtn">이력서저장</button>
+        
+                </p>
+            </div>
+                <div class="autoSaveWp hide devAutoSave">
+                    <p><span></span><strong>자동저장 완료</strong></p>
+                </div>
+
+                <div class="saveExitWp hide devResumeExit">
+                        <p class="txt">다른 페이지 이탈 시<br> <em>작성한 이력서 내용은 자동 저장되지 않습니다.</em><br>이력서를 <strong>임시저장</strong>해 주세요.</p>
+                        <p class="saveBtn"><a href="#" class="tempSaveExit devResumeTempSaveExitBtn">임시저장 후 나가기</a><a href="#" class="noSaveExit devResumeNoSaveExitBtn">저장하지 않고 나가기</a></p>
+                        <p class="closeBtn"><button type="button" class="devResumeExitCloseBtn">닫기</button></p>
+        
+                </div>
+
+        </form>
+
+                <form id="frm_cert" method="post">
+                    <input type="hidden" name="DB_Name" value="GG" />
+                    <input type="hidden" name="u_id" value="KA_25186627" />
+                    <input type="hidden" id="u_name" name="u_name" value="박민영" />
+                    <input type="hidden" id="dev_m_phone1" name="m_phone1" value="010" />
+                    <input type="hidden" id="dev_m_phone2" name="m_phone2" value="7484" />
+                    <input type="hidden" id="dev_m_phone3" name="m_phone3" value="4850" />
+                    <input type="hidden" name="cert_path" value="RESUME_NEW" />
+                    <input type="hidden" id="dev_cert_type" name="cert_type" value="PHONE" />
+                </form>
+                <form id="frm_cert2" method="post">
+                    <input type="hidden" name="DB_Name" value="GG" />
+                    <input type="hidden" name="u_id" value="KA_25186627" />
+                    <input type="hidden" id="u_name" name="u_name" value="박민영" />
+                    <input type="hidden" id="dev_m_phone1" name="m_phone1" value="010" />
+                    <input type="hidden" id="dev_m_phone2" name="m_phone2" value="7484" />
+                    <input type="hidden" id="dev_m_phone3" name="m_phone3" value="4850" />
+                    <input type="hidden" name="cert_path" value="RESUMEOPENSTAT" />
+                    <input type="hidden" id="dev_cert_type" name="cert_type" value="PHONE" />
+                </form>
+        
+        
+        </div>
+
+
+
+
+
+
+
+
+
+        <script type="text/javascript">
+            <!--
+            $(function () {
+                FFSizeRe();
+                var menupos = $("#quickMenu").offset().top;
+                    $(window).scroll(function(){
+                        //alert($(window).scrollTop() + ">=" + menupos);
+                        var agent = navigator.userAgent.toLowerCase();
+                        var _iechk = (agent.indexOf("msie") != -1 || agent.indexOf("trident") != -1);   //true : ie
+                        
+                        if ($(window).scrollTop() > ($("#container").height() - 570)) {
+                            $("#quickMenu").css("position", "fixed");
+                            if ($("#RIdx").length > 0) {
+                                $("#quickMenu").css("top", ($(window).scrollTop() - $("#container").height() + (_iechk ? 150 : 230)));
+                            } else {
+                                $("#quickMenu").css("top", ($(window).scrollTop() - $("#container").height() + (_iechk ? 116 : 196)));
+                            }
+                        } else if($(window).scrollTop() >= 110) {
+                            $("#quickMenu").css("position", "fixed");
+                            $("#quickMenu").css("top", "0");
+        
+                        } else {
+                            $("#quickMenu").css("position", "fixed");
+                            $("#quickMenu").css("top", 110 - $(window).scrollTop());
+                    }
+                });
+            });
+            function FFSizeRe() {
+        
+                var _scroll_right_width = 480     //우측 고정 거리
+                var DivRight = _scroll_right_width + (((document.body.clientWidth - 960) / 2));
+                if (DivRight < _scroll_right_width) {
+                    document.getElementById("quickMenu").style.left = _scroll_right_width + "px";
+                } else {
+                    document.getElementById("quickMenu").style.left = _scroll_right_width + (((document.body.clientWidth - 960) / 2)) + "px";
+                }
+            }
+        
+            function WinResieze() {
+                try {
+                    FFSizeRe();    //우측 바로가기 메뉴바
+                } catch (e) {
+                }
+            }
+        
+            window.onresize = WinResieze;
+            //-->
+        </script>
+        <div id="quickMenu">
+                <div class="qTop">
+                    <p class="qWrite"><a href="#" class="button rsBtnWriteEnd devResumeRegBtn">이력서 저장</a></p>
+                    <p class="qSave"><a href="#" class="button rsBtnSave devResumeTempRegBtn">임시저장</a></p>
+                    <p class="qDate_1 devResumeTempDate hide"></p>
+                </div>
+        
+            <!-- 미리보기 -->
+            <div class="util-menu">
+                <div class="preview">
+                    <a href="" class="preview-pc devPreviewPC">
+                        <b class="bold">PC화면</b>미리보기
+                    </a>
+                    <a href="" class="preview-mobile devPreviewMobile">
+                        <b class="bold">모바일</b>미리보기
+                    </a>
+                </div>
+            </div>
+        
+            <!--// 필수 입력사항 -->
+            <div class="qMenu qMenu_1 devQuickMenuList">
+                <p class="tit">필수입력사항</p>
+                <ul>
+                    <li data-val="UserInfo"><a href="#">개인기본정보</a></li>
+                    <li data-val="Title"><a href="#">이력서제목</a></li>
+                    <li data-val="Edu"><a href="#">학력사항</a></li>
+                    <li data-val="Career"><a href="#">경력사항</a></li>
+                    <li data-val="WishWork"><a href="#">희망근무조건</a></li>
+                    <li data-val="Profile" class="end"><a href="#">자기소개서</a></li>
+                </ul>
+            </div>
+        
+            <!--// 선택입력사항 -->
+            <div class="qMenu qMenu_2 devQuickMenuList">
+                <p class="tit">선택입력사항</p>
+                <ul>
+                    <li data-val="Video"><a href="#">동영상</a></li>
+                    <li data-val="PhotoAlbum"><a href="#">사진첩</a></li>
+                    <li data-val="Lngg"><a href="#">어학능력</a></li>
+                    <li data-val="Lcns"><a href="#">자격증</a></li>
+                    <li data-val="OaCaa"><a href="#">컴퓨터활용능력</a></li>
+                    <li data-val="Award" class="end"><a href="#">수상·수료내역</a></li>
+                    <li data-val="Portfolio"><a href="#">포트폴리오</a></li>
+                    <li data-val="AdditionInfo"><a href="#">취업우대사항</a></li>
+                    <li data-val="ResumeOpen" ><a href="#">공개설정</a></li>
+                </ul>
+            </div>
+        
+            <div class="qBtn_2">
+                <ul>
+                    <li><a href="/Services/QnA/Regist?intro_url=https%3a%2f%2fwww.albamon.com%2fResume%2fWrite" class="m2 devServiceInquiry">문의/제안/신고</a></li>
+                    <li><a href="http://www.albamon.com/service/safe/pri-tip.asp" class="m3" target="_blank">개인정보 안심 캠페인</a></li>
+                </ul>
+            </div>
+        
+        </div>
+        
+        
+        
+        
+        
+                </div><!-- container //-->
+
+</body>
+</html>
