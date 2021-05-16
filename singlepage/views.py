@@ -10,7 +10,7 @@ from django.views.generic import CreateView, UpdateView
 from accounts.decorators import login_message_required
 from accounts.models import SNS, Profile
 from resumes.models import SelfIntro, Experience, Education, Resume
-from singlepage.forms import snsForm, ProfileForm
+from singlepage.forms import snsForm, ProfileForm, ResumeForm, ExperienceForm, EduForm
 
 
 def _page_id(request):
@@ -52,6 +52,8 @@ def ChangePicture(request, pk):
     return render(request, 'singlepage/picture_popup.html')
 
 
+
+
 @method_decorator(login_message_required, name='dispatch')
 class snsCreate(CreateView):
     model = SNS
@@ -80,40 +82,85 @@ def create_sns(request, pk):
         # commit=False일 경우 실제 DB에는 적용X
         # 아직 작성자 정보가 없으니
 
+def create_resume(request,pk):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST)
+        if form.is_valid():
+            resume = form.save(commit=False)
+            resume.user = request.user
+            resume.save()
+            return redirect('singlepage:page_detail', request.user.id)
+        return render(request, 'singlepage/resume_create.html', {'form':form})
+    else:
+        form = ResumeForm()
+        return render(request, 'singlepage/resume_create.html', {'form':form})
 
+def create_experience(request,pk):
+    if request.method == 'POST':
+        form = ExperienceForm(request.POST)
+        if form.is_valid():
+            experience = form.save(commit=False)
+            experience.user = request.user
+            experience.save()
+            return redirect('singlepage:page_detail', request.user.id)
+        return render(request, 'singlepage/experience_create.html', {'form':form})
+    else:
+        form = ExperienceForm()
+        print('hahaha')
+        return render(request, 'singlepage/experience_create.html', {'form':form})
+
+def create_edu(request,pk):
+    if request.method == 'POST':
+        form = EduForm(request.POST)
+        if form.is_valid():
+            edu = form.save(commit=False)
+            edu.user = request.user
+            edu.save()
+            return redirect('singlepage:page_detail', request.user.id)
+        return render(request, 'singlepage/edu_create.html', {'form':form})
+    else:
+        form = EduForm()
+        print('hahaha')
+        return render(request, 'singlepage/edu_create.html', {'form':form})
+
+
+@login_message_required
 def ChangeProfile(request, pk):
     profile = Profile.objects.get(id=pk)
+    snses = SNS.objects.all()
+    snses = snses.filter(user_id=pk)
+
+    sns_formIn = []
+    for sns in snses:
+        sns_formIn.append(sns)
 
     if request.method == 'POST':
-        profile_form = ProfileForm(request.POST, instance=profile)
-        if profile_form.is_valid():
-            # profile.korName = profile_form.cleaned_data['korName']
-            # profile.engName = profile_form.cleaned_data['engName']
-            # profile.address = profile_form.cleaned_data['address']
-            # profile.email = profile_form.cleaned_data['email']
-            # profile.phone = profile_form.cleaned_data['phone']
-            # profile.image = profile_form.cleaned_data['image']
+        profile_form = ProfileForm(request.POST,request.FILES, instance=profile)
+        for sns in snses:
+            sns_formIn.append(sns)
 
-
-            # prof.user_id = request.user.id
-            # profile_form.save()
+        sns_form = snsForm(request.POST, instance=sns)
+        if profile_form.is_valid() and sns_form.is_valid():
+            sns = sns_form.save(commit=False)
+            sns.save()
             prof = profile_form.save(commit=False)
-            print(profile_form.cleaned_data['image'])
-            print(profile_form.cleaned_data['image'])
-            print(profile_form.cleaned_data['image'])
-            prof.image = profile_form.cleaned_data['image']
+
             prof.save()
             return redirect('singlepage:page_detail', pk)
         return redirect('singlepage:page_detail', pk)
     else:
+        s_form = snsForm(instance=snses[0])
+        sns_form = snsForm(instance=snses[1])
         profile_form = ProfileForm(instance=profile)
         # print(profile)
-        return render(request, 'singlepage/edit_page.html',{'profile_form':profile_form})
+        return render(request, 'singlepage/edit_page.html',{'profile_form':profile_form,
+                                                            's_form':s_form,
+                                                            'sns_form':sns_form},)
 
 class ProfileUpdate(UpdateView):
     model = Profile
     fields = ['korName','engName','address','email','phone','image',]
     template_name = 'singlepage/edit_page.html'
 
-    def get_absolute_url(self):
-        return reverse('singlepage:page_detail',args=[self.id])
+    # def get_absolute_url(self):
+    #     return reverse('singlepage:page_detail',args=[self.id])
