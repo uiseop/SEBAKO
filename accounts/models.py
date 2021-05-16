@@ -29,7 +29,6 @@ class Profile(models.Model):
 
     created_at = models.DateField(auto_now_add=True)
 
-    AddSNS = models.ManyToManyField('SNS', blank=True, related_name='domain')
     image = models.ImageField(upload_to='profile/images/user', blank=True, verbose_name='프로필 사진')
 
     def get_absolute_url(self):
@@ -39,9 +38,11 @@ class Profile(models.Model):
         return f'{self.user}'
 
 class SNS(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, unique=True)
-    url = models.URLField("Site URL")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    github = models.URLField(null=True, blank=True)
+    blog = models.URLField(null=True, blank=True)
+    facebook = models.URLField(null=True, blank=True)
+    insta = models.URLField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "SNS"

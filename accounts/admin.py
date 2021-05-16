@@ -8,10 +8,10 @@ admin.site.register(Profile)
 admin.site.register(Company)
 
 class SnsAdmin(admin.ModelAdmin):
-    list_display = ['user_id','name','url']
-    raw_id_fields = ['user_id']
-    list_filter = ['user_id']
-    search_fields = ['name']
+    list_display = ['user','github','blog','facebook','insta']
+    raw_id_fields = ['user']
+    list_filter = ['github']
+    search_fields = ['github']
 
 
 admin.site.register(SNS,SnsAdmin)

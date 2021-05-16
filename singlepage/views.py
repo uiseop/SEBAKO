@@ -52,8 +52,6 @@ def ChangePicture(request, pk):
     return render(request, 'singlepage/picture_popup.html')
 
 
-
-
 @method_decorator(login_message_required, name='dispatch')
 class snsCreate(CreateView):
     model = SNS
@@ -82,7 +80,8 @@ def create_sns(request, pk):
         # commit=False일 경우 실제 DB에는 적용X
         # 아직 작성자 정보가 없으니
 
-def create_resume(request,pk):
+
+def create_resume(request, pk):
     if request.method == 'POST':
         form = ResumeForm(request.POST)
         if form.is_valid():
@@ -90,12 +89,13 @@ def create_resume(request,pk):
             resume.user = request.user
             resume.save()
             return redirect('singlepage:page_detail', request.user.id)
-        return render(request, 'singlepage/resume_create.html', {'form':form})
+        return render(request, 'singlepage/resume_create.html', {'form': form})
     else:
         form = ResumeForm()
-        return render(request, 'singlepage/resume_create.html', {'form':form})
+        return render(request, 'singlepage/resume_create.html', {'form': form})
 
-def create_experience(request,pk):
+
+def create_experience(request, pk):
     if request.method == 'POST':
         form = ExperienceForm(request.POST)
         if form.is_valid():
@@ -103,13 +103,14 @@ def create_experience(request,pk):
             experience.user = request.user
             experience.save()
             return redirect('singlepage:page_detail', request.user.id)
-        return render(request, 'singlepage/experience_create.html', {'form':form})
+        return render(request, 'singlepage/experience_create.html', {'form': form})
     else:
         form = ExperienceForm()
         print('hahaha')
-        return render(request, 'singlepage/experience_create.html', {'form':form})
+        return render(request, 'singlepage/experience_create.html', {'form': form})
 
-def create_edu(request,pk):
+
+def create_edu(request, pk):
     if request.method == 'POST':
         form = EduForm(request.POST)
         if form.is_valid():
@@ -117,49 +118,69 @@ def create_edu(request,pk):
             edu.user = request.user
             edu.save()
             return redirect('singlepage:page_detail', request.user.id)
-        return render(request, 'singlepage/edu_create.html', {'form':form})
+        return render(request, 'singlepage/edu_create.html', {'form': form})
     else:
         form = EduForm()
         print('hahaha')
-        return render(request, 'singlepage/edu_create.html', {'form':form})
+        return render(request, 'singlepage/edu_create.html', {'form': form})
 
 
 @login_message_required
-def ChangeProfile(request, pk):
-    profile = Profile.objects.get(id=pk)
-    snses = SNS.objects.all()
-    snses = snses.filter(user_id=pk)
-
-    sns_formIn = []
-    for sns in snses:
-        sns_formIn.append(sns)
+def ChangeProfile(request, pk, created=None):
+    profile = Profile.objects.get(user_id=pk)
 
     if request.method == 'POST':
-        profile_form = ProfileForm(request.POST,request.FILES, instance=profile)
-        for sns in snses:
-            sns_formIn.append(sns)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+        try: # SNS의 정보를 가져오는것을 먼저 시도해봄
+            s = SNS.objects.get(user_id=pk)
+            sns_form = snsForm(request.POST, instance=s)
 
-        sns_form = snsForm(request.POST, instance=sns)
-        if profile_form.is_valid() and sns_form.is_valid():
-            sns = sns_form.save(commit=False)
-            sns.save()
-            prof = profile_form.save(commit=False)
-
-            prof.save()
+            # sns_form = snsForm(request.POST, instance=sns)
+            if profile_form.is_valid() and sns_form.is_valid():
+                sns = sns_form.save(commit=False)
+                prof = profile_form.save(commit=False)
+                sns.save()
+                prof.save()
+                return redirect('singlepage:page_detail', pk)
             return redirect('singlepage:page_detail', pk)
-        return redirect('singlepage:page_detail', pk)
+        except: # 정보가 없으면 새로 추가해주면 됨
+            sns = snsForm(request.POST)
+            # sns.user_id = pk
+            addsns = sns.save(commit=False)
+            addsns.user = request.user
+            addsns.save()
+            return redirect('singlepage:page_detail', request.user.id)
+
     else:
-        s_form = snsForm(instance=snses[0])
-        sns_form = snsForm(instance=snses[1])
+        # s_form = snsForm(instance=snses[0])
+        # sns_form = snsForm(instance=snses[1])
+        snses = SNS.objects.all()
+        snses = snses.filter(user_id=pk)
+
         profile_form = ProfileForm(instance=profile)
-        # print(profile)
-        return render(request, 'singlepage/edit_page.html',{'profile_form':profile_form,
-                                                            's_form':s_form,
-                                                            'sns_form':sns_form},)
+
+        if not snses:
+            sns1 = snsForm()
+
+            return render(request, 'singlepage/edit_page.html', {'profile_form': profile_form,
+                                                                 'sns1_form': sns1,
+                                                                 })
+        else:
+            s = SNS.objects.get(user_id=pk)
+            sns_form = snsForm(instance=s)
+            # for i in range(len(snses)):
+            #     sns[i] = snsForm(instance=snses[i])
+            # sns = snsForm(instance=snses)
+
+            # print(profile)
+            return render(request, 'singlepage/edit_page.html', {'profile_form': profile_form,
+                                                                 'sns1_form': sns_form,
+                                                                 })
+
 
 class ProfileUpdate(UpdateView):
     model = Profile
-    fields = ['korName','engName','address','email','phone','image',]
+    fields = ['korName', 'engName', 'address', 'email', 'phone', 'image', ]
     template_name = 'singlepage/edit_page.html'
 
     # def get_absolute_url(self):

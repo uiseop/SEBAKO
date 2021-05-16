@@ -38,9 +38,9 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
                 {% if user.profile.is_user %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.id}}/">내 정보</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/">내 정보</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.id}}/">인증관리</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/">인증관리</a></li>
                 {% endif %}
                 {% else %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>

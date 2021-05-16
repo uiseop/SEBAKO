@@ -7,7 +7,7 @@ from resumes.models import Resume, Experience, Education
 class snsForm(forms.ModelForm):
     class Meta:
         model = SNS
-        fields = ['name','url']
+        fields = ['github','blog','facebook','insta']
 
 class ProfileForm(forms.ModelForm):
     class Meta:
