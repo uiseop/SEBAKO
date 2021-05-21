@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEBACO-개인회원가입</title>
+
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -19,20 +20,42 @@
     <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
 
 </head>
-<body>
-    <!-- 가입하기 버튼을 누른 뒤 어디로? -->
-    <center><h1>SEBACO RESUME MANAGEMENT SYSTEM</h1></center>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">SEBACO</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">요청하기</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">관리하기</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                    {% if user.is_active %}
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/index">내 정보</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<section class="page-section bg-primary" id="about">
+    
+    <center><h1>개인 회원가입</h1></center>
     <hr>
     <div align="right">  
-        
-        <a href="/">HOME</a>
+        <a href="/" class="btn btn-primary">HOME</a>
     </div>
 
 <div align="center">
     <div id="content">
         <!--회원가입 -->
         <div class="monLeave monUserJoin joinPerson">
-            <h1>개인회원 가입</h1>
+            
             <input type="hidden" name="historyCert" id="historyCert" />
     
     <form action="{% url 'accounts:signup_personal' %}" id="frm-reg" method="POST" name="frm-reg">
@@ -220,7 +243,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="howAlbamon">
-                                            <span class="select" style="color:#78838e">[선택]</span> SEBACO를 어떻게 알게 되셨나요?
+                                            <span class="select" style="color:#61666b">[선택]</span> SEBACO를 어떻게 알게 되셨나요?
                                             <select class="tBox joinBx tHow" id="known_route" name="SelectedKnownRouteValue" style="width:350px;" title="알바몬을 어떻게 알게 되셨나요"><option value="">선택하세요</option>
                                             <option value="A01">주요 포털사이트 검색</option>
                                             <option value="A13">앱스토어 검색</option>
@@ -240,7 +263,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="expiry">
-                                            <span class="select">[선택]</span>
+                                            <span class="select" style="color:#61666b">[선택]</span>
                                             <span class="title">
                                                 개인정보 유효기간 선택
                                                 <a href="javascript:void(0);"><span class="iconPwdQues" id="dev_valid_day_help_icon"></span></a>
@@ -285,6 +308,6 @@
     </div>
 </div>
 
-
+</section>
 </body>
 </html>
