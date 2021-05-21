@@ -31,6 +31,39 @@ def signup(request):
 
 
 def signup_company(request):
+    if request.method == 'POST':
+        if User.objects.filter(username=request.POST['username']).exists():
+            messages.info(request, '이미 가입한 아이디입니다')
+            return redirect('accounts:signup_personal')
+        # redirect는 함수 명 적어.
+
+        if request.POST['password1'] == request.POST['password2']:
+            if len(request.POST['password1']) < 8:
+                messages.info(request, '비밀 짧아')
+                return redirect('accounts:signup_personal')
+
+            user = User.objects.create_user(
+                username=request.POST['username'],
+                password=request.POST['password1'],
+            )
+            # korName = '한국'
+            # engName = 'Engl'
+            # address = 'bababobo'
+            # email = 'babo@babo.com'
+            # phone = '010-5123-4567'
+            korName = request.POST['korName']
+            engName = request.POST['engName']
+            address = request.POST['Address']
+            email = request.POST['EmailId'] + '@' + request.POST['EmailDomain']
+            phone = request.POST['Phone1'] + '-' + request.POST['Phone2'] + '-' + request.POST['Phone3']
+            # sns = request.POST['GitSns']
+
+            profile = Profile(user=user, korName=korName, engName=engName, address=address, email=email, phone=phone)
+            profile.save()
+            auth.login(request, user)
+            return redirect('home')
+
+        return render(request, 'accounts/signup_personal.html')
     return render(request, 'accounts/signup_company.html')
 
 
