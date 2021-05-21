@@ -39,10 +39,10 @@ class Profile(models.Model):
 
 class SNS(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    github = models.URLField(null=True, blank=True)
-    blog = models.URLField(null=True, blank=True)
-    facebook = models.URLField(null=True, blank=True)
-    insta = models.URLField(null=True, blank=True)
+    github = models.URLField(blank=True)
+    blog = models.URLField(blank=True)
+    facebook = models.URLField(blank=True)
+    insta = models.URLField(blank=True)
 
     class Meta:
         verbose_name_plural = "SNS"
