@@ -4,19 +4,122 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+          rel="stylesheet" type="text/css"/>
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+          rel="stylesheet"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet"/>
+    <style>
+        div#login_wrapper{border:1px solid gray;
+        position: absolute;
+        left:40%;
+        top:20%;
+        }
+        label.liname{
+        position: absolute;
+        left:35%;
+        }
+        div.head{
+        margin-top:-100px;
+        margin-bottom:30px;
+        }
+    </style>
 </head>
-<body>
-<h1 class="text-center">회원정보 변경</h1>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{profile_form.as_p}}
-<!--    {{form.as_p}}-->
-    <br>
-    <br>
-    <hr>
-    {{sns1_form.as_p}}
+<body id="page-top">
+<nav class="navbar navbar-expand-lg navbar-light py-3 bg-primary" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/">SEBACO</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                <!--                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">요청하기</a></li>-->
+                <!--                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">관리하기</a></li>-->
+                <!--                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>-->
+                {% if user.is_active %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/">내
+                    정보</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <button type="submit" class="btn btn-primary">수정</button>
-</form>
+<section class="page-section " id="about">
+    <div id="container">
+        <center>
+            <div class="head">
+            <h1 class="title">회원정보 변경</h1>
+            </div>
+            <!--    <div class="row justify-content-md-center">-->
+            <!--        <div style="position: absolute; top: 50%; height: 876.39px; margin-top: -438.195px;">-->
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!--                fields = ['korName','engName','address','email','phone','image',]-->
+                <label class="liname" name="label_user_kor"><i class="fas fa-user"></i>&nbsp;&nbsp;{{ profile_form.korName.label }}</label>
+                    {{ profile_form.korName }}
+                <!--                {{profile_form.korName.id_for_label-->
+                <!--                {{profile_form.korName.label}} {{profile_form.korName}}-->
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fas fa-user"></i>&nbsp;&nbsp;{{profile_form.engName.label }}</label>
+                    {{profile_form.engName}}
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fas fa-home"></i>&nbsp;&nbsp;{{profile_form.address.label }}</label>
+                {{profile_form.address}}
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{profile_form.email.label }}</label>
+                {{profile_form.email}}
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fas fa-phone"></i>&nbsp;&nbsp;{{profile_form.phone.label }}</label>
+                {{profile_form.phone}}
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;{{profile_form.image.label }}</label>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                {{profile_form.image}}
+
+
+                <!--    {{form.as_p}}-->
+                <hr>
+                <!--                fields = ['github','blog','facebook','insta']-->
+
+                <label class="liname" name="label_user_kor"><i class="fab fa-github"></i>&nbsp;&nbsp;{{sns1_form.github.label }}</label>
+                {{sns1_form.github}}
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fas fa-blog"></i>&nbsp;&nbsp;{{sns1_form.blog.label }}</label>
+                {{sns1_form.blog}}
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fab fa-facebook"></i>&nbsp;&nbsp;{{sns1_form.facebook.label }}</label>
+                {{sns1_form.facebook}}
+                <br><br>
+                <label class="liname" name="label_user_kor"><i class="fab fa-instagram"></i>&nbsp;&nbsp;{{sns1_form.insta.label }}</label>
+                {{sns1_form.insta}}
+                <br><br>
+
+
+<!--                {{sns1_form.as_p}}-->
+
+                <button type="submit" class="btn btn-primary">수정</button>
+            </form>
+        </center>
+        <!--        </div>-->
+        <!--    </div>-->
+    </div>
+</section>
+
 </body>
 </html>

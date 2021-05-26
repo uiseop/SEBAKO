@@ -145,7 +145,7 @@ from django.contrib.messages import constants as messages_constants
 MESSAGE_LEVEL = messages_constants.DEBUG
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,MEDIA_URL)
+MEDIA_ROOT = os.path.join(BASE_DIR,'_media')
 
 # 창 종료시 세션 제거
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
