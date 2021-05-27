@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,301 +14,363 @@
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css" />
     <!-- Third party plugin CSS-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+        rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
 
 </head>
-<body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">SEBACO</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+<section class="page-section bg-primary" id="about" style="text-align: center;">
+
+    <body id="page-top">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="/">SEBACO</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">요청하기</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">관리하기</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                    {% if user.is_active %}
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/index">내 정보</a></li>
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
-                    {% endif %}
-                </ul>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">요청하기</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">관리하기</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                        {% if user.is_active %}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/index">내 정보</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-<section class="page-section bg-primary" id="about">
-    
-    <center><h1>개인 회원가입</h1></center>
-    <hr>
-    <div align="right">  
-        <a href="/" class="btn btn-primary">HOME</a>
-    </div>
 
-<div align="center">
+</section>
+<br>
+
+
+<div style="margin-left: 400px;">
     <div id="content">
         <!--회원가입 -->
         <div class="monLeave monUserJoin joinPerson">
-            
-            <input type="hidden" name="historyCert" id="historyCert" />
-    
-    <form action="{% url 'accounts:signup_personal' %}" id="frm-reg" method="POST" name="frm-reg">
-        {% csrf_token %}
-        <input id="dev_Ident_e" name="UserIdentE" type="hidden" value="" />
-        <input id="dev_certGubun" name="CertPathType" type="hidden" value="GGREG" />
-        <input id="dev_db_name" name="DbName" type="hidden" value="GG" />
-        <input id="dev_u_ident" name="UserIdent" type="hidden" value="" />
-        <input id="dev_cert_idx" name="CertIndex" type="hidden" value="" />
-        <input id="MemberType" name="MemberType" type="hidden" value="M" />            
-        <!--// 동의 -->
+
+
+
+            <form action="{% url 'accounts:signup_personal' %}" id="frm-reg" method="POST" name="frm-reg">
+                {% csrf_token %}
+                <input id="dev_Ident_e" name="UserIdentE" type="hidden" value="" />
+                <input id="dev_certGubun" name="CertPathType" type="hidden" value="GGREG" />
+                <input id="dev_db_name" name="DbName" type="hidden" value="GG" />
+                <input id="dev_u_ident" name="UserIdent" type="hidden" value="" />
+                <input id="dev_cert_idx" name="CertIndex" type="hidden" value="" />
+                <input id="MemberType" name="MemberType" type="hidden" value="M" />
+                <!--// 동의 -->
                 <div class="inner">
-                    
-                    <div class="join_dot"></div>
-                    <div class="user_join_agree agrSelect">
-                        <input type="checkbox" name="Agree5" id="agreeChk_5" value="on">
-                        <label for="agreeChk_5"><span>[필수]</span> 만 15세 이상입니다</label>
-                    </div>
-                    <div class="user_join_agree agrSelect">
-                        <input type="checkbox" name="Agree1" id="agreeChk_0" value="on">
-                        <label for="agreeChk_0"><span>[필수]</span> 서비스 이용약관 동의</label>
-                        <div class="toggle_terms"><a href="#">내용보기<span></span></a>
-                    </div>
-                        
-                    <div class="user_join_agree agrSelect">
-                        <input type="checkbox" name="Agree2" id="agreeChk_1" value="on"><label for="agreeChk_1"><span>[필수]</span> 개인정보 수집 및 이용 동의</label>
-                        <div class="toggle_terms"><a href="#">내용보기<span></span></a></div>
-                        
-                    </div>
-    
-                    <div class="user_join_agree agrSelect">
-                        <input type="checkbox" name="Agree4" id="agreeChk_3" value="on"><label for="agreeChk_3"><span class="select">[선택]</span> 개인정보 수집 및 이용 동의</label>
-                        <div class="toggle_terms"><a href="#">내용보기<span></span></a></div>
-                        
-                    </div>
-                    <div class="user_join_agree agrSelect">
-                        <input type="checkbox" name="Agree3" id="agreeChk_2" value="on" /><label for="agreeChk_2"><span class="select">[선택]</span> 광고성 정보 이메일/SMS 수신 동의 <br /><span class="promotion_type">(알바 뉴스레터, 소식 및 광고메일, 휴대폰 알림)</span></label>
-                        <div class="toggle_terms">
-                            <a href="#">내용보기<span></span></a>
-                        
-                    </div>
-                </div>
-                <!-- 동의 끝 //-->
-                <!--// 회원가입폼 -->
-                <div class="inner">
-                    <h2 class="skip"></h2>
-                    <div class="step3">
-                        <div class="tbLeave tbJoin">
-                            <table summary="회원가입폼">
-                                
-                                <colgroup>
-                                    <col width="120">
-                                    <col width="653">
-                                </colgroup>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" class="tLine"><div></div></td>
-                                    </tr>
-                                    <tr>
-                                        <th>아이디</th>
-                                        <td>
-                                            <input type="text" name="username" class="tBox" title="아이디" id="dev_u_id" maxlength="12" />
-                                            <p class="compul"></p>
-                                        </td>
+                    <div style="margin-left:350px;">
+                        <ul style="margin-left: 50px;">
+                            <li>
+                                <h4>이용약관</h4>
+                            </li>
+                        </ul>
 
-                                    </tr>
-                                    <tr>
-                                        <th>한글이름</th>
-                                        <td>
-                                            <input type="text" name="korName" class="tBox" title="이름" id="dev_u_korname" maxlength="12" />
-                                            <p class="compul"></p>
-                                        </td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <th>영문이름</th>
-                                        <td>
-                                            <input type="text" name="engName" class="tBox" title="이름" id="dev_u_engname" maxlength="12" />
-                                            <p class="compul"></p>
-                                        </td>
-                                    </tr>
-                    
-                                    <tr>
-                                        <th>이메일</th>
-                                        <td>
-                                            <input type="text" name="EmailId" class="tBox tEmail" id="dev_M_Email" maxlength="25" title="이메일아이디"> <span>@</span> <input type="text" name="EmailDomain" class="tBox tEmail" id="dev_mail_etc" maxlength="25" title="이메일계정" onfocus="mon.account.regist.core.reg.emailChk1()">
-                                            <select name="C_Email_Cp" class="tBox joinBx tEmail" id="dev_email_Cp" title="이메일 서비스업체 선택">
-                                                <option value="">선택하세요</option>
-                                                <option value="naver.com">naver.com</option>
-                                                <option value="hanmail.net">hanmail.net</option>
-                                                <option value="nate.com">nate.com</option>
-                                                <option value="daum.net">daum.net</option>
-                                                <option value="hotmail.com">hotmail.com</option>
-                                                <option value="dreamwiz.com">dreamwiz.com</option>
-                                                <option value="gmail.com">gmail.com</option>
-                                                <option value="etc">직접입력</option>
-                                            </select>
-                                            <p class="compul" id="txtEmail"></p>
-                                            <input id="dev_mailChkStat" name="dev_mailChkStat" type="hidden" value="" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>비밀번호 <a href="javascript:;"><span class="iconPwdQues" id="dev_pwd_help_icon"></span></a></th>
-                                        <td>
-                                            <input type="password" name="password1" class="tBox tPwd" id="dev_pwd1" maxlength="16" placeholder="8~16자 영문, 숫자, 특수문자" title="비밀번호" />
-                                            <input type="hidden" name="birthcheck" id="dev_birthcheck" value="" />
-                                            <p class="compul" id="PwdSafeResult"></p>
-                                            <input id="dev_pwdchkStat" name="dev_pwdchkStat" type="hidden" value="" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>비밀번호 확인</th>
-                                        <td>
-                                            <input type="password" name="password2" id="dev_pwconfirm" class="tBox tPwd" maxlength="16" title="비밀번호확인" />
-                                            <p class="compul" id="dev_chk_pwd_confirm"></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="tLine"><div></div></td>
-                                    </tr>
-                                    
-                                    
-                                    
-                                    <tr>
-                                        <td colspan="2" class="tLine"><div></div></td>
-                                    </tr>
-                                    <tr>
-                                        <th>휴대폰 번호</th>
-                                        <td>
-                                            <select name="Phone1" class="tBox joinBx tPhone" id="dev_hphone1" title="휴대폰 번호">
-                                                <option value="010">010</option>
-                                                <option value="011">011</option>
-                                                <option value="016">016</option>
-                                                <option value="017">017</option>
-                                                <option value="018">018</option>
-                                                <option value="019">019</option>
-                                            </select> -
-                                            <input type="text" name="Phone2" id="dev_hphone2" maxlength="4" class="tBox tPhone" title="휴대폰 번호"> -
-                                            <input type="text" name="Phone3" id="dev_hphone3" maxlength="4" class="tBox tPhone" title="휴대폰 번호">
-                                            
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>주소</th>
-                                        <td>
-                                            <input type="text" name="Address" style="width: 375px;" class="tBox" title="주소" id="dev_u_address" maxlength="50" />
-                                            <p class="compul"></p>
-                                            <input id="dev_addchkStat" name="dev_addchkStat" type="hidden" value="" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>SNS</th>
-                                        <td>
-                                            <li><b>Instagram</b>
-                                            <input type="text" name="Sns" class="tBox" title="SNS" id="dev_u_sns" maxlength="50" />
-                                            <p class="compul"></p>
-                                            <input id="dev_snschkStat" name="dev_snschkStat" type="hidden" value="" />
-                                            </li>
+                        <div class="join_dot"></div>
+                        <div class="user_join_agree agrSelect">
+                            <input type="checkbox" name="Agree5" id="agreeChk_5" value="on">
+                            <label for="agreeChk_5"><span>[필수]</span> 만 15세 이상입니다</label>
+                        </div>
+                        <div class="user_join_agree agrSelect">
 
-                                            <li><b>Facebook</b>
-                                                <input type="text" name="Sns" class="tBox" title="SNS" id="dev_u_sns" maxlength="50" />
-                                                <p class="compul"></p>
-                                                <input id="dev_snschkStat" name="dev_snschkStat" type="hidden" value="" />
-                                            </li>
-
-                                            <li><b>Github</b>
-                                                <input type="text" name="GitSns" class="tBox" title="SNS" id="dev_u_sns" maxlength="50" />
-                                                <p class="compul"></p>
-                                                <input id="dev_snschkStat" name="dev_snschkStat" type="hidden" value="" />
-                                            </li>
-
-                                            <li><b>Twitter</b>
-                                                <input type="text" name="Sns" class="tBox" title="SNS" id="dev_u_sns" maxlength="50" />
-                                                <p class="compul"></p>
-                                                <input id="dev_snschkStat" name="dev_snschkStat" type="hidden" value="" />
-                                            </li>
+                            <input type="checkbox" name="Agree1" id="agreeChk_0" value="on">
+                            <label for="agreeChk_0"><span>[필수]</span> 서비스 이용약관 동의</label>
+                            <a href="#">내용보기</a>
 
 
-                                        </td>
-                                    </tr>
-                                    
-                                    
-                                    <tr>
-                                        <td colspan="2" class="tLine"><div></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="howAlbamon">
-                                            <span class="select" style="color:#61666b">[선택]</span> SEBACO를 어떻게 알게 되셨나요?
-                                            <select class="tBox joinBx tHow" id="known_route" name="SelectedKnownRouteValue" style="width:350px;" title="알바몬을 어떻게 알게 되셨나요"><option value="">선택하세요</option>
-                                            <option value="A01">주요 포털사이트 검색</option>
-                                            <option value="A13">앱스토어 검색</option>
-                                            <option value="A03">라디오광고</option>
-                                            <option value="A04">TV광고</option>
-                                            <option value="A05">뉴스(신문, 인터넷 등)</option>
-                                            <option value="A14">모바일(온라인) 광고 배너</option>
-                                            <option value="A08">친구 및 지인 소개</option>
-                                            <option value="A09">인터넷 커뮤니티 및 게시판</option>
-                                            <option value="A12">극장광고</option>
-                                            <option value="A00">기타(버스, 지하철, 판촉물 등)</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="tLine"><div></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="expiry">
-                                            <span class="select" style="color:#61666b">[선택]</span>
-                                            <span class="title">
-                                                개인정보 유효기간 선택
-                                                <a href="javascript:void(0);"><span class="iconPwdQues" id="dev_valid_day_help_icon"></span></a>
-                                                <div class="tooltip expiry" style="display:none;" id="dev_valid_day_help_tooltip">
-                                                    <p>개인정보 유효기간</p>
-                                                    <div class="content">가입하신 ID로 선택하신 기간동안 사이트에 로그인 등 활동을 하지 않을 경우, 해당 개인정보를 별도 분리 저장하게 됩니다.</div>
-                                                    <div class="btnClose"><a href="#"></a></div>
-                                                </div>
-                                            </span>
-                                            <input type="radio" name="Valid_Day_Cnt" title="1년" value="365" id="dev_valid_day_365" checked><label for="dev_valid_day_365">1년</label>
-                                            <input type="radio" name="Valid_Day_Cnt" title="3년" value="1095" id="dev_valid_day_1095"><label for="dev_valid_day_1095">3년</label>
-                                            <input type="radio" name="Valid_Day_Cnt" title="회원탈퇴시" value="0" id="dev_valid_day_0"><label for="dev_valid_day_0">회원탈퇴시</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="tLine"><div></div></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="tooltip" style="display: none;" id="dev_pwd_help_tooltip">
-                                <p>안전한 비밀번호 사용법</p>
-                                <ul>
-                                    <li>8~16자의 영문 대소문자, 숫자, 특수문자 사용 <br>(사용 가능한 특수문자는 ! " # $ % & ( ) * + , - . / : ; ? @ [ ] ^ _ { } ~ 입니다.)</li>
-                                    <li>3자 이상 연속 영문/숫자 조합 사용불가</li>
-                                    <li>아이디와 동일한 비밀번호를 사용하지 마세요.</li>
-                                    <li>키보드의 연속 패턴은 사용하지 마세요.</li>
-                                    <li>개인정보를 포함하는 비밀번호를 사용하지 마세요.</li>
-                                    <li>비밀번호는 주기적으로 변경하세요.</li>
-                                </ul>
-                                <div class="btnClose"><a href="#"></a></div>
+                            <div class="user_join_agree agrSelect">
+                                <input type="checkbox" name="Agree2" id="agreeChk_1" value="on">
+                                <label for="agreeChk_1"><span> [필수]</span> 개인정보 수집 및 이용 동의</label>
+                                <a href="#">내용보기</a>
                             </div>
+
+
+                            <div class="user_join_agree agrSelect">
+                                <input type="checkbox" name="Agree3" id="agreeChk_2" value="on" />
+                                <label for="agreeChk_2"><span class="select">[선택]</span> 광고성 정보 이메일/SMS 수신 동의
+                                </label>
+
+                                <a href="#">내용보기</a>
+
+
+                            </div>
+
                         </div>
                     </div>
-                    <div class="info_confirm" id="boxJoinConfirm" style="display: none;">입력한 정보를 다시 확인해주세요.</div>
-                    <div class="btnBx">
-                        <input type="submit" value="가입하기">
+
+                    <!-- 회원가입폼 -->
+                    <div class="inner" style="margin-left: 200px;">
+                        <h2 class="skip"></h2>
+                        <div class="step3">
+                            <div class="tbLeave tbJoin">
+                                <table summary="회원가입폼">
+
+                                    <colgroup>
+                                        <col width="120">
+                                        <col width="653">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2" class="tLine">
+                                                <div></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>아이디</th>
+                                            <td>
+                                                <input type="text" name="username" class="tBox" title="아이디"
+                                                    id="dev_u_id" maxlength="12" />
+                                                <p class="compul"></p>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <th>한글이름</th>
+                                            <td>
+                                                <input type="text" name="korName" class="tBox" title="이름"
+                                                    id="dev_u_korname" maxlength="12" />
+                                                <p class="compul"></p>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <th>영문이름</th>
+                                            <td>
+                                                <input type="text" name="engName" class="tBox" title="이름"
+                                                    id="dev_u_engname" maxlength="12" />
+                                                <p class="compul"></p>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>이메일</th>
+                                            <td>
+                                                <input type="text" name="EmailId" class="tBox tEmail" id="dev_M_Email"
+                                                    maxlength="25" title="이메일아이디">
+                                                <span>@</span> <input type="text" name="EmailDomain" class="tBox tEmail"
+                                                    id="dev_mail_etc" maxlength="25" title="이메일계정"
+                                                    onfocus="mon.account.regist.core.reg.emailChk1()">
+                                                <select name="C_Email_Cp" class="tBox joinBx tEmail" id="dev_email_Cp"
+                                                    title="이메일 서비스업체 선택">
+                                                    <option value="">선택하세요</option>
+                                                    <option value="naver.com">naver.com</option>
+                                                    <option value="hanmail.net">hanmail.net</option>
+                                                    <option value="nate.com">nate.com</option>
+                                                    <option value="daum.net">daum.net</option>
+                                                    <option value="hotmail.com">hotmail.com</option>
+                                                    <option value="dreamwiz.com">dreamwiz.com</option>
+                                                    <option value="gmail.com">gmail.com</option>
+                                                    <option value="etc">직접입력</option>
+                                                </select>
+                                                <p class="compul" id="txtEmail"></p>
+                                                <input id="dev_mailChkStat" name="dev_mailChkStat" type="hidden"
+                                                    value="" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>비밀번호 <a href="javascript:;"><span class="iconPwdQues"
+                                                        id="dev_pwd_help_icon"></span></a></th>
+                                            <td>
+                                                <input type="password" name="password1" class="tBox tPwd" id="dev_pwd1"
+                                                    maxlength="16" placeholder="8~16자 영문, 숫자, 특수문자" title="비밀번호" />
+                                                <input type="hidden" name="birthcheck" id="dev_birthcheck" value="" />
+                                                <p class="compul" id="PwdSafeResult"></p>
+                                                <input id="dev_pwdchkStat" name="dev_pwdchkStat" type="hidden"
+                                                    value="" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>비밀번호 확인</th>
+                                            <td>
+                                                <input type="password" name="password2" id="dev_pwconfirm"
+                                                    class="tBox tPwd" maxlength="16" title="비밀번호확인" />
+                                                <p class="compul" id="dev_chk_pwd_confirm"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="tLine">
+                                                <div></div>
+                                            </td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td colspan="2" class="tLine">
+                                                <div></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>휴대폰 번호</th>
+                                            <td>
+                                                <select name="Phone1" class="tBox joinBx tPhone" id="dev_hphone1"
+                                                    title="휴대폰 번호">
+                                                    <option value="010">010</option>
+                                                    <option value="011">011</option>
+                                                    <option value="016">016</option>
+                                                    <option value="017">017</option>
+                                                    <option value="018">018</option>
+                                                    <option value="019">019</option>
+                                                </select> -
+                                                <input type="text" name="Phone2" id="dev_hphone2" maxlength="4"
+                                                    class="tBox tPhone" title="휴대폰 번호"> -
+                                                <input type="text" name="Phone3" id="dev_hphone3" maxlength="4"
+                                                    class="tBox tPhone" title="휴대폰 번호">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>주소</th>
+                                            <td>
+                                                <input type="text" name="Address" style="width: 375px;" class="tBox"
+                                                    title="주소" id="dev_u_address" maxlength="50" />
+                                                <p class="compul"></p>
+                                                <input id="dev_addchkStat" name="dev_addchkStat" type="hidden"
+                                                    value="" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>SNS</th>
+                                            <td>
+                                                <li><b>Instagram</b>
+                                                    <input type="text" name="Sns" class="tBox" title="SNS"
+                                                        id="dev_u_sns" maxlength="50" />
+                                                    <p class="compul"></p>
+                                                    <input id="dev_snschkStat" name="dev_snschkStat" type="hidden"
+                                                        value="" />
+                                                </li>
+
+                                                <li><b>Facebook</b>
+                                                    <input type="text" name="Sns" class="tBox" title="SNS"
+                                                        id="dev_u_sns" maxlength="50" />
+                                                    <p class="compul"></p>
+                                                    <input id="dev_snschkStat" name="dev_snschkStat" type="hidden"
+                                                        value="" />
+                                                </li>
+
+                                                <li><b>Github</b>
+                                                    <input type="text" name="GitSns" class="tBox" title="SNS"
+                                                        id="dev_u_sns" maxlength="50" />
+                                                    <p class="compul"></p>
+                                                    <input id="dev_snschkStat" name="dev_snschkStat" type="hidden"
+                                                        value="" />
+                                                </li>
+
+                                                <li><b>Twitter</b>
+                                                    <input type="text" name="Sns" class="tBox" title="SNS"
+                                                        id="dev_u_sns" maxlength="50" />
+                                                    <p class="compul"></p>
+                                                    <input id="dev_snschkStat" name="dev_snschkStat" type="hidden"
+                                                        value="" />
+                                                </li>
+
+
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2" class="tLine">
+                                                <div></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="howAlbamon">
+                                                <span class="select" style="color:#61666b">[선택]</span>
+                                                SEBACO를 어떻게 알게 되셨나요?
+                                                <select class="tBox joinBx tHow" id="known_route"
+                                                    name="SelectedKnownRouteValue" style="width:350px;"
+                                                    title="알바몬을 어떻게 알게 되셨나요">
+                                                    <option value="">선택하세요</option>
+                                                    <option value="A01">주요 포털사이트 검색</option>
+                                                    <option value="A13">앱스토어 검색</option>
+                                                    <option value="A03">라디오광고</option>
+                                                    <option value="A04">TV광고</option>
+                                                    <option value="A05">뉴스(신문, 인터넷 등)</option>
+                                                    <option value="A14">모바일(온라인) 광고 배너</option>
+                                                    <option value="A08">친구 및 지인 소개</option>
+                                                    <option value="A09">인터넷 커뮤니티 및 게시판</option>
+                                                    <option value="A12">극장광고</option>
+                                                    <option value="A00">기타(버스, 지하철, 판촉물 등)</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="tLine">
+                                                <div></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="expiry">
+                                                <span class="select" style="color:#61666b">[선택]</span>
+                                                <span class="title">
+                                                    개인정보 유효기간 선택
+                                                    <a href="javascript:void(0);"><span class="iconPwdQues"
+                                                            id="dev_valid_day_help_icon"></span></a>
+                                                    <div class="tooltip expiry" style="display:none;"
+                                                        id="dev_valid_day_help_tooltip">
+                                                        <p>개인정보 유효기간</p>
+                                                        <div class="content">가입하신 ID로 선택하신 기간동안 사이트에 로그인 등
+                                                            활동을 하지 않을 경우, 해당 개인정보를 별도 분리 저장하게 됩니다.</div>
+                                                        <div class="btnClose"><a href="#"></a></div>
+                                                    </div>
+                                                </span>
+                                                <input type="radio" name="Valid_Day_Cnt" title="1년" value="365"
+                                                    id="dev_valid_day_365" checked><label
+                                                    for="dev_valid_day_365">1년</label>
+                                                <input type="radio" name="Valid_Day_Cnt" title="3년" value="1095"
+                                                    id="dev_valid_day_1095"><label for="dev_valid_day_1095">3년</label>
+                                                <input type="radio" name="Valid_Day_Cnt" title="회원탈퇴시" value="0"
+                                                    id="dev_valid_day_0"><label for="dev_valid_day_0">회원탈퇴시</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="tLine">
+                                                <div></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="tooltip" style="display: none;" id="dev_pwd_help_tooltip">
+                                    <p>안전한 비밀번호 사용법</p>
+                                    <ul>
+                                        <li>8~16자의 영문 대소문자, 숫자, 특수문자 사용 <br>(사용 가능한 특수문자는 ! " # $ % & ( ) *
+                                            + , - . / : ; ? @ [ ] ^ _ { } ~ 입니다.)</li>
+                                        <li>3자 이상 연속 영문/숫자 조합 사용불가</li>
+                                        <li>아이디와 동일한 비밀번호를 사용하지 마세요.</li>
+                                        <li>키보드의 연속 패턴은 사용하지 마세요.</li>
+                                        <li>개인정보를 포함하는 비밀번호를 사용하지 마세요.</li>
+                                        <li>비밀번호는 주기적으로 변경하세요.</li>
+                                    </ul>
+                                    <div class="btnClose"><a href="#"></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info_confirm" id="boxJoinConfirm" style="display: none;">입력한 정보를 다시
+                            확인해주세요.</div>
+                        <div style="margin-left: 300px;">
+                            <input type="submit" class="btn btn-primary" value="가입하기">
+                        </div>
                     </div>
-                </div>
-                <!-- 회원가입폼 끝 //-->
-    </form>    </div>
+                    <!-- 회원가입폼 끝 //-->
+            </form>
+        </div>
         <!-- 회원가입 끝 //-->
     </div>
 </div>
 
-</section>
+
 </body>
+
 </html>
