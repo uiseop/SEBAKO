@@ -1,63 +1,123 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>SEBACO-회원가입</title>
-    
-     <!-- Favicon-->
-     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-     <!-- Font Awesome icons (free version)-->
-     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-     <!-- Google fonts-->
-     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-     <!-- Third party plugin CSS-->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
-     <!-- Core theme CSS (includes Bootstrap)-->
-     <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
 
-
-</head>
-<body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">SEBACO</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">요청하기</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">관리하기</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                    {% if user.is_active %}
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/index">내 정보</a></li>
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Third party plugin CSS-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
+  </head>
+  <body id="page-top">
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/">SEBACO</a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto my-2 my-lg-0">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">요청하기</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#services"
+                >관리하기</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+            {% if user.is_active %}
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/accounts/logout"
+                >로그아웃</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/index">내 정보</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/accounts/login"
+                >로그인</a
+              >
+            </li>
+            {% endif %}
+          </ul>
         </div>
+      </div>
     </nav>
-    
 
     <section class="page-section bg-primary" id="about">
-       
-        <div class="container">
-            <center>
-                <a href="{% url 'accounts:signup_personal'%}" class="btn btn-primary" >개인회원</a>
-                <a href="{% url 'accounts:signup_company'%}" class="btn btn-primary" >기업회원</a>
-                <br><br><br>
-                <a href="{% url 'accounts:login' %}" class="btn btn-primary">로그인</a>
-            </center>
-        
-        </div>
+      <div class="container">
+        <center>
+          <a
+            href="{% url 'accounts:signup_personal'%}"
+            class="btn btn-primary"
+            style="
+              display: block;
+              width: 250px;
+              height: 200px;
+              padding-top: 70px;
+              font-size: xx-large;
+            "
+            >개인회원</a
+          >
+          <br />
+          <a
+            href="{% url 'accounts:signup_company'%}"
+            class="btn btn-primary"
+            style="
+              display: block;
+              width: 250px;
+              height: 200px;
+              padding-top: 70px;
+              font-size: xx-large;
+            "
+            >기업회원</a
+          >
+          <br /><br /><br />
+          이미 회원이신가요?
+          <a href="{% url 'accounts:login' %}" class="btn btn-primary"
+            >로그인</a
+          >
+        </center>
+      </div>
     </section>
-
- 
-</body>
+  </body>
 </html>

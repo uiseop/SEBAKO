@@ -90,20 +90,43 @@
     </nav>
 
     <section class="page-section bg-primary" id="about">
-      <div class="container">
-        <center>
-          <a href="{% url 'accounts:login_personal'%}" class="btn btn-primary"
+      <center>
+        <div>
+          <a
+            href="{% url 'accounts:login_personal'%}"
+            class="btn btn-primary"
+            style="
+              display: block;
+              width: 250px;
+              height: 200px;
+              padding-top: 70px;
+              font-size: xx-large;
+            "
             >개인회원</a
           >
-          <a href="{% url 'accounts:login_company'%}" class="btn btn-primary"
+          <br />
+          <a
+            href="{% url 'accounts:login_company'%}"
+            class="btn btn-primary"
+            style="
+              display: block;
+              width: 250px;
+              height: 200px;
+              padding-top: 70px;
+              font-size: xx-large;
+            "
             >기업회원</a
           >
-          <br /><br /><br />
+        </div>
+        <br /><br /><br />
+
+        <div>
+          아직 회원이 아니신가요?
           <a href="{% url 'accounts:signup' %}" class="btn btn-primary"
             >회원가입</a
           >
-        </center>
-      </div>
+        </div>
+      </center>
     </section>
   </body>
 </html>
