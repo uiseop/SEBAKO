@@ -53,24 +53,19 @@
 <br>
 
 
-<div style="margin-left: 400px;">
+<div style="margin-left:15%; margin-right:15%;" >
     <div id="content">
         <!--회원가입 -->
-        <div class="monLeave monUserJoin joinPerson">
+        <div>
 
 
 
             <form action="{% url 'accounts:signup_personal' %}" id="frm-reg" method="POST" name="frm-reg">
                 {% csrf_token %}
-                <input id="dev_Ident_e" name="UserIdentE" type="hidden" value="" />
-                <input id="dev_certGubun" name="CertPathType" type="hidden" value="GGREG" />
-                <input id="dev_db_name" name="DbName" type="hidden" value="GG" />
-                <input id="dev_u_ident" name="UserIdent" type="hidden" value="" />
-                <input id="dev_cert_idx" name="CertIndex" type="hidden" value="" />
-                <input id="MemberType" name="MemberType" type="hidden" value="M" />
+                
                 <!--// 동의 -->
                 <div class="inner">
-                    <div style="margin-left:350px;">
+                    <div style="margin-left:35%;">
                         <ul style="margin-left: 50px;">
                             <li>
                                 <h4>이용약관</h4>
@@ -359,7 +354,7 @@
                         </div>
                         <div class="info_confirm" id="boxJoinConfirm" style="display: none;">입력한 정보를 다시
                             확인해주세요.</div>
-                        <div style="margin-left: 300px;">
+                        <div style="margin-left: 250px;">
                             <input type="submit" class="btn btn-primary" value="가입하기">
                         </div>
                     </div>
