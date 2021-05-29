@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'resumes',
     'singlepage',
     'managepage',
+    # web 소셜로그인 사용
+    'web3auth.app.Web3AuthConfig',
 
 ]
 
