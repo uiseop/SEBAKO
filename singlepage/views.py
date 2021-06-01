@@ -84,6 +84,8 @@ def create_sns(request, pk):
 
 
 def create_resume(request, pk):
+    person = get_object_or_404(Person,pk=pk)
+    profile = get_object_or_404(Profile,user_id=person)
     if request.method == 'POST':
         form = ResumeForm(request.POST)
         if form.is_valid():
@@ -94,7 +96,7 @@ def create_resume(request, pk):
         return render(request, 'singlepage/resume_create.html', {'form': form})
     else:
         form = ResumeForm()
-        return render(request, 'singlepage/resume_create.html', {'form': form})
+        return render(request, 'singlepage/resume_create.html', {'person':person,'profile':profile,'form': form})
 
 
 def create_experience(request, pk):
