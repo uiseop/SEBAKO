@@ -1,0 +1,149 @@
+{% load static %}
+<!doctype html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>BLOG ON BLOCKS!</title>
+  </head>
+  <body >
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-inverse" style="background-color: #00CED1; ">
+          <div class="container">
+          <a class="navbar-brand" href="{% url 'accounts:login_wallet' %}">BOB</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Buy Content</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+ </div>
+</nav>
+
+<div class="container">
+
+  <div class="form-row">
+    <div class="form-group col-md-6" style="margin-top: 60px;">
+      <label for="inputEmail4">Title</label>
+      <input id="title" name="title" class="form-control" placeholder="ADD A CATCHY TITLE HERE">
+    </div>
+  </div>
+  <div class="form-group" style="margin-top: 20px;">
+    <label for="inputAddress">Subtitle</label>
+    <textarea id="subtitle" name="subtitle" type="text" class="form-control" id="inputAddress2" placeholder="ADD A SUITABLE SUBITILE" rows="5"></textarea> 
+  </div>
+  <div class="form-group" style="margin-top: 20px;">
+    <label for="inputAddress2">CONTENT</label>
+    <textarea id="content" name="content" type="text" class="form-control" id="inputAddress2" placeholder="START WRITING YOUR BLOG" rows="8"></textarea> 
+  </div>
+  
+  <div class="form-group" style="margin-top: 20px; text-align: center;">
+     <label style="font-size: 30px">SELL THIS BLOG</label><input style="width: 20px; height: 20px; margin-left: 30px" id="for_sale" name="for_sale" type="checkbox" checked data-toggle="toggle" data-on="YES" data-off="NO" data-size="md">
+  </div>
+  </div>
+  <div class="row col-lg-4 col-md-4 d-flex justify-content-center" style="margin-bottom: 50px; style=margin-top: 50px; ">
+     
+      <button type="submit" class="btn btn-primary" onclick="append()">ADD NOW</button>
+      
+  </div>
+   
+</div>
+ 
+
+     <div class="container" style="margin-bottom: 100px; ">
+         <h2 id="receipt"> You know your Blog is on the BLockchain when you get the transaction RECEIPT DOWN BELOW</h2>
+      <a id="rec_url" href="" style="font-size: 20px"></a>
+      </div>
+  
+
+
+<!-- Footer -->
+<div class="bottom">
+
+<footer class="page-footer font-small blue pt-4" style="background:DarkTurquoise;">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase" align="text-center">Blog and Earn with Blockchain</h5>
+        <p>Blockchain based Content Selling Platform, built on Ethereum, where writers can sell their articles in exchange for Cryptocurrencies.<br><br>
+
+        <a href="https://github.com/zaryab2000/Blog_on_Blocks" class="btn btn-primary" style="background-color: black;">Contribute On Github</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Developer</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="https://github.com/zaryab2000/" class="btn btn-primary" style="background-color: black;">Zaryab Afser</a>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-md-3 mb-md-0 mb-3">
+
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright: Zaryab Afser
+    <a href="https://github.com/zaryab2000/Blog_on_Blocks">Blog_On_Blocks</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="{% static 'js/submit_post.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+  </body>
+
+

@@ -37,13 +37,13 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout">로그아웃</a></li>
-                {% if user.profile.is_user %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/">내 정보</a></li>
+                {% if user.person.is_user %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/">내 정보</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/">인증관리</a></li>
                 {% endif %}
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/login">로그인</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:checkMeta()">로그인</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -64,6 +64,7 @@
         </div>
     </div>
 </header>
+
 <!-- About-->
 <section class="page-section bg-primary" id="about">
     <div class="container">
@@ -171,6 +172,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <!-- Core theme JS-->
+<!--web3 JS-->
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/scriptsHome.js' %}"></script>
+<script src="{% static 'js/web3auth.js' %}"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@ class snsForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['korName','engName','address','email','phone','image',]
+        fields = ['korName','engName','email','phone','image_hash',]
 
 class ResumeForm(forms.ModelForm):
     class Meta:

@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>{{ person.profile.korName }}의 발자취</title>
+<!--    현재 로그인한 유저는 user.peson이며 프로필의 소유자는 person으로 알 수 있음
+profile은 글 작성자의 프로필을 불러온다-->
+
+    {% if profile.korName %}
+    <title>{{ profile.korName }}의 발자취</title>
+    {% else %}
+    <title>당신의 프로필을 만들어보세요!</title>
+    {% endif %}
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -33,13 +40,14 @@
 <body id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
-    {% if user.id == person.id %}
+    {% if user.person.pk == person.pk %}
     <a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
-        <span class="d-block d-lg-none">{{ person.profile.korName }}</span>
+        <span class="d-block d-lg-none">{{ profile.korName }}</span>
         <span class="d-none d-lg-block">
-            {% if person.profile.image %}
+            {% if profile.image_hash%}
             <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
-                 src="{{person.profile.image.url}}"/></span>
+                 src="https://ipfs.io/ipfs/{{profile.image_hash}}"/></span>
+
         {% else %}
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
              src="{% static 'assets/img/face.png' %}" alt="..."/></span>
@@ -47,11 +55,15 @@
     </a>
     {% else %}
     <div class="navbar-brand js-scroll-trigger">
-        <span class="d-block d-lg-none">{{ person.profile.korName }}</span>
+        {% if profile.korName %}
+        <span class="d-block d-lg-none">{{ profile.korName }}님의 발자취</span>
+        {% else %}
+        <span class="d-block d-lg-none">SEBAKO 가입을 환영합니다!</span>
+        {% endif %}
         <span class="d-none d-lg-block">
-            {% if person.profile.image %}
+            {% if profile.image_hash%}
             <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
-                 src="{{person.profile.image.url}}"/></span>
+                 src="https://ipfs.io/ipfs/{{profile.image_hash}}"/></span>
         {% else %}
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
              src="{% static 'assets/img/face.png' %}" alt="..."/></span>
@@ -74,7 +86,7 @@
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
             <br><br>
-            <li class="nav-item"><a style="float:center" class="nav-link" href="#">로그아웃</a> <a style="float:center"
+            <li class="nav-item"><a style="float:center" class="nav-link" href="{% url 'accounts:logout' %}">로그아웃</a> <a style="float:center"
                                                                                                class="nav-link"
                                                                                                href="/">처음화면</a></li>
         </ul>
@@ -86,13 +98,19 @@
     <!-- About-->
     <section class="resume-section" id="about">
         <div class="resume-section-content">
+<!--            자기소개서를 작성했을 경우 -->
+            {% if profile.korName %}
             <h1 class="mb-0">
-                {{ person.profile.korName }}
-                <span class="text-primary">{{ person.profile.engName }}</span>
+                {{ profile.korName }}
+                {% if profile.engName %}
+                <span class="text-primary">{{ profile.engName }}</span>
+                {% else %}
+                <span class="text-primary">영어이름을 설정해보세요!</span>
+                {% endif %}
             </h1>
             <div class="subheading mb-5">
-                {{ person.profile.address }} · {{ person.profile.phone }} ·
-                <a href="mailto:|{{ person.profie.email }}">{{ person.profile.email }}</a>
+                {{ profile.address }} · {{ profile.phone }} ·
+                <a href="mailto:|{{ person.profie.email }}">{{ profile.email }}</a>
             </div>
             {% if intro_list.all %}
             {% for intro in intro_list.all %}
@@ -110,7 +128,42 @@
             </div>
             <br>
             <br>
-            <a type="button" class="btn btn-primary" href="{% url 'singlepage:change_profile' pk=person.id %}">수정하기</a>
+            {% if user.person.pk == person.pk %}
+            <a type="button" class="btn btn-primary" href="{% url 'singlepage:profile' pk=person.id %}">수정하기</a>
+            {% else %}
+            {% endif %}
+
+<!--            처음 회원가입했을때 모습을 보여줌-->
+            {% else %}
+            <h2 class="mb-5">
+                성명, 주소 등.. <br>
+                당신의
+                <span class="text-primary">프로필</span>을 작성해봅시다!
+            </h2>
+            <h4 class="text-secondary">
+                인스타, 깃허브 주소도 함께 등록해보세요<br><br>
+            </h4>
+            <div class="social-icons">
+
+                <!--                        소셜 주소가 있을경우 우리는 github만 사용-->
+                <a class="social-icon disableLink" ><i class="fab fa-instagram"></i></a>
+                <a class="social-icon disableLink" ><i class="fab fa-github"></i></a>
+                <a class="social-icon disableLink" ><i class="fab fa-twitter"></i></a>
+                <a class="social-icon disableLink" ><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <br>
+            <br>
+            <br>
+            {% if user.person.pk == person.pk %}
+            <a type="button" class="btn btn-primary" href="{% url 'singlepage:profile' pk=person.id %}">시작하기</a>
+            {% else %}
+            {% endif %}
+
+<!--            첫번째 페이즈 끝-->
+            {% endif %}
+
+
+
 
         </div>
     </section>
@@ -363,6 +416,7 @@
         </div>
     </section>
 </div>
+
 <!-- Bootstrap core JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>

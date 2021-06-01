@@ -3958,6 +3958,113 @@ input[type=button].btn-block {
   display: block;
 }
 
+.probootstrap-navbar-dark {
+  background: #32609e !important;
+  position: relative;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding-top: 0;
+  padding-bottom: 0; }
+  @media screen and (max-width: 991px) {
+    .probootstrap-navbar-dark {
+      top: 0;
+      position: relative; } }
+  .probootstrap-navbar-dark .navbar-nav > .nav-item > .nav-link {
+    font-size: 13px;
+    letter-spacing: .1em;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-transform: uppercase; }
+    @media screen and (max-width: 960px) {
+      .probootstrap-navbar-dark .navbar-nav > .nav-item > .nav-link {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 0px;
+        padding-right: 0px; } }
+  .probootstrap-navbar-dark .navbar-nav > .nav-item.probootstrap-cta a {
+    color: #fff; }
+  .probootstrap-navbar-dark .navbar-nav > .nav-item.probootstrap-seperator {
+    position: relative;
+    margin-left: 20px;
+    padding-left: 20px; }
+    @media screen and (max-width: 960px) {
+      .probootstrap-navbar-dark .navbar-nav > .nav-item.probootstrap-seperator {
+        padding-left: 0;
+        margin-left: 0; } }
+    .probootstrap-navbar-dark .navbar-nav > .nav-item.probootstrap-seperator:before {
+      position: absolute;
+      content: "";
+      top: 10px;
+      bottom: 10px;
+      left: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.05); }
+      @media screen and (max-width: 960px) {
+        .probootstrap-navbar-dark .navbar-nav > .nav-item.probootstrap-seperator:before {
+          display: none; } }
+  .probootstrap-navbar-dark .navbar-toggler {
+    border: none;
+    color: rgba(255, 255, 255, 0.5) !important;
+    cursor: pointer;
+    padding-right: 0;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: .1em;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 0; }
+    .probootstrap-navbar-dark .navbar-toggler:focus, .probootstrap-navbar-dark .navbar-toggler:active {
+      outline: none; }
+  @media screen and (max-width: 576px) {
+    .probootstrap-navbar-dark .probootstrap-search-form {
+      margin-bottom: 20px; } }
+  .probootstrap-navbar-dark .probootstrap-search-form .form-group {
+    position: relative;
+    margin-bottom: 0 !important; }
+    .probootstrap-navbar-dark .probootstrap-search-form .form-group button {
+      border: none;
+      background: none; }
+      .probootstrap-navbar-dark .probootstrap-search-form .form-group button:active, .probootstrap-navbar-dark .probootstrap-search-form .form-group button:focus {
+        outline: none; }
+    .probootstrap-navbar-dark .probootstrap-search-form .form-group .icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      font-size: 20px;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      color: #fff;
+      line-height: 0; }
+    .probootstrap-navbar-dark .probootstrap-search-form .form-group .form-control {
+      color: #fff !important;
+      border: none;
+      background: #386cb1 !important;
+      border-radius: 0;
+      padding-left: 20px;
+      padding-right: 55px;
+      font-size: 16px;
+      -webkit-transition: .3s all ease;
+      -o-transition: .3s all ease;
+      transition: .3s all ease; }
+      .probootstrap-navbar-dark .probootstrap-search-form .form-group .form-control:focus, .probootstrap-navbar-dark .probootstrap-search-form .form-group .form-control:active {
+        background: #3b70b9 !important; }
+      .probootstrap-navbar-dark .probootstrap-search-form .form-group .form-control::-webkit-input-placeholder {
+        color: black;
+        font-size: 16px; }
+      .probootstrap-navbar-dark .probootstrap-search-form .form-group .form-control::-moz-placeholder {
+        color: black;
+        font-size: 16px; }
+      .probootstrap-navbar-dark .probootstrap-search-form .form-group .form-control:-ms-input-placeholder {
+        color: black;
+        font-size: 16px; }
+      .probootstrap-navbar-dark .probootstrap-search-form .form-group .form-control:-moz-placeholder {
+        color: black;
+        font-size: 16px; }
+
 .navbar {
   position: relative;
   display: flex;
@@ -6107,10 +6214,6 @@ a.close.disabled {
 
 .bg-primary {
   background-color: #f4623a !important;
-}
-
-.mymy{
-  background-color: #bd5d38;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -10109,7 +10212,7 @@ hr.light {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/headImage.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -10119,7 +10222,7 @@ header.masthead {
 header.masterheader{
 padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/headImage.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;

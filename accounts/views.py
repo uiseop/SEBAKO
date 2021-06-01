@@ -7,19 +7,18 @@ from django.urls import reverse
 # Create your views here.
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
-from accounts.models import Blog, Profile
+from accounts.forms import personForm
+from accounts.models import Profile, Person, SNS
 
 
 def home(request):
-    blogs = Blog.objects
-    return render(request, 'accounts/home2.html', {'blogs': blogs})
+    return render(request, 'accounts/home2.html')
     # return render(request, 'zzsignup.html')
 
 
 def detail(request, pk):
     # blog_detail = get_object_or_404(Blog, pk=pk)
-    blog_detail = Blog.objects.get(pk=pk)
-    return render(request, 'accounts/detail.html', {'blog': blog_detail})
+    return render(request, 'accounts/detail.html')
 
 
 def index(request):
@@ -111,7 +110,7 @@ def login(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('singlepage:page_detail', user.pk)
+            return redirect('singlepage:page_detail', user.person.pk)
         else:
             return render(request, 'accounts/login.html', {'error': 'username or password is incorrect'})
 
@@ -130,3 +129,40 @@ def login_company(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+
+def personal_signUp(request):
+    if request.method == 'POST':
+        print(request.POST['walletAddress'])
+        print(request.POST['walletAddress'])
+        user = User.objects.create_user(
+            username=request.POST['walletAddress']
+        )
+        person = Person(user=user)
+        person.save()
+
+        profile = Profile(user_id=person)
+        sns = SNS(user_id=person)
+        sns.save()
+        profile.save()
+        auth.login(request, user)
+        return redirect('home')
+    else:
+        print('why no')
+        print('why no')
+        print('why no')
+        render(request, 'accounts/signup.html')
+
+def login_wallet(request):
+    if request.method == 'POST':
+        username = request.POST['walletAddress']
+        user = get_object_or_404(User,username=username)
+        if user:
+            auth.login(request,user)
+            # 유저모델과 1:1 연결한 PERSON모델의 pk로 연결함으로써 오류를 방지함
+            return redirect('singlepage:page_detail', user.person.pk)
+        else:
+            return render(request,'accounts/login.html',{'error': 'WalletAccount is incorrect'})
+
+    else:
+        return render(request, 'accounts/login.html')

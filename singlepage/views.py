@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
 
 from accounts.decorators import login_message_required
-from accounts.models import SNS, Profile
+from accounts.models import SNS, Profile, Person
 from resumes.models import SelfIntro, Experience, Education, Resume
 from singlepage.forms import snsForm, ProfileForm, ResumeForm, ExperienceForm, EduForm
 
@@ -28,7 +28,8 @@ def _page_id(request):
 def PageDetail(request, pk):
     # print(request.user) : seop 출럭
     # print(request.user.profile.korName)
-    person = get_object_or_404(User, pk=pk)
+    person = get_object_or_404(Person, pk=pk)
+    profile = get_object_or_404(Profile,user_id=person)
     # user = User.objects.get(id=pk)
     # print(user) : seop 출력
     # print(request.user.id) : 1출력 (첫번째 회원가입한곳)
@@ -41,8 +42,9 @@ def PageDetail(request, pk):
     resumes = Resume.objects.all()
     resume_list = resumes.filter(user_id=pk)
 
+
     return render(request, 'singlepage/index.html',
-                  {'person': person, 'intro_list': intro_list, 'experience_list': experience_list,
+                  {'person': person,'profile':profile, 'intro_list': intro_list, 'experience_list': experience_list,
                    'education_list': education_list, 'resume_list': resume_list})
 
 
@@ -126,11 +128,11 @@ def create_edu(request, pk):
 
 
 @login_message_required
-def ChangeProfile(request, pk, created=None):
+def ChangeProfile(request, pk):
     profile = Profile.objects.get(user_id=pk)
 
     if request.method == 'POST':
-        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+        profile_form = ProfileForm(request.POST['name'],request.POST['engName'],request.POST['email'],request.POST['phone'],request.POST['image_hash'],instance=profile)
         try: # SNS의 정보를 가져오는것을 먼저 시도해봄
             s = SNS.objects.get(user_id=pk)
             sns_form = snsForm(request.POST, instance=s)
@@ -173,9 +175,7 @@ def ChangeProfile(request, pk, created=None):
             # sns = snsForm(instance=snses)
 
             # print(profile)
-            return render(request, 'singlepage/edit_page.html', {'profile_form': profile_form,
-                                                                 'sns1_form': sns_form,
-                                                                 })
+            return render(request, 'singlepage/edit_page.html')
 
 
 class ProfileUpdate(UpdateView):
@@ -185,3 +185,24 @@ class ProfileUpdate(UpdateView):
 
     # def get_absolute_url(self):
     #     return reverse('singlepage:page_detail',args=[self.id])
+
+def ProfileCreate(request,pk):
+    person = get_object_or_404(Person, pk=pk)
+    profile = get_object_or_404(Profile, user_id=person)
+    if request.method == 'POST':
+        print(request.POST['korName'])
+        print(request.POST['korName'])
+        print(request.POST['korName'])
+        profile.korName = request.POST['korName']
+        profile.engName = request.POST['engName']
+        profile.email = request.POST['email']
+        profile.phone = request.POST['phone']
+        profile.image_hash = request.POST['image_hash']
+        profile.save()
+        return redirect('singlepage:page_detail', pk=pk)
+    else:
+        return render(request, 'singlepage/edit_page.html',
+                      {'person':person,'profile':profile})
+
+def append(request):
+	return render(request, 'singlepage/submit.html')

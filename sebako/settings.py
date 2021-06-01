@@ -46,17 +46,9 @@ INSTALLED_APPS = [
     'resumes',
     'singlepage',
     'managepage',
-    # web 소셜로그인 사용
-    'web3auth.apps.Web3AuthConfig',
+
 
 ]
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'web3auth.backend.Web3Backend'
-]
-WEB3AUTH_USER_ADDRESS_FIELD = 'username'
-WEB3AUTH_USER_SIGNUP_FIELDS = ['email',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

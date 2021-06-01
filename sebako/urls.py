@@ -17,7 +17,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from web3auth import urls as web3auth_urls
 
 import accounts.views
 
@@ -32,7 +31,7 @@ urlpatterns = [
     # path('index/', accounts.views.index, name='index'),
     path('singlepage/',include('singlepage.urls')),
     path('resume/', include('resumes.urls')),
-    path('web3/',include(web3auth_urls)),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
