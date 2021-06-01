@@ -112,13 +112,9 @@ profile은 글 작성자의 프로필을 불러온다-->
                 {{ profile.address }} · {{ profile.phone }} ·
                 <a href="mailto:|{{ person.profie.email }}">{{ profile.email }}</a>
             </div>
-            {% if intro_list.all %}
-            {% for intro in intro_list.all %}
-            <p class="lead mb-5">{{intro.text}}</p>
-            {% endfor %}
-            {% else %}
-            <p class="lead mb-5">간단한 자기소개서 작성하여 봅시다</p>
-            {% endif %}
+
+            <p class="lead mb-5" style="font-weight:bold;">지갑주소 : {{person.user}}</p>
+            <br><br><br>
             <div class="social-icons">
                 <!--                        소셜 주소가 있을경우 우리는 github만 사용-->
                 <a class="social-icon" href="#"><i class="fab fa-instagram"></i></a>
