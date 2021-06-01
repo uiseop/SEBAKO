@@ -93,25 +93,27 @@
             <form method="POST" action="{% url 'accounts:printconsole' %}">
                 {% csrf_token %}
 
-                아이디 :
-<!--                walletAddress로 request.POST로 받아옴-->
+                ID :
+                
+                
+              <!--  walletAddress로 request.POST로 받아옴-->
                 <input name="walletAddress" id="showAccount" type="text" readonly>
+                </br>
                 </br>
                 <button type="button" class="enableEthereumButton btn-primary">Enable Ethereum</button>
                 <input type="submit" class="btn btn-primary" value="회원가입">
-            </form>개인회원
+            </form>
 
             <br/>
             <a
                     href="{% url 'accounts:signup_company'%}"
                     class="btn btn-primary"
                     style="
-              display: block;
-              width: 250px;
-              height: 200px;
-              padding-top: 70px;
-              font-size: xx-large;
-            "
+                            display:block;
+                            width: 200px;
+                            height: 150px;
+                            padding-top: 50px;
+                            font-size: xx-large;"
             >기업회원</a
             >
             <br/><br/><br/>
