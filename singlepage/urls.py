@@ -1,7 +1,7 @@
 from django.urls import path
 
 from singlepage.views import PageDetail, ChangePicture, snsCreate, ChangeProfile, ProfileUpdate, create_resume, \
-    create_experience, create_edu, append, ProfileCreate
+    create_experience, create_edu, append, ProfileCreate, created_resume_db
 
 app_name = 'singlepage'
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path('<int:pk>/edu_popup/',create_edu, name='addEDU'),
     path('submit/',append,name='submit'),
     path('<int:pk>/profile_create/',ProfileCreate, name='profile'),
+    path('created_resume_db/',created_resume_db, name='created_resume_db'),
     # path('<int:pk>/edit/',ProfileUpdate.as_view(), name='updateprofile'),
 
 ]

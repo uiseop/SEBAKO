@@ -17,7 +17,7 @@ class ProfileForm(forms.ModelForm):
 class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
-        fields = ['title','regiNum','issure','dateAcq','file_upload',]
+        fields = ['title','regiNum','issure','dateAcq','file_hash',]
 
 class ExperienceForm(forms.ModelForm):
     class Meta:
