@@ -36,7 +36,7 @@
               $("#hash").text("IPFS HASH:"+result[0].hash)
 
               $("#link").text("IPFS 네트워크에 성공적으로 등록되었습니다. 등록하기를 눌러도 좋습니다!")
-              image_hash.value = result[0].hash
+              image_hash.value = 'https://ipfs.io/ipfs/'+result[0].hash
               ipfsHash = result[0].hash
 
 

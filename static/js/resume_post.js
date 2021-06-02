@@ -6,134 +6,13 @@ const abi = [
 		"type": "constructor"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "bool",
-				"name": "_forSale",
-				"type": "bool"
-			},
-			{
-				"internalType": "string",
-				"name": "_title",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_regiNumber",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_issure",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_date",
-				"type": "string"
-			}
-		],
-		"name": "createResume",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [],
-		"name": "get_count",
+		"name": "owner",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "address",
 				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "name",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "resumeCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "resumes",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "forSale",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tipAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "title",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "regiNumber",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "issure",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "date",
-				"type": "string"
-			},
-			{
-				"internalType": "address payable",
-				"name": "author",
 				"type": "address"
 			}
 		],
@@ -145,41 +24,21 @@ const abi = [
 		"constant": false,
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "_value",
-				"type": "bool"
+				"internalType": "address",
+				"name": "_newOwner",
+				"type": "address"
 			}
 		],
-		"name": "set_forSale",
+		"name": "transferOwnership",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "tipResume",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
 	}
 ]
-
 // 수신 wallet_Address;
 const c_address="0xE4cD403C1216cA0A313ed9419fD3d4C332EA818E";
+const cc_address="0xEF877539c18F3F0149B5C08acBa5938D77552d57";
 
 async function checkMeta(){
     if (typeof window.ethereum !== 'undefined'){
@@ -203,6 +62,26 @@ async function checkMeta(){
 
     }
 }
+
+async function loadCertificateData(){
+    window.web3 = new Web3(window.ethereum)
+    const ww3 = window.web3
+    await window.ethereum.enable()
+    const wallet = await ww3.eth.getAccounts();
+    console.log(wallet)
+    console.log(wallet)
+    console.log(wallet)
+    const certificateContract = new ww3.eth.Contract(abi,cc_address)
+    const certificateCount = await certificateContract.methods.get_count().call()
+    console.log(certificateCount)
+    console.log(certificateCount)
+    console.log(certificateCount)
+    console.log('hahah')
+    console.log('hahah')
+    console.log('hahah')
+}
+
+window.onload = loadCertificateData()
 
 // 화면 들어오면 바로 실행되게 함
 window.addEventListener('load', checkMeta()
@@ -235,9 +114,9 @@ function waitForReceipt(hash, cb) {
         var sale;
         let title=$("#title").val();
         let subtitle=$("#subtitle").val();
-        let content=$("#content").val();
+        let company=$("#content").val();
         let ddate = $("#ddate").val();
-        let for_sale=$("#for_sale").val();
+        let filehash = $("#image_hash").val();
 
         if(for_sale == 'on'){
           sale = true;
@@ -256,7 +135,7 @@ function waitForReceipt(hash, cb) {
                     "gasPrice": web3.utils.toWei('4.1','Gwei')
                   })
 
-                  contract.methods.createResume(sale,title,subtitle,content,ddate).send(
+                  contract.methods.setCertifiactionData(title,subtitle,company,ddate,filehash).send(
                       transaction,
                       (error,result)=>{
                           if(error){

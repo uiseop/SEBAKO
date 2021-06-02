@@ -35,9 +35,6 @@ async function getAccount(){
   const account = accounts[0]
   console.log(account)
   console.log(account)
-  console.log(account)
-  console.log(account)
-  console.log(account)
   showAccount.value = account
   console.log(showAccount)
   console.log(showAccount)

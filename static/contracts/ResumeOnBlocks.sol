@@ -1,7 +1,7 @@
 pragma solidity ^0.5.1;
 
 
-contract Resume{
+contract ResumeNetwork{
     //STATE VARIABLES
 
     // smart contract 이름 명시
