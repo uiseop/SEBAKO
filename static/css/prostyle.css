@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   line-height: 1.45;
   font-weight: normal;
-  color: #32609e; }
+  color: #01378C; }
 
 h1, .h1 {
   font-size: 30px; }
@@ -50,7 +50,7 @@ h5, .h5 {
   letter-spacing: .1em; }
 
 .probootstrap-navbar-dark {
-  background: #32609e !important;
+  background: #01378C !important;
   position: relative;
   left: 0;
   right: 0;
@@ -429,7 +429,7 @@ h5, .h5 {
 
 .probootstrap-aside-stretch-left,
 .probootstrap-aside-stretch-right {
-  background: #32609e; }
+  background: #01378C; }
   .probootstrap-aside-stretch-left a,
   .probootstrap-aside-stretch-right a {
     color: #4fb5e6; }
@@ -442,14 +442,14 @@ h5, .h5 {
     top: 0;
     right: 100%;
     bottom: 0;
-    background: #32609e;
+    background: #01378C;
     content: "";
     width: 370%; }
   .probootstrap-aside-stretch-left h2,
   .probootstrap-aside-stretch-right h2 {
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.9);
+    color: #ffffff;
     padding-bottom: 20px;
     margin-bottom: 30px;
     position: relative; }
