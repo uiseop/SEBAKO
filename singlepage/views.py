@@ -1,5 +1,8 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
@@ -97,6 +100,31 @@ def create_resume(request, pk):
     else:
         form = ResumeForm()
         return render(request, 'singlepage/resume_create.html', {'person':person,'profile':profile,'form': form})
+
+def created_resume_db(request):
+    # ['title','regiNum','issure','dateAcq','file_hash',]
+    user = request.user.person.user
+    person = get_object_or_404(Person,user_id=user)
+    title = request.POST['title']
+    regiNum = request.POST['subtitle']
+    issure = request.POST['content']
+    dateAcq = request.POST['ddate']
+    file_hash = request.POST['image_hash']
+    resume = Resume(
+        user = person,
+        title = title,
+        regiNum = regiNum,
+        issure = issure,
+        dateAcq = dateAcq,
+        file_hash = file_hash,
+    )
+    message = resume
+    context = {
+        'message':message,
+    }
+    resume.save()
+    return HttpResponse(json.dumps(context),content_type="application/json")
+
 
 
 def create_experience(request, pk):

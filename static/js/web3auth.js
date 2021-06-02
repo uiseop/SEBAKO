@@ -1,4 +1,6 @@
-
+console.log('hi its web3')
+window.onload = loadData()
+console.log('haha hi')
 async function checkMeta(){
     if (typeof window.ethereum !== 'undefined'){
     window.web3 = new Web3(window.ethereum)
@@ -35,9 +37,6 @@ async function getAccount(){
   const account = accounts[0]
   console.log(account)
   console.log(account)
-  console.log(account)
-  console.log(account)
-  console.log(account)
   showAccount.value = account
   console.log(showAccount)
   console.log(showAccount)
@@ -72,3 +71,31 @@ async function getAccount(){
 //      .catch((error) => console.error)
 //  })
 }
+
+async function loadData(){
+  ethereum.enable().then(function (accounts) {
+    var account = accounts[0];
+    let params = {
+      "module": "account",
+      "action": "txlist",
+      "address": account,
+      "startblock" : 0,
+      "endblock" : 99999999,
+      "sort": "asc",
+      "apikey": "TE951KCDV98H43GIB8G31F3H77IMEN51BT"
+    };
+
+    let query = Object.keys(params)
+               .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+               .join('&');
+
+    let url = 'https://api-ropsten.etherscan.io/api?' + query;
+
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.result[0])
+    });
+  })
+}
+
