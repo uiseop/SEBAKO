@@ -43,7 +43,13 @@
       id="mainNav"
     >
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="/">SEBACO</a>
+        <a
+          class="navbar-brand js-scroll-trigger"
+          href="/"
+          style="font-size: 27px"
+        >
+          S E B A C O</a
+        >
         <button
           class="navbar-toggler navbar-toggler-right"
           type="button"
@@ -58,29 +64,98 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto my-2 my-lg-0">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#about">요청하기</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#services"
-                >관리하기</a
+              <a
+                class="nav-link js-scroll-trigger"
+                href="#about"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                "
+              >
+                About</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#contact">Contact</a>
-            </li>
-            {% if user.is_active %}
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/accounts/logout"
-                >로그아웃</a
+              <a
+                class="nav-link js-scroll-trigger"
+                href="#services"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                "
+              >
+                Services</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/index">내 정보</a>
+              <a
+                class="nav-link js-scroll-trigger"
+                href="#contact"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                "
+              >
+                Contact</a
+              >
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="/accounts/logout"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                "
+              >
+                로그아웃</a
+              >
+            </li>
+            {% if user.person.is_user %}
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="/singlepage/{{user.person.pk}}/"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                "
+              >
+                내 정보</a
+              >
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/accounts/login"
-                >로그인</a
+              <a
+                class="nav-link js-scroll-trigger"
+                href="/singlepage/{{user.profile.pk}}/"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                "
+              >
+                인증관리</a
+              >
+            </li>
+            {% endif %} {% else %}
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="javascript:checkMeta()"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                "
+              >
+                로그인</a
               >
             </li>
             {% endif %}
