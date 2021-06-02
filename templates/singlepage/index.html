@@ -21,6 +21,11 @@ profile은 글 작성자의 프로필을 불러온다-->
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet"
           type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+          rel="stylesheet" type="text/css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
 
@@ -39,7 +44,7 @@ profile은 글 작성자의 프로필을 불러온다-->
 </head>
 <body id="page-top">
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-third fixed-top" id="mainNav">
     {% if user.person.pk == person.pk %}
     <a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
         <span class="d-block d-lg-none">{{ profile.korName }}</span>
@@ -131,12 +136,11 @@ profile은 글 작성자의 프로필을 불러온다-->
 
 <!--            처음 회원가입했을때 모습을 보여줌-->
             {% else %}
-            <h2 class="mb-5">
-                성명, 주소 등.. <br>
-                당신의
-                <span class="text-primary">프로필</span>을 작성해봅시다!
+            <h2 class="mb-5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 700; font-size : 60px; line-height:140%">
+                당신은 어떤 사람인가요?<br>
+                <span class="text-primary">프로필</span>을 작성해봅시다!😊
             </h2>
-            <h4 class="text-secondary">
+            <h4 class="text-secondary" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 700; font-size : 30px; line-height:120%">
                 인스타, 깃허브 주소도 함께 등록해보세요<br><br>
             </h4>
             <div class="social-icons">
