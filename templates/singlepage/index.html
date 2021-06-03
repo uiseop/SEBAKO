@@ -118,7 +118,7 @@ profile은 글 작성자의 프로필을 불러온다-->
                 <a href="mailto:|{{ person.profie.email }}">{{ profile.email }}</a>
             </div>
 
-            <p class="lead mb-5" style="font-weight:bold;">지갑주소 : {{person.user}}</p>
+            <p class="lead mb-5" style="font-weight:bold;">지갑주소 : <a href="https://ropsten.etherscan.io/address/{{person.user}}">{{person.user}}</a> </p>
             <br><br><br>
             <div class="social-icons">
                 <!--                        소셜 주소가 있을경우 우리는 github만 사용-->

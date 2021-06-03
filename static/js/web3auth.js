@@ -1,5 +1,11 @@
-console.log('hi its web3')
+console.log('hi its web3 its very funny')
+var idx = 0;
+console.log(idx)
 window.onload = loadData()
+async function updateIdx(){
+    idx = await loadData();
+    console.log(idx)
+}
 console.log('haha hi')
 async function checkMeta(){
     if (typeof window.ethereum !== 'undefined'){
@@ -72,7 +78,7 @@ async function getAccount(){
 //  })
 }
 
-async function loadData(){
+function loadData(){
   ethereum.enable().then(function (accounts) {
     var account = accounts[0];
     let params = {
@@ -94,8 +100,14 @@ async function loadData(){
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.result[0])
+      console.log('haha')
+      idx = data.result.length - 1
+      console.log(data.result[idx])
+      console.log(data.result.length)
+      console.log(idx)
     });
   })
+
+  return idx
 }
 

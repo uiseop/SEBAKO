@@ -402,10 +402,17 @@ function waitForReceipt(hash, cb) {
         let ddate = $("#ddate").val();
         let filehash = $("#image_hash").val();
 
-        $.ajax({
+
+        {$.ajax({
             type: "POST",
             url: "{% url 'singlepage:created_resume_db' %}",
-            data: {'csrfmiddlewaretoken': '{{csrf_token}}'},
+            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+            'title':title,
+            'subtitle':subtitle,
+            'content':content,
+            'ddate':ddate,
+            'filehash':filehash},
+            dataType:"json",
             success:function(response){
             alert(response.message);
             },
@@ -445,5 +452,5 @@ function waitForReceipt(hash, cb) {
                   );
 
         });
-
+        }
       }

@@ -103,13 +103,16 @@ def create_resume(request, pk):
 
 def created_resume_db(request):
     # ['title','regiNum','issure','dateAcq','file_hash',]
+    print(request.POST)
+    print(request.POST)
+    print(request.POST)
     user = request.user.person.user
     person = get_object_or_404(Person,user_id=user)
     title = request.POST['title']
     regiNum = request.POST['subtitle']
     issure = request.POST['content']
     dateAcq = request.POST['ddate']
-    file_hash = request.POST['image_hash']
+    file_hash = request.POST['filehash']
     resume = Resume(
         user = person,
         title = title,
@@ -123,7 +126,7 @@ def created_resume_db(request):
         'message':message,
     }
     resume.save()
-    return HttpResponse(json.dumps(context),content_type="application/json")
+    return HttpResponse(status=201)
 
 
 
