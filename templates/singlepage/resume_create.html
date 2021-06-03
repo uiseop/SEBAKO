@@ -509,15 +509,15 @@ function waitForReceipt(hash, cb) {
       </button>
 
       <div class="collapse navbar-collapse" id="probootstrap-nav">
-          <a class="navbar-brand js-scroll-trigger" href="/">SEBACO</a>
+          <a class="navbar-brand js-scroll-trigger" href="/">SEBAKO</a>
         <ul class="navbar-nav ml-auto">
                 {% if user.is_active %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 30px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 30px">
                   로그아웃</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/singlepage/{{profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 10px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/singlepage/{{profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 10px">
                   내 정보</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/login" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 10px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/login" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 10px">
                   로그인</a></li>
                 {% endif %}
         </ul>

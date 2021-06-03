@@ -35,24 +35,24 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
                     About</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
                     Services</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
                     Contact</a></li>
                 {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
                     로그아웃</a></li>
                 {% if user.person.is_user %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
                     내 정보</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
                     인증관리</a></li>
                 {% endif %}
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:checkMeta()" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:checkMeta()" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
                     로그인</a></li>
                 {% endif %}
             </ul>
@@ -173,10 +173,10 @@
         </div>
         <div class="row">
 
-            <div class="col-lg-5 ml-auto mb-5 mb-lg-0">
-                <i class="fas fa-comments fa-6x text-muted" style="margin-left:180px"></i>
-                <br><br><br>
-                <ul class="text-soblue mb-5 h3" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 400 bold; font-size : 24px">
+            <div class="col-lg-5 ml-auto text-center mb-5 mb-lg-0">
+                <i class="fas fa-comments fa-6x text-muted"></i>
+                <br><br>
+                <ul class="text-soblue mb-5 h3" style="text-align:left; font-family: 'Noto Sans KR', sans-serif; font-weight : 400 bold; font-size : 24px">
                     <li>이의섭 - <a href="mailto:bono521@naver.com">bono521@naver.com</a></li>
                     <li>이찬혁 - <a href="mailto:dlcksgur7@naver.com">dlcksgur7@naver.com</a></li>
                     <li>정재욱 - <a href="mailto:jw755482@gmail.com">jw755482@gmail.com</a> </li>
