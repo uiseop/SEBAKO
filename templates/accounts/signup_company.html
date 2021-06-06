@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -5,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SEBACO-기업회원가입</title>
+    <title>SEBAKO - 기업 회원가입</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -40,7 +41,7 @@
           <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="/" style="font-size : 27px">
-            S E B A C O</a>
+            S E B A K O</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -74,7 +75,7 @@
 
     <div class="limiter" style="margin-top: -10px">
       <div class="container-login100">
-        <div style="padding-top: -50px">
+        <div style="padding-top: -50px" >
           <ul>
             <li>
               <input type="checkbox" /> 서비스 이용약관 동의 (필수)
@@ -145,7 +146,7 @@
             <input
               class="input100"
               type="text"
-              placeholder="ex) sebaco@naver.com"
+              placeholder="ex) sebako@naver.com"
             />
             <span class="focus-input100"></span>
           </div>
@@ -203,7 +204,7 @@
           </div>
 
           <div class="w-full text-center p-t-55">
-            <span class="txt2"> 이미 회원이신가요? </span>
+            <span class="txt2"> 이미 회원이신가요? </span>&nbsp;
 
             <a href="{% url 'accounts:login' %}" class="txt2 bo1"> 로그인 </a>
           </div>
@@ -212,7 +213,14 @@
         
       </div>
     </div>
-
+<!-- Footer-->
+<footer class="bg-light">
+    <div class="container">
+        <div class="small text-center text-muted">
+            Copyright &copy;2021- SEBAKO
+        </div>
+    </div>
+</footer>
      
 
         <script type="text/javascript">
