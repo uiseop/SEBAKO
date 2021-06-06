@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="javascript:checkMeta()"
+                href="{% url 'accounts:signup' %}"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -178,7 +178,7 @@
                 onmouseover = "this.style.color='#0000FF'"
                 onmouseout  = "this.style.color='black'"
               >
-                로그인</a
+                회원가입</a
               >
             </li>
             {% endif %}
@@ -225,14 +225,14 @@
                     <span class="txt1" style="font-size:large ;"> PASSWORD </span>
 
                     <a href="#" class="txt2 bo1 m-l-5"> Forgot? </a>
-                    </div>
-                    <div
+              </div>
+              <div
                     class="wrap-input100 validate-input"
                     data-validate="Password is required"
                     >
                     <input class="input100" type="password" name="pass" />
                     <span class="focus-input100"></span>
-                    </div>
+              </div>
 
               <div class="container-login100-form-btn m-t-17">
                 <input type="submit" class="login100-form-btn" value="로그인" />
