@@ -9,7 +9,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>SEBACO-로그인</title>
+    <title>SEBAKO-로그인</title>
 
    
     <!-- Font Awesome icons (free version)-->
@@ -39,40 +39,154 @@
   </head>
 
   <body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="/" style="font-size : 27px">
-            S E B A C O</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+      style="background-color: white"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand js-scroll-trigger"
+          href="/"
+          style="font-size: 27px; color: black"
+        >
+          S E B A K O</a
+        >
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
-                    About</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
-                    Services</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
-                    Contact</a></li>
-                {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
-                    로그아웃</a></li>
-                {% if user.person.is_user %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
-                    내 정보</a></li>
-                {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
-                    인증관리</a></li>
-                {% endif %}
-                {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:checkMeta()" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
-                    로그인</a></li>
-                {% endif %}
-            </ul>
+          <ul class="navbar-nav ml-auto my-2 my-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="#services"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                  color: black;
+                "
+                onmouseover = "this.style.color='#0000FF'"
+                onmouseout  = "this.style.color='black'"
+              >
+                About</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="#services"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                  color: black;
+                "
+                onmouseover = "this.style.color='#0000FF'"
+                onmouseout  = "this.style.color='black'"
+              >
+                Services</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="#contact"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                  color: black;
+                "
+                onmouseover = "this.style.color='#0000FF'"
+                onmouseout  = "this.style.color='black'"
+              >
+                Contact</a
+              >
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="/accounts/logout"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                  color: black;
+                "
+                onmouseover = "this.style.color='#0000FF'"
+                onmouseout  = "this.style.color='black'"
+              >
+                로그아웃</a
+              >
+            </li>
+            {% if user.person.is_user %}
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="/singlepage/{{user.person.pk}}/"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                  color: black;
+                "
+                onmouseover = "this.style.color='#0000FF'"
+                onmouseout  = "this.style.color='black'"
+              >
+                내 정보</a
+              >
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="/singlepage/{{user.profile.pk}}/"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                  color: black;
+                "
+                onmouseover = "this.style.color='#0000FF'"
+                onmouseout  = "this.style.color='black'"
+              >
+                인증관리</a
+              >
+            </li>
+            {% endif %} {% else %}
+            <li class="nav-item">
+              <a
+                class="nav-link js-scroll-trigger"
+                href="javascript:checkMeta()"
+                style="
+                  font-family: 'Noto Sans KR', sans-serif;
+                  font-weight: 500;
+                  font-size: 20px;
+                  color: black;
+                "
+                onmouseover = "this.style.color='#0000FF'"
+                onmouseout  = "this.style.color='black'"
+              >
+                로그인</a
+              >
+            </li>
+            {% endif %}
+          </ul>
         </div>
-    </div>
+      </div>
     </nav>
+
 
    <section class="page-section bg-info" id="about">
       <div class="limiter" style="margin-top: -120px">
