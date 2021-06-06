@@ -32,15 +32,20 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!--    이미지 변경 팝업 JavaScripts-->
     <script>
         function popup(){
-            var url = "picture_popup/";
+            var url = "https://ipfs.io/ipfs/{{profile.image_hash}}";
             var name = "popup test";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            var option = "width = 500, height = 500, top = 100, left = 200"
             window.open(url, name, option);
         }
 
 
 
     </script>
+    <style>
+        .is-active:hover{
+            background-color:#008ddd;
+        }
+    </style>
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -110,7 +115,6 @@ profile은 글 작성자의 프로필을 불러온다-->
                 {% if profile.engName %}
                 <span class="text-primary">{{ profile.engName }}</span>
                 {% else %}
-                <span class="text-primary">영어이름을 설정해보세요!</span>
                 {% endif %}
             </h1>
             <div class="subheading mb-5">
@@ -122,10 +126,26 @@ profile은 글 작성자의 프로필을 불러온다-->
             <br><br><br>
             <div class="social-icons">
                 <!--                        소셜 주소가 있을경우 우리는 github만 사용-->
-                <a class="social-icon" href="#"><i class="fab fa-instagram"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-github"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-facebook-f"></i></a>
+                {% if profile.insta %}
+                <a class="social-icon"  href="{{profile.insta}}"><i class="fab fa-instagram"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-instagram"></i></a>
+                {% endif %}
+                {% if profile.github %}
+                <a class="social-icon " href="{{profile.github}}"><i class="fab fa-github"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-github"></i></a>
+                {% endif %}
+                {% if profile.blog %}
+                <a class="social-icon" href="{{profile.blog}}"><i class="fab fa-twitter"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-twitter"></i></a>
+                {% endif %}
+                {% if profile.facebook %}
+                <a class="social-icon"  href="{{profile.facebook}}"><i class="fab fa-facebook-f"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-facebook-f"></i></a>
+                {% endif %}
             </div>
             <br>
             <br>
@@ -171,27 +191,32 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!--            certificate-->
     <section class="resume-section" id="certificate">
         <div class="resume-section-content">
-            <h2 class="mb-5">Certificate ( 자격증 작성하는 곳 )</h2>
+            <h2 class="mb-5">자격증</h2>
             {% if resume_list.all %}
             {% for resume in resume_list.all %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">{{resume.title}}</h3>
-                    <div class="subheading mb-3">·{{resume.issure}} ·{{resume.dateAcq}}</div>
+                    <div class="subheading mb-3" style="font-weight:bold">{{resume.issure}}</div>
 
-                    <p>{{resume.regiNum}}</p>
+                    <p style="font-weigt:bold">{{resume.regiNum}}</p>
                 </div>
-                <div class="flex-shrink-0"><span class="text-primary">{{resume.dateAcq}} - Present</span></div>
+                <div class="flex-shrink-0">
+                    <span class="text-primary" style="font-weight:bold">{{resume.dateAcq}}</span><br><br>
+                    <button class="mb-3 btn btn-primary white" type="submit">삭제하기</button>
+                </div>
+
             </div>
+            <hr class="mb-0">
             {% endfor %}
             {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">자격증 명</h3>
-                    <div class="subheading mb-3">·자격증 발급처 ·자격증 취득일</div>
-                    <p>당신의 이력서를 보다 안전하고 편리하게 관리해드립니다</p>
+                    <h3 class="mb-0" style="font-weight:bold">자격증 명</h3>
+                    <div class="subheading mb-3" style="font-weight:bold">·자격증 발급처 ·자격증 취득일</div>
+                    <p style="font-weight:bold">당신의 이력서를 보다 안전하고 편리하게 관리해드립니다</p>
                 </div>
-                <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
+                <div class="flex-shrink-0"><span class="text-primary" style="font-weight:bold">March 2013 - Present</span></div>
             </div>
             {% endif %}
             <br>
@@ -203,7 +228,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Experience-->
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
-            <h2 class="mb-5">Experience ( 인증받을 경험 작성하는 곳 )</h2>
+            <h2 class="mb-5">경력</h2>
             {% if experience_list.all %}
             {% for experience in experience_list.all %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -268,7 +293,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Education-->
     <section class="resume-section" id="education">
         <div class="resume-section-content">
-            <h2 class="mb-5">Education</h2>
+            <h2 class="mb-5">학력</h2>
             {% if education_list.all %}
             {% for edu in education_list.all %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -353,7 +378,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Interests-->
     <section class="resume-section" id="interests">
         <div class="resume-section-content">
-            <h2 class="mb-5">Interests</h2>
+            <h2 class="mb-5">취미/관심</h2>
             <p>Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid
                 skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free
                 climbing, and kayaking.</p>
@@ -369,7 +394,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Awards-->
     <section class="resume-section" id="awards">
         <div class="resume-section-content">
-            <h2 class="mb-5">Awards & Certifications</h2>
+            <h2 class="mb-5">수상경력</h2>
             <ul class="fa-ul mb-0">
                 <li>
                     <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>

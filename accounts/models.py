@@ -23,6 +23,11 @@ class Profile(models.Model):
     email = models.EmailField(max_length=50, verbose_name='이메일')
     phone = models.CharField(max_length=13, verbose_name='전화번호')
 
+    github = models.URLField(blank=True, verbose_name='깃허브')
+    blog = models.URLField(blank=True, verbose_name='블로그')
+    facebook = models.URLField(blank=True, verbose_name='페이스북')
+    insta = models.URLField(blank=True,verbose_name='인스타')
+
     created_at = models.DateField(auto_now_add=True)
     # IPFS 네트워크를 사용하여 이미지 파일을 관리
     image_hash = models.CharField(max_length=255, blank=True, null=True)

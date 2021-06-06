@@ -11,6 +11,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
 <!--<script src="{% static 'js/resume_post.js' %}"></script>-->
+<!--비동기 크롤링 axios 임포트-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 const abi = [
 	{
@@ -359,43 +361,6 @@ window.web3 = new Web3(window.ethereum)
 web3 = window.web3
 contract = new web3.eth.Contract(abi,c_address)
 
-    //IMAGE AND IPFS
-  var ipfsHash;
-  function setIpsfHash(hash){
-    ipfsHash = hash;
-  }
-  function getIpfsHash(){
-    return ipfsHash;
-  }
-  const ipfs = window.IpfsHttpClient('ipfs.infura.io', '5001', { protocol: 'https' });
-  $("document").ready(function(){
-
-    $("#upload").change(function() {
-       $("#link").text("당신의 자격증을 안전하게 IPFS네트워크에 올리고있습니다.. 잠시만 기다려주세요..")
-       var reader = new FileReader();
-            reader.onload = function (e) {
-
-                const magic_array_buffer_converted_to_buffer = buffer.Buffer(reader.result);
-                ipfs.add(magic_array_buffer_converted_to_buffer, (err, result) => {
-
-              let ipfsLink = "<a href='https://ipfs.io/ipfs/" + result[0].hash + "'>ipfs.io/ipfs/" + result[0].hash + "</a>";
-              var image_hash = document.getElementById('image_hash');
-              $("#hash").text("IPFS HASH:"+result[0].hash)
-
-              $("#link").text("IPFS 네트워크에 성공적으로 등록되었습니다. 등록하기를 눌러도 좋습니다!")
-              image_hash.value = result[0].hash
-              ipfsHash = result[0].hash
-
-
-              setIpsfHash(ipfsHash);
-
-
-                })
-            }
-            reader.readAsArrayBuffer(this.files[0]);
-
-    });
-});
 
 function waitForReceipt(hash, cb) {
     web3.eth.getTransactionReceipt(hash, function (err, receipt) {
@@ -424,15 +389,28 @@ function waitForReceipt(hash, cb) {
         let subtitle=$("#subtitle").val();
         let company=$("#content").val();
         let ddate = $("#ddate").val();
-        let filehash = $("#image_hash").val();
-        console.log('haha' + title,subtitle,company,ddate,filehash);
-        if(title==''||subtitle==''||company==''||ddate==''||filehash==''){
+        let check = false;
+        console.log('haha' + title,subtitle,company,ddate);
+        if(title==''||subtitle==''||company==''||ddate==''){
             alert('모든 값을 작성하여주세요');
         }
 
-
         else{
-        $("#rec_url").text("RECEIPT IS LOADING......")
+        $.ajax({
+                    type: "POST",
+                    url: "{% url 'singlepage:get_api' %}",
+                    data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+            'title':title,
+            'subtitle':subtitle,
+            'content':company,
+            'ddate':ddate},
+                    dataType: "json",
+                    success : function(response){console.log(response);
+                        console.log(response.result);
+                        if(response.result == true){
+                            check = true;
+                            console.log('합격');
+                            $("#rec_url").text("RECEIPT IS LOADING......")
         $.ajax({
             type: "POST",
             url: "{% url 'singlepage:created_resume_db' %}",
@@ -440,8 +418,7 @@ function waitForReceipt(hash, cb) {
             'title':title,
             'subtitle':subtitle,
             'content':company,
-            'ddate':ddate,
-            'filehash':filehash},
+            'ddate':ddate},
             dataType:"json",
 
         });
@@ -457,7 +434,7 @@ function waitForReceipt(hash, cb) {
                     "gasPrice": web3.utils.toWei('4.1','Gwei')
                   })
 
-                  contract.methods.setCertifiactionData(title,subtitle,company,ddate,filehash).send(
+                  contract.methods.setCertifiactionData(title,subtitle,company,ddate,'').send(
                       transaction,
                       (error,result)=>{
                           if(error){
@@ -476,6 +453,15 @@ function waitForReceipt(hash, cb) {
                   );
 
         });
+
+                        }
+                        else{
+                            console.log('불합격');
+                            alert('정보가 옳바르지 않습니다');
+                        }
+                    }
+            });
+
         }
       }
 </script>
@@ -564,7 +550,7 @@ function waitForReceipt(hash, cb) {
                   <input type="text" class="form-control" name="title"id="title" placeholder="자격증명">
                 </div>
                 <div class="form-group col-md-5" style="padding-left:0px">
-                  <input type="text" class="form-control"name="subtitle" id="subtitle" placeholder="자격증 번호">
+                  <input type="text" class="form-control"name="subtitle" id="subtitle" placeholder="자격증 번호">숫자만 입력해주세요</input>
                 </div>
                 <div class="form-group col-md-5" style="padding-left:0px">
                   <input type="text" id="content"name="content" class="form-control" placeholder="발행기관">
@@ -578,15 +564,16 @@ function waitForReceipt(hash, cb) {
                 </div>
 
 
-                <div>
-                  <input type="file" id="upload"><br>
-                </div>
-                <div col-md-5>
-                <h4 id="hash" style="font-style: italic; font-weight: bold; margin-top: 20px"></h4>
+<!--                <div>-->
+<!--                    <label for="upload">필수 X</label>-->
+<!--                  <input type="file" id="upload"><br>-->
+<!--                </div>-->
+<!--                <div col-md-5>-->
+<!--                <h4 id="hash" style="font-style: italic; font-weight: bold; margin-top: 20px"></h4>-->
 
-                 <h4 id="link" style="font-style: italic; font-weight: bold; text-align: center; margin-top: 20px"></h4>
-                  <input type="hidden" name="image_hash" id="image_hash">
-                </div>
+<!--                 <h4 id="link" style="font-style: italic; font-weight: bold; text-align: center; margin-top: 20px"></h4>-->
+<!--                  <input type="hidden" name="image_hash" id="image_hash">-->
+<!--                </div>-->
                 <div class="form-group">
                   <input type="submit" class="btn btn-primary" onclick="append()" value="등록하기" style="margin-top: 20px; margin-left: 0px; font-size:16px">
                 </div>

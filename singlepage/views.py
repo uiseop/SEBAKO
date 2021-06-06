@@ -1,5 +1,6 @@
 import json
 
+import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -14,6 +15,8 @@ from accounts.decorators import login_message_required
 from accounts.models import SNS, Profile, Person
 from resumes.models import SelfIntro, Experience, Education, Resume
 from singlepage.forms import snsForm, ProfileForm, ResumeForm, ExperienceForm, EduForm
+
+from bs4 import BeautifulSoup
 
 
 def _page_id(request):
@@ -51,10 +54,6 @@ def PageDetail(request, pk):
                    'education_list': education_list, 'resume_list': resume_list})
 
 
-@login_message_required
-def ChangePicture(request, pk):
-    user = User.objects.get(id=pk)
-    return render(request, 'singlepage/picture_popup.html')
 
 
 @method_decorator(login_message_required, name='dispatch')
@@ -105,21 +104,19 @@ def created_resume_db(request):
     # ['title','regiNum','issure','dateAcq','file_hash',]
     print(request.POST)
     print(request.POST)
-    print(request.POST)
     user = request.user.person.user
     person = get_object_or_404(Person,user_id=user)
     title = request.POST['title']
     regiNum = request.POST['subtitle']
     issure = request.POST['content']
     dateAcq = request.POST['ddate']
-    file_hash = request.POST['filehash']
+
     resume = Resume(
         user = person,
         title = title,
         regiNum = regiNum,
         issure = issure,
         dateAcq = dateAcq,
-        file_hash = file_hash,
     )
     message = resume
     context = {
@@ -127,6 +124,29 @@ def created_resume_db(request):
     }
     resume.save()
     return HttpResponse(status=201)
+
+def check_Certificate(request):
+    # ['title','regiNum','issure','dateAcq','file_hash',]
+    user = request.user.person.user
+    person = get_object_or_404(Person,user_id=user)
+    profile = get_object_or_404(Profile,user_id=person)
+    name = profile.korName
+    regiNumber = request.POST['subtitle']
+    company = request.POST['content']
+    # url = "http://data.kca.kr/api/v1/cq/certificate/check?apiKey=2fd824fae641032fa79d9db55f3be972cf40be4f703334fb5991e485b40705ab&name=송치윤&no=189010149"
+
+    url22 = "http://data.kca.kr/api/v1/cq/certificate/check?apiKey=2fd824fae641032fa79d9db55f3be972cf40be4f703334fb5991e485b40705ab&name="+name+"&no="+regiNumber
+    print(url22)
+
+
+
+    res = requests.get(url22)
+
+    soup = BeautifulSoup(res.content,'html.parser')
+    print(soup)
+
+
+    return HttpResponse(soup)
 
 
 
@@ -165,7 +185,8 @@ def ChangeProfile(request, pk):
     profile = Profile.objects.get(user_id=pk)
 
     if request.method == 'POST':
-        profile_form = ProfileForm(request.POST['name'],request.POST['engName'],request.POST['email'],request.POST['phone'],request.POST['image_hash'],instance=profile)
+        profile_form = ProfileForm(request.POST['name'],request.POST['engName'],request.POST['email'],request.POST['phone'],request.POST['image_hash'],
+        request.POST['github'],request.POST['blog'],request.POST['facebook'],request.POST['insta'],instance=profile)
         try: # SNS의 정보를 가져오는것을 먼저 시도해봄
             s = SNS.objects.get(user_id=pk)
             sns_form = snsForm(request.POST, instance=s)
@@ -226,11 +247,16 @@ def ProfileCreate(request,pk):
         print(request.POST['korName'])
         print(request.POST['korName'])
         print(request.POST['korName'])
+        print(request.POST['insta'])
         profile.korName = request.POST['korName']
         profile.engName = request.POST['engName']
         profile.email = request.POST['email']
         profile.phone = request.POST['phone']
         profile.image_hash = request.POST['image_hash']
+        profile.github = request.POST['github']
+        profile.insta = request.POST['insta']
+        profile.blog = request.POST['blog']
+        profile.facebook = request.POST['facebook']
         profile.save()
         return redirect('singlepage:page_detail', pk=pk)
     else:
