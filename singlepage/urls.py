@@ -1,7 +1,7 @@
 from django.urls import path
 
 from singlepage.views import PageDetail, snsCreate, ChangeProfile, ProfileUpdate, create_resume, \
-    create_experience, create_edu, append, ProfileCreate, created_resume_db, check_Certificate
+    create_experience, create_edu, append, ProfileCreate, created_resume_db, check_Certificate, delete_resume
 
 app_name = 'singlepage'
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path('<int:pk>/profile_create/',ProfileCreate, name='profile'),
     path('created_resume_db/',created_resume_db, name='created_resume_db'),
     path('get_api/',check_Certificate,name='get_api'),
+    path('<int:pk>/delete_resume/<int:resume_id>/',delete_resume,name='delete_resume'),
     # path('<int:pk>/edit/',ProfileUpdate.as_view(), name='updateprofile'),
 
 ]

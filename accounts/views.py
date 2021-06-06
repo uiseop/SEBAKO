@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from accounts.forms import personForm
-from accounts.models import Profile, Person, SNS
+from accounts.models import Profile, Person, SNS, Company
 
 
 def home(request):
@@ -153,14 +153,30 @@ def personal_signUp(request):
         print('why no')
         render(request, 'accounts/signup.html')
 
+def company_signUp(request):
+    if request.method == 'POST':
+        user = User.objects.create_user(
+            username=request.POST['walletAddress']
+        )
+        company = Company(user=user)
+        company.save()
+        return redirect('home')
+    else:
+        render(request, 'accounts/signup_company.html')
+
 def login_wallet(request):
     if request.method == 'POST':
         username = request.POST['walletAddress']
         user = get_object_or_404(User,username=username)
-        if user:
+        if Person.objects.get(user=user):
             auth.login(request,user)
+
             # 유저모델과 1:1 연결한 PERSON모델의 pk로 연결함으로써 오류를 방지함
             return redirect('singlepage:page_detail', user.person.pk)
+        elif Company.objects.get(user=user):
+            auth.login(request,user)
+
+            return redirect('home')
         else:
             return render(request,'accounts/login.html',{'error': 'WalletAccount is incorrect'})
 

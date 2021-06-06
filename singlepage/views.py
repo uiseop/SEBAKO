@@ -144,11 +144,13 @@ def check_Certificate(request):
 
     soup = BeautifulSoup(res.content,'html.parser')
     print(soup)
-
-
     return HttpResponse(soup)
 
-
+def delete_resume(request, resume_id,pk):
+    user = request.user.person.user
+    resume = Resume.objects.get(id=resume_id)
+    resume.delete()
+    return redirect('singlepage:page_detail', pk=pk)
 
 def create_experience(request, pk):
     if request.method == 'POST':

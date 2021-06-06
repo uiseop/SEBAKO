@@ -382,88 +382,141 @@ function waitForReceipt(hash, cb) {
   }
 
 //FOR CHANGING PAGE
-      function append(){
+function append(){
 
-        var sale;
-        let title=$("#title").val();
-        let subtitle=$("#subtitle").val();
-        let company=$("#content").val();
-        let ddate = $("#ddate").val();
-        let check = false;
-        console.log('haha' + title,subtitle,company,ddate);
-        if(title==''||subtitle==''||company==''||ddate==''){
-            alert('모든 값을 작성하여주세요');
-        }
+    var sale;
+    let title=$("#title").val();
+    let subtitle=$("#subtitle").val();
+    let company=$("#content").val();
+    let ddate = $("#ddate").val();
+    let for_sale=$("#for_sale").prop("checked");
+    console.log(for_sale);
+    let comba = 'haha';
+    console.log(comba);
 
-        else{
-        $.ajax({
-                    type: "POST",
-                    url: "{% url 'singlepage:get_api' %}",
-                    data: {'csrfmiddlewaretoken': '{{csrf_token}}',
-            'title':title,
-            'subtitle':subtitle,
-            'content':company,
-            'ddate':ddate},
-                    dataType: "json",
-                    success : function(response){console.log(response);
-                        console.log(response.result);
-                        if(response.result == true){
-                            check = true;
-                            console.log('합격');
-                            $("#rec_url").text("RECEIPT IS LOADING......")
-        $.ajax({
-            type: "POST",
-            url: "{% url 'singlepage:created_resume_db' %}",
-            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
-            'title':title,
-            'subtitle':subtitle,
-            'content':company,
-            'ddate':ddate},
-            dataType:"json",
+    let check = false;
+    console.log('haha' + title,subtitle,company,ddate);
+    if(title==''||subtitle==''||company==''||ddate==''){
+        alert('모든 값을 작성하여주세요');
+    }
 
-        });
+else{
+    if(for_sale == true){
+    $.ajax({
+                type: "POST",
+                url: "{% url 'singlepage:get_api' %}",
+                data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+        'title':title,
+        'subtitle':subtitle,
+        'content':company,
+        'ddate':ddate},
+                dataType: "json",
+                success : function(response){console.log(response);
+                    console.log(response.result);
+                    if(response.result == true){
+                        check = true;
+                        console.log('합격');
+                        $("#rec_url").text("RECEIPT IS LOADING......")
+    $.ajax({
+        type: "POST",
+        url: "{% url 'singlepage:created_resume_db' %}",
+        data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+        'title':title,
+        'subtitle':subtitle,
+        'content':company,
+        'ddate':ddate},
+        dataType:"json",
 
-        web3.eth.getAccounts(function get(err, res){
-                  account=res[0]
-                  console.log(account)
-                  transaction =
-                  ({
-                    from: account,
-                    "gas": 300000,
-                    "chainId": 3,
-                    "gasPrice": web3.utils.toWei('4.1','Gwei')
-                  })
+    });
 
-                  contract.methods.setCertifiactionData(title,subtitle,company,ddate,'').send(
-                      transaction,
-                      (error,result)=>{
-                          if(error){
-                            console.log('hahah why not')
-                          }
-                          else{
-                            waitForReceipt(result, function(){
-                                console.log(result)
-                                var newUrl = "https://ropsten.etherscan.io/tx/" + result
-                                $("#rec_url").attr("href", newUrl)
-                                $("#rec_url").text(result)
-                                }
-                            )
-                          }
+    web3.eth.getAccounts(function get(err, res){
+              account=res[0]
+              console.log(account)
+              transaction =
+              ({
+                from: account,
+                "gas": 300000,
+                "chainId": 3,
+                "gasPrice": web3.utils.toWei('4.1','Gwei')
+              })
+
+              contract.methods.setCertifiactionData(title,subtitle,company,ddate,'').send(
+                  transaction,
+                  (error,result)=>{
+                      if(error){
+                        console.log('hahah why not')
                       }
-                  );
+                      else{
+                        waitForReceipt(result, function(){
+                            console.log(result)
+                            var newUrl = "https://ropsten.etherscan.io/tx/" + result
+                            $("#rec_url").attr("href", newUrl)
+                            $("#rec_url").text(result)
+                            }
+                        )
+                      }
+                  }
+              );
 
+    });
+
+                    }
+                    else{
+                        console.log('불합격');
+                        alert('정보가 옳바르지 않습니다');
+                    }
+                }
         });
 
-                        }
-                        else{
-                            console.log('불합격');
-                            alert('정보가 옳바르지 않습니다');
-                        }
-                    }
-            });
+    }
+    else{
+        $("#rec_url").text("RECEIPT IS LOADING......")
+    $.ajax({
+        type: "POST",
+        url: "{% url 'singlepage:created_resume_db' %}",
+        data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+        'title':title,
+        'subtitle':subtitle,
+        'content':company,
+        'ddate':ddate},
+        dataType:"json",
 
-        }
-      }
+    });
+
+    web3.eth.getAccounts(function get(err, res){
+              account=res[0]
+              console.log(account)
+              transaction =
+              ({
+                from: account,
+                "gas": 300000,
+                "chainId": 3,
+                "gasPrice": web3.utils.toWei('4.1','Gwei')
+              })
+
+              contract.methods.setCertifiactionData(title,subtitle,company,ddate,'').send(
+                  transaction,
+                  (error,result)=>{
+                      if(error){
+                        console.log('hahah why not')
+                      }
+                      else{
+                        waitForReceipt(result, function(){
+                            console.log(result)
+                            var newUrl = "https://ropsten.etherscan.io/tx/" + result
+                            $("#rec_url").attr("href", newUrl)
+                            $("#rec_url").text(result)
+                            }
+                        )
+                      }
+                  }
+              );
+
+    });
+
+    }
+  }
+}
 </script>
 <head>
     <meta charset="UTF-8">
@@ -535,6 +588,11 @@ function waitForReceipt(hash, cb) {
                 취득한 자격증을 한눈에</li>
               <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 200; font-size : 20px; line-height:140%; color:white;">
                 이더리움 네트워크에 저장되어 <br>안전하게 저장됩니다</li>
+            <h2 class="h1" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 40px; line-height:140%">
+              WARNING</h2>
+            <ul class="list-unstyled probootstrap-light mb-4">
+              <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 200; font-size : 20px; line-height:140%; color:white;">
+                  한번 등록한 정보는 이후에 삭제 및 수정이 어렵습니다</li>
               <li><a href='/singlepage/{{profile.pk}}'>Go Back</a></li>
 
             </ul>
@@ -560,7 +618,7 @@ function waitForReceipt(hash, cb) {
                 </div>
 
                 <div class="form-group" style="margin-top: 20px; text-align: left;">
-                    <label  style="font-size: 15px">국가기술</label><input  style="width: 20px; height: 15px; margin-left: 15px" id="for_sale" name="for_sale" type="checkbox" checked data-toggle="toggle" data-on="YES" data-off="NO" data-size="md">
+                    <label  style="font-size: 15px">한국방송통신전파진흥원 발행 자격증입니까?</label><input  style="width: 20px; height: 15px; margin-left: 15px" id="for_sale" name="for_sale" type="checkbox">
                 </div>
 
 

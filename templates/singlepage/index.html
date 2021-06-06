@@ -28,6 +28,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!--    이미지 변경 팝업 JavaScripts-->
     <script>
@@ -203,7 +204,23 @@ profile은 글 작성자의 프로필을 불러온다-->
                 </div>
                 <div class="flex-shrink-0">
                     <span class="text-primary" style="font-weight:bold">{{resume.dateAcq}}</span><br><br>
-                    <button class="mb-3 btn btn-primary white" type="submit">삭제하기</button>
+                    <p id="resume_id" hidden class="resume_id">{{resume.id}}</p>
+<!--                    {% url 'singlepage:delete_resume' person.pk resume.id %}-->
+                    <a class="delete mb-3 btn btn-primary white" >삭제하기</a>
+                    <script>
+                        $(document).ready(function(){
+                            $(".delete").on('click', function() {
+                                var conf = confirm("삭제하셔도 블록체인에 기록이 남습니다. \n정말로 삭제하시겠습니까?")
+                                if(conf){
+                                    location.href = '{% url 'singlepage:delete_resume' person.pk resume.id %}';
+                                }
+                                else{
+                                    location.href;
+                                }
+                            });
+                        });
+                    </script>
+
                 </div>
 
             </div>
@@ -443,7 +460,6 @@ profile은 글 작성자의 프로필을 불러온다-->
 </div>
 
 <!-- Bootstrap core JS-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
