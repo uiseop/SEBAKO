@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   line-height: 1.45;
   font-weight: normal;
-  color: #01378C; }
+  color: #0B68B3; }
 
 h1, .h1 {
   font-size: 30px; }
@@ -50,7 +50,7 @@ h5, .h5 {
   letter-spacing: .1em; }
 
 .probootstrap-navbar-dark {
-  background: #01378C !important;
+  background: #00A0E2 !important;
   position: relative;
   left: 0;
   right: 0;
@@ -429,7 +429,7 @@ h5, .h5 {
 
 .probootstrap-aside-stretch-left,
 .probootstrap-aside-stretch-right {
-  background: #01378C; }
+  background: #00A0E2; }
   .probootstrap-aside-stretch-left a,
   .probootstrap-aside-stretch-right a {
     color: #4fb5e6; }
@@ -442,7 +442,7 @@ h5, .h5 {
     top: 0;
     right: 100%;
     bottom: 0;
-    background: #01378C;
+    background: #00A0E2;
     content: "";
     width: 370%; }
   .probootstrap-aside-stretch-left h2,
@@ -468,7 +468,7 @@ h5, .h5 {
     display: block; }
     .probootstrap-aside-stretch-left .probootstrap-light li a,
     .probootstrap-aside-stretch-right .probootstrap-light li a {
-      color: #4fb5e6;
+      color: #ffffff;
       display: block; }
       .probootstrap-aside-stretch-left .probootstrap-light li a:hover,
       .probootstrap-aside-stretch-right .probootstrap-light li a:hover {

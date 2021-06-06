@@ -3,8 +3,7 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>SEBAKO-회원가입</title>
+    <title>SEBAKO - 기업 회원가입</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -23,6 +22,8 @@
       rel="stylesheet"
       type="text/css"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- Third party plugin CSS-->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
@@ -36,6 +37,49 @@
   </head>
 
   <body id="page-top">
+    <section class="page-section bg-info" id="about">
+          <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/" style="font-size : 27px">
+            S E B A K O</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px" onmouseover = "this.style.color='#01378C'" onmouseout  = "this.style.color='#FFFFFF'">
+                    About</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px" onmouseover = "this.style.color='#01378C'" onmouseout  = "this.style.color='#FFFFFF'">
+                    Services</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px" onmouseover = "this.style.color='#01378C'" onmouseout  = "this.style.color='#FFFFFF'">
+                    Contact</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px" onmouseover = "this.style.color='#01378C'" onmouseout  = "this.style.color='#FFFFFF'">
+                    로그아웃</a></li>
+                {% if user.person.is_user %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px" onmouseover = "this.style.color='#01378C'" onmouseout  = "this.style.color='#FFFFFF'">
+                    내 정보</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px" onmouseover = "this.style.color='#01378C'" onmouseout  = "this.style.color='#FFFFFF'">
+                    인증관리</a></li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'accounts:login'%}" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px" onmouseover = "this.style.color='#01378C'" onmouseout  = "this.style.color='#FFFFFF'">
+                    로그인</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    </nav>
+    </section>
+
+    <div class="limiter" style="margin-top: -10px">
+      <div class="container-login100">
+        <div style="padding-top: -50px" >
+          <ul>
+            <li>
+              <input type="checkbox" /> 서비스 이용약관 동의 (필수)
+              <a href="#">내용보기</a>
     <!-- Navigation-->
     <nav
       class="navbar navbar-expand-lg navbar-light fixed-top py-3"
@@ -73,7 +117,7 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
+                onmouseover="this.style.color='#00A0E2'"
                 onmouseout="this.style.color='black'"
               >
                 About</a
@@ -89,7 +133,7 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
+                onmouseover="this.style.color='#00A0E2'"
                 onmouseout="this.style.color='black'"
               >
                 Services</a
@@ -105,7 +149,7 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
+                onmouseover="this.style.color='#00A0E2'"
                 onmouseout="this.style.color='black'"
               >
                 Contact</a
@@ -122,7 +166,7 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
+                onmouseover="this.style.color='#00A0E2'"
                 onmouseout="this.style.color='black'"
               >
                 로그아웃</a
@@ -139,7 +183,7 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
+                onmouseover="this.style.color='#00A0E2'"
                 onmouseout="this.style.color='black'"
               >
                 내 정보</a
@@ -156,7 +200,7 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
+                onmouseover="this.style.color='#00A0E2'"
                 onmouseout="this.style.color='black'"
               >
                 인증관리</a
@@ -173,7 +217,7 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
+                onmouseover="this.style.color='#00A0E2'"
                 onmouseout="this.style.color='black'"
               >
                 로그인</a
@@ -220,8 +264,17 @@
                   readonly
                 />
 
-                <span class="focus-input100"></span>
-              </div>
+          <div class="p-t-31 p-b-9">
+            <span class="txt1" style="font-size: large"> <b>Email</b> </span>
+          </div>
+          <div class="wrap-input100 validate-input">
+            <input
+              class="input100"
+              type="text"
+              placeholder="ex) sebako@naver.com"
+            />
+            <span class="focus-input100"></span>
+          </div>
 
               <div class="p-t-13 p-b-9">
                 <span class="txt1" style="font-size: large"> 회사명 </span>
@@ -243,34 +296,46 @@
               </div>
             </form>
 
-            <div class="w-full text-center p-t-55">
-              <span class="txt2">이미 회원이신가요? </span>&nbsp;
+          <div class="p-t-13 p-b-9">
+            <span class="txt1" style="font-size: large"> <b>대표자명</b></span>
+          </div>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="p-t-13 p-b-9">
+            <span class="txt1" style="font-size: large">
+              <b>회사/점포 주소</b>
+            </span>
+          </div>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="container-login100-form-btn m-t-17">
+            <input type="submit" class="login100-form-btn" value="회원가입" />
+          </div>
+
+          <div class="w-full text-center p-t-55">
+            <span class="txt2"> 이미 회원이신가요? </span>&nbsp;
 
               <a href="{% url 'accounts:login' %}" class="txt2 bo1"> 로그인 </a>
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-        <br><br>
-
-=======
->>>>>>> 3f40d0cc6ed8b35558e71c4f45c39634e4062fc3
       </div>
-    </section>
-    <!-- Footer-->
-    <footer class="bg-light">
-      <div class="container">
+    </div>
+<!-- Footer-->
+<footer class="bg-light">
+    <div class="container">
         <div class="small text-center text-muted">
-          Copyright &copy;2021- SEBAKO
+            Copyright &copy;2021- SEBAKO
         </div>
-<<<<<<< HEAD
     </div>
 </footer>
-<<<<<<< Updated upstream
      
-=======
-
->>>>>>> Stashed changes
 
         <script type="text/javascript">
           /* js lazy fn */
@@ -405,8 +470,13 @@
             width="0"
             height="0"
         /></noscript>
-=======
->>>>>>> 3f40d0cc6ed8b35558e71c4f45c39634e4062fc3
+    </section>
+    <!-- Footer-->
+    <footer class="bg-light">
+      <div class="container">
+        <div class="small text-center text-muted">
+          Copyright &copy;2021- SEBAKO
+        </div>
       </div>
     </footer>
     <!--web3 JS-->

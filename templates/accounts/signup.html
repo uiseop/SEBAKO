@@ -23,6 +23,8 @@
       rel="stylesheet"
       type="text/css"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- Third party plugin CSS-->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
@@ -73,8 +75,8 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
-                onmouseout="this.style.color='black'"
+                onmouseover = "this.style.color='#00A0E2'"
+                onmouseout  = "this.style.color='black'"
               >
                 About</a
               >
@@ -89,8 +91,8 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
-                onmouseout="this.style.color='black'"
+                onmouseover = "this.style.color='#00A0E2'"
+                onmouseout  = "this.style.color='black'"
               >
                 Services</a
               >
@@ -105,8 +107,8 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
-                onmouseout="this.style.color='black'"
+                onmouseover = "this.style.color='#00A0E2'"
+                onmouseout  = "this.style.color='black'"
               >
                 Contact</a
               >
@@ -122,8 +124,8 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
-                onmouseout="this.style.color='black'"
+                onmouseover = "this.style.color='#00A0E2'"
+                onmouseout  = "this.style.color='black'"
               >
                 로그아웃</a
               >
@@ -139,8 +141,8 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
-                onmouseout="this.style.color='black'"
+                onmouseover = "this.style.color='#00A0E2'"
+                onmouseout  = "this.style.color='black'"
               >
                 내 정보</a
               >
@@ -156,8 +158,8 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
-                onmouseout="this.style.color='black'"
+                onmouseover = "this.style.color='#00A0E2'"
+                onmouseout  = "this.style.color='black'"
               >
                 인증관리</a
               >
@@ -173,8 +175,8 @@
                   font-size: 20px;
                   color: black;
                 "
-                onmouseover="this.style.color='#0000FF'"
-                onmouseout="this.style.color='black'"
+                onmouseover = "this.style.color='#00A0E2'"
+                onmouseout  = "this.style.color='black'"
               >
                 로그인</a
               >
@@ -243,7 +245,6 @@
               <span class="txt2">이미 회원이신가요? </span>&nbsp;
 
               <a href="{% url 'accounts:login' %}" class="txt2 bo1"> 로그인 </a>
-              <button onclick="append()" >하하</button>
             </div>
           </div>
         </div>
@@ -268,189 +269,5 @@
     <script src="{% static 'js/web3auth.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-  <script>
-    // 수신 wallet_Address;
-    abi = [
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "_creator",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "_certificate",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "_depositedValue",
-						"type": "uint256"
-					}
-				],
-				"name": "CertificateCreated",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "previousOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "OwnershipTransferred",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					}
-				],
-				"name": "Paused",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					}
-				],
-				"name": "Unpaused",
-				"type": "event"
-			},
-			{
-				"inputs": [],
-				"name": "createCertificate",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "paused",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "renounceOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "transferOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}
-		]
-    const c_address="0x89D215A92BF3Cbd01470236b1e74488194DaAcbC";
-    window.web3 = new Web3(window.ethereum)
-    web3 = window.web3
-    contract = new web3.eth.Contract(abi,c_address)
-
-    function waitForReceipt(hash, cb) {
-    web3.eth.getTransactionReceipt(hash, function (err, receipt) {
-      if (err) {
-        error(err);
-      }
-      if (receipt !== null) {
-        // Transaction went through
-        if (cb) {
-          cb(receipt);
-        }
-      } else {
-        // Try again in 1 second
-        window.setTimeout(function () {
-          waitForReceipt(hash, cb);
-        }, 1000);
-      }
-    });
-  }
-function append(){
-  web3.eth.getAccounts(function get(err, res){
-    account=res[0]
-    console.log(account)
-    transaction =
-    ({
-      from: account,
-      "gas": 300000,
-      "chainId": 3,
-      "gasPrice": web3.utils.toWei('4.1','Gwei')
-    })
-
-    contract.methods.createCertificate().send(
-        transaction,
-        (error,result)=>{
-            if(error){
-              console.log('hahah why not')
-            }
-            else{
-              waitForReceipt(result, function(){
-                  console.log(result)
-                  var newUrl = "https://ropsten.etherscan.io/tx/" + result
-                  $("#rec_url").attr("href", newUrl)
-                  $("#rec_url").text(result)
-                  }
-              )
-            }
-        }
-    );
-
-});
-}
-
-  </script>
   </body>
 </html>
