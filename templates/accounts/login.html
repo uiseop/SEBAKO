@@ -167,7 +167,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="javascript:checkMeta()"
+                href="{% url 'accounts:signup' %}"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -177,7 +177,7 @@
                 onmouseover="this.style.color='#0000FF'"
                 onmouseout="this.style.color='black'"
               >
-                로그인</a
+                회원가입</a
               >
             </li>
             {% endif %}
