@@ -1,4 +1,3 @@
-
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Creative v6.0.5 (https://startbootstrap.com/theme/creative)
@@ -2255,7 +2254,8 @@ a.btn.disabled, fieldset:disabled a.btn {
   background-color: #32609e;
   border-color: #32609e;
 }
-.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show>.btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(50, 96, 158, 1);
 }
 
@@ -3390,7 +3390,8 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 .custom-checkbox .custom-control-input:checked~.custom-control-label::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
 }
-.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
+
+.custom-checkbox .custom-control-input:indeterminate~.custom-control-label::before {
   border-color: #32609e;
   background-color: #32609e;
 }
@@ -3777,6 +3778,11 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
+  color: #32609e;
+}
+
+.nav-link a:hover {
+  background-color: #32609e;
 }
 
 .nav-link.disabled {
@@ -6345,7 +6351,7 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
 }
 
 .bg-soblue {
-  background-color: #00b2f7  !important;
+  background-color: #00b2f7 !important;
 }
 
 .bg-transparent {
@@ -9320,6 +9326,11 @@ hr.light {
 
 #mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
   color: #32609e;
+}
+
+#mainNav .navbar-nav .nav-item a:hover {
+  background-color: #32609e;
+  
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active {
