@@ -167,17 +167,22 @@ def company_signUp(request):
 def login_wallet(request):
     if request.method == 'POST':
         username = request.POST['walletAddress']
-        user = get_object_or_404(User,username=username)
-        if Person.objects.get(user=user):
-            auth.login(request,user)
+        print(username)
+        print(username)
+        print(username)
+        try:
+            if User.objects.get(username=username):
+                user = User.objects.get(username=username)
+                if Person.objects.get(user=user):
+                    auth.login(request,user)
+                    # 유저모델과 1:1 연결한 PERSON모델의 pk로 연결함으로써 오류를 방지함
+                    return redirect('singlepage:page_detail', user.person.pk)
+                else:
+                    auth.login(request,user)
+                    return redirect('home')
 
-            # 유저모델과 1:1 연결한 PERSON모델의 pk로 연결함으로써 오류를 방지함
-            return redirect('singlepage:page_detail', user.person.pk)
-        elif Company.objects.get(user=user):
-            auth.login(request,user)
-
-            return redirect('home')
-        else:
+        except:
+            messages.info(request,'회원가입을 먼저 진행해주세요')
             return render(request,'accounts/login.html',{'error': 'WalletAccount is incorrect'})
 
     else:
