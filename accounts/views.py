@@ -146,7 +146,7 @@ def personal_signUp(request):
         sns.save()
         profile.save()
         auth.login(request, user)
-        return redirect('home')
+        return redirect('singlepage:page_detail', user.person.pk)
     else:
         print('why no')
         print('why no')

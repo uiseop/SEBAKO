@@ -20,7 +20,214 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="{% static 'css/prostyle.css' %}" rel="stylesheet"/>
+<!--    web3 연결, jquery연결-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
 
+
+    <script>
+    const abi = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_school",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_GPA",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_dDate",
+				"type": "string"
+			}
+		],
+		"name": "createEducation",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "educationCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "educations",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "school",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "GPA",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dDate",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_count",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+    const c_address = "0xe7c82f052492257a781e7400d5bf15fa557c7c6c";
+    window.web3 = new Web3(window.ethereum)
+    web3 = window.web3
+    contract = new web3.eth.Contract(abi,c_address)
+
+    function waitForReceipt(hash, cb) {
+        web3.eth.getTransactionReceipt(hash, function (err, receipt) {
+          if (err) {
+            error(err);
+          }
+          if (receipt !== null) {
+            // Transaction went through
+            if (cb) {
+              cb(receipt);
+            }
+          } else {
+            // Try again in 1 second
+            window.setTimeout(function () {
+              waitForReceipt(hash, cb);
+            }, 1000);
+          }
+        });
+      }
+
+//FOR CHANGING PAGE
+
+
+    function append(){
+
+    let school=$("#school").val();
+    let major=$("#major").val();
+    let startDay=$("#startDay").val();
+    let gdp = $("#gdp").val();
+
+    if(school==''||startDay==''||gdp==''){
+        alert('모든 값을 작성하여주세요');
+    }
+
+    else{
+        $("#rec_url").text("RECEIPT IS LOADING......")
+        $.ajax({
+            type: "POST",
+            url: "{% url 'singlepage:created_school_db' %}",
+            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+            'school':school,
+            'major':major,
+            'startDay':startDay,
+            'gdp':gdp},
+            dataType:"json",
+        });
+
+        web3.eth.getAccounts(function get(err, res){
+              account=res[0]
+              console.log(account)
+              transaction =
+              ({
+                from: account,
+                "gas": 900000,
+                "chainId": 3,
+                "gasPrice": web3.utils.toWei('14.1','Gwei')
+              })
+
+              contract.methods.createEducation(school,major,startDay,gdp).send(
+                  transaction,
+                  (error,result)=>{
+                      if(error){
+                        console.log('hahah why not')
+                      }
+                      else{
+                        waitForReceipt(result, function(){
+                            console.log(result)
+                            var newUrl = "https://ropsten.etherscan.io/tx/" + result
+                            $("#rec_url").attr("href", newUrl)
+                            $("#rec_url").text(result)
+                            }
+                        )
+                      }
+                  }
+              );
+            });
+    }
+}
+</script>
 </head>
 <body id="page-top">
   <div class="container-fluid">
@@ -71,7 +278,13 @@
                 지금까지의 학력을 한눈에</li>
               <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 200; font-size : 20px; line-height:140%; color:white;">
                 이더리움 네트워크에 저장되어 <br>안전하게 저장됩니다</li>
-              <li><a href="javascript:history.back();">Go Back</a></li>
+                <h2 class="h1" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 40px; line-height:140%">
+              WARNING</h2>
+            <ul class="list-unstyled probootstrap-light mb-4">
+              <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 200; font-size : 20px; line-height:140%; color:white;">
+                  한번 등록한 정보는 이후에 삭제 및 수정이 어렵습니다</li>
+                <br>
+              <li><a href="/singlepage/{{profile.pk}}">Go Back</a></li>
             </ul>
           </div>
         </div>
@@ -80,23 +293,24 @@
         학력의 세부내용을 입력해주세요 :)</h1>
         <div class="row">
             <div class="col-md-12">
-                <form class="probootstrap-form">
-                    <div class="form-group">
+                <div class="probootstrap-form">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
                       <input type="text" class="form-control" name="school" id="school" placeholder="학교명을 입력해주세요">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
                       <input type="text" class="form-control"name="major" id="major" placeholder="전공을 입력해주세요">
                     </div>
-                    <div class="form-group">
-                      <input type="text" id="startSchool" name="startDay" class="form-control" placeholder="입학일을 입력해주세요 ex) 2016.03">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
+                        <input type="text" id="gdp" name="gdp" class="form-control" placeholder="학점을 입력해주세요">
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="finishSchool" name="finishDay" class="form-control" placeholder="졸업일을 입력해주세요 ex) 2022.02">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
+                      <input type="date" id="startDay" name="startDay" class="form-control" placeholder="입학일을 입력해주세요 ex) 2016.03">&nbsp&nbsp졸업날짜를 입력해주세요</input>
                     </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-primary" value="등록하기" style="margin-top: 80px; font-family: 'Noto Sans KR', sans-serif; font-weight : 400; font-size:16px">
+
+                    <div class="form-group col-md-5" style="margin-top:-50px; padding-left:0px;">
+                      <input type="submit" class="btn btn-primary" onclick="append()" value="등록하기" style="margin-top: 80px; font-family: 'Noto Sans KR', sans-serif; font-weight : 400; font-size:16px">
                     </div>
-                  </form>
+                  </div>
                   <div class="container" style="margin-bottom: 100px; margin-left:-18px; ">
                     <h2 id="receipt" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 24px;">
                       등록하기 버튼을 누르면 경력이 블록체인에 등록됩니다<br>등록이 완료되면 아래에 링크가 생성됩니다</h2>                    <a id="rec_url" href="" style="font-size: 20px"></a>

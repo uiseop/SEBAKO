@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Interests</title>
+    <title>자기소개서</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
     <!-- Font Awesome icons (free version)-->
@@ -12,15 +12,104 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
           rel="stylesheet" type="text/css"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com"> 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">         
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- Third party plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
           rel="stylesheet"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="{% static 'css/prostyle.css' %}" rel="stylesheet"/>
+<!--    web3 연결, jquery연결-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
 
+
+    <script>
+    const abi = [
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "sendMoney",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+    ]
+
+    const c_address = "0x34209fef877b28873067dde05087455da5db2550";
+    window.web3 = new Web3(window.ethereum)
+    web3 = window.web3
+    contract = new web3.eth.Contract(abi,c_address)
+
+
+    function waitForReceipt(hash, cb) {
+        web3.eth.getTransactionReceipt(hash, function (err, receipt) {
+          if (err) {
+            error(err);
+          }
+          if (receipt !== null) {
+            // Transaction went through
+            if (cb) {
+              cb(receipt);
+            }
+          } else {
+            // Try again in 1 second
+            window.setTimeout(function () {
+              waitForReceipt(hash, cb);
+            }, 1000);
+          }
+        });
+      }
+
+//FOR CHANGING PAGE
+
+
+    function append(){
+    const wallet = $("#wallet").val();
+    const check = web3.utils.isAddress(wallet)
+    if(check == true){
+    $("#rec_url").text("RECEIPT IS LOADING......")
+
+    web3.eth.getAccounts(function get(err, res){
+          account=res[0]
+          console.log(account)
+          transaction =
+          ({
+            from: account,
+            to: wallet,
+            "gas": 900000,
+            "chainId": 3,
+            "gasPrice": web3.utils.toWei('14.1','Gwei'),
+            value:10000000
+          })
+
+          web3.eth.sendTransaction(
+              transaction,
+              (error,result)=>{
+                  if(error){
+                    console.log('hahah why not')
+                  }
+                  else{
+                    waitForReceipt(result, function(){
+                        console.log(result)
+                        var newUrl = "https://ropsten.etherscan.io/tx/" + result
+                        $("#rec_url").attr("href", newUrl)
+                        $("#rec_url").text(result)
+                        }
+                    )
+                  }
+              }
+          );
+        });
+}
+else{
+    alert('정확한 주소를 입력하여주십쇼');
+    }
+}
+
+</script>
 </head>
 <body id="page-top">
   <div class="container-fluid">
@@ -32,12 +121,12 @@
       </button>
 
       <div class="collapse navbar-collapse" id="probootstrap-nav">
-          <a class="navbar-brand js-scroll-trigger" href="/">SEBACO</a>
+          <a class="navbar-brand js-scroll-trigger" href="/">SEBAKO</a>
         <ul class="navbar-nav ml-auto">
                 {% if user.is_active %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/logout">로그아웃</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/singlepage/{{user.profile.pk}}/">내
-                    정보</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="javascript:history.back();">
+                  내 정보</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/login">로그인</a></li>
                 {% endif %}
@@ -45,13 +134,15 @@
       </div>
     </div>
   </nav>
+  <!-- END nav -->
 
   <br><br><br>
   <section class="mb-5" style="margin-top: 50px">
     <div class="container">
       <div class="row">
         <div class="col-md-6 mb-5">
-          <h1 class="display-4" style="font-weight:bold;">관심 분야 저장</h1><br>
+          <h1 class="display-4" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 700; font-size : 70px; line-height:140%">
+            잡동사니</h1><br>
 
         </div>
       </div>
@@ -61,25 +152,35 @@
     <div class="container">
       <div class="row no-gutters">
         <div class="col-md-3 pb-5 probootstrap-aside-stretch-left probootstrap-inside">
-          <div class="mb-3 pt-5">
-            <h2 class="h1">관심 분야 입력</h2>
+          <div class="mb-4 pt-5">
+            <h2 class="h1" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 40px; line-height:140%">
+              놀이터</h2>
             <ul class="list-unstyled probootstrap-light mb-4">
-              <h2 class="h5">당신의 관심 분야를 한눈에!</h2>
-
-              <li><a href='/singlepage/{{user.profile.pk}}'>Go Back</a></li>
-
+              <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 400; font-size : 24px; line-height:140%; color:white;">
+                보내고싶은 사람에게 코인을 보내보세요</li>
+              <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 200; font-size : 20px; line-height:140%; color:white;">
+                <br>
+              <li><a href="/singlepage/{{profile.pk}}">Go Back</a></li>
             </ul>
           </div>
         </div>
     <div class="col-md-9 pl-md-5 pb-5 pl-0 probootstrap-inside">
-        <h1 class="mt-4 mb-4" style="font-weight: bold;">추가하기</h1>
+      <h1 class="mt-4 mb-4" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 24px;">
+        코인 보내기</h1>
         <div class="row">
             <div class="col-md-12">
-                <form class="probootstrap-form">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="school" id="school" placeholder="본인의 관심 분야를 자유롭게 입력해주세요">
+                <div class="probootstrap-form">
+                    <div class="form-group col-md-12" style="padding-left:0px;">
+                      <input type="text" class="form-control" name="wallet" id="wallet" placeholder="보낼 주소를 입력해주세요!!">
                     </div>
-                  </form>
+                    <div class="form-group col-md-5" style="margin-top:-50px; padding-left:0px;">
+                      <input type="submit" class="btn btn-primary" onclick="append()" value="보내기" style="margin-top: 80px; font-family: 'Noto Sans KR', sans-serif; font-weight : 400; font-size:16px">
+                    </div>
+                  </div>
+                  <div class="container" style="margin-bottom: 100px; margin-left:-18px; ">
+                    <h2 id="receipt" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 24px;">
+                      등록하기 버튼을 누르면 블록체인에 등록됩니다<br>등록이 완료되면 아래에 링크가 생성됩니다</h2>                    <a id="rec_url" href="" style="font-size: 20px"></a>
+                </div>
             </div>
         </div>
     </div>

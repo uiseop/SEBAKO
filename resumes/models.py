@@ -24,6 +24,9 @@ class Experience(models.Model): # 경험 작성 필드
     dateFrom = models.DateField(verbose_name='시작일')
     dateEnd = models.DateField(verbose_name='종료일')
 
+    signature = models.CharField(max_length=10, blank=True, verbose_name='인증')
+    domain = models.URLField(blank=True, verbose_name='이더넷')
+
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     user = models.ForeignKey(Person, null=False, on_delete=models.CASCADE)
@@ -35,8 +38,11 @@ class Education(models.Model): # 학력 작성 필드
     school = models.CharField(max_length=30, verbose_name='학교명')
     major = models.CharField(max_length=30, verbose_name='전공명', null=True)
     # course = models.JSONField( verbose_name='이수과목')
-    dateFrom = models.DateField(verbose_name='시작일')
     dateEnd = models.DateField(verbose_name='종료일')
+    GPA = models.CharField(max_length=5, verbose_name='학점')
+
+    signature = models.CharField(max_length=10, blank=True, verbose_name='인증')
+    domain = models.URLField(blank=True, verbose_name='이더넷')
 
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

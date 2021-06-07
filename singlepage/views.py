@@ -151,6 +151,10 @@ def created_career_db(request):
     # let finishDay=$("#finishDay").val();
 
     user = request.user
+    print(user)
+    print(user)
+    print(user)
+    print(user)
     person = get_object_or_404(Person,user=user)
     job = request.POST['job']
     business = request.POST['business']
@@ -160,7 +164,7 @@ def created_career_db(request):
     career = Experience(
         user=person,
         title=job,
-        comapny=business,
+        company=business,
         text=work,
         dateFrom=startDay,
         dateEnd=finishDay
@@ -170,6 +174,32 @@ def created_career_db(request):
         'message': message,
     }
     career.save()
+    return HttpResponse(status=201)
+
+def create_school_db(request):
+    # school = models.CharField(max_length=30, verbose_name='학교명')
+    # major = models.CharField(max_length=30, verbose_name='전공명', null=True)
+    # # course = models.JSONField( verbose_name='이수과목')
+    # dateEnd = models.DateField(verbose_name='종료일')
+    # GPA = models.CharField(max_length=5, verbose_name='학점')
+    user = request.user
+    person = get_object_or_404(Person, user=user)
+    school = request.POST['school']
+    major = request.POST['major']
+    dateEnd = request.POST['startDay']
+    GPA = request.POST['gdp']
+    edu = Education(
+        user=person,
+        school=school,
+        major=major,
+        dateEnd=dateEnd,
+        GPA=GPA
+    )
+    message = edu
+    context = {
+        'message': message,
+    }
+    edu.save()
     return HttpResponse(status=201)
 
 
@@ -199,7 +229,21 @@ def delete_resume(request, resume_id,pk):
     resume.delete()
     return redirect('singlepage:page_detail', pk=pk)
 
+def delete_career(request, career_id,pk):
+    user = request.user
+    career = Experience.objects.get(id=career_id)
+    career.delete()
+    return redirect('singlepage:page_detail', pk=pk)
+
+def delete_edu(request, edu_id,pk):
+    user = request.user
+    edu = Education.objects.get(id=edu_id)
+    edu.delete()
+    return redirect('singlepage:page_detail', pk=pk)
+
 def create_experience(request, pk):
+    person = get_object_or_404(Person, pk=pk)
+    profile = get_object_or_404(Profile, user_id=person)
     if request.method == 'POST':
         form = ExperienceForm(request.POST)
         if form.is_valid():
@@ -207,14 +251,16 @@ def create_experience(request, pk):
             experience.user = request.user
             experience.save()
             return redirect('singlepage:page_detail', request.user.id)
-        return render(request, 'singlepage/experience_create.html', {'form': form})
+        return render(request, 'singlepage/experience_create.html', {'form': form, 'profile':profile})
     else:
         form = ExperienceForm()
         print('hahaha')
-        return render(request, 'singlepage/experience_create.html', {'form': form})
+        return render(request, 'singlepage/experience_create.html', {'form': form, 'profile':profile})
 
 
 def create_edu(request, pk):
+    person = get_object_or_404(Person, pk=pk)
+    profile = get_object_or_404(Profile, user_id=person)
     if request.method == 'POST':
         form = EduForm(request.POST)
         if form.is_valid():
@@ -222,11 +268,25 @@ def create_edu(request, pk):
             edu.user = request.user
             edu.save()
             return redirect('singlepage:page_detail', request.user.id)
-        return render(request, 'singlepage/edu_create.html', {'form': form})
+        return render(request, 'singlepage/edu_create.html', {'form': form, 'profile':profile})
     else:
         form = EduForm()
         print('hahaha')
-        return render(request, 'singlepage/edu_create.html', {'form': form})
+        return render(request, 'singlepage/edu_create.html', {'form': form, 'profile':profile})
+
+def create_intro(request, pk):
+    person = get_object_or_404(Person, pk=pk)
+    profile = get_object_or_404(Profile, user_id=person)
+    if request.method == 'POST':
+        form = EduForm(request.POST)
+        if form.is_valid():
+            edu = form.save(commit=False)
+            edu.user = request.user
+            edu.save()
+            return redirect('singlepage:page_detail', request.user.id)
+        return render(request, 'singlepage/interests_create.html', {'form': form, 'profile':profile})
+    else:
+        return render(request, 'singlepage/interests_create.html', {'profile':profile})
 
 
 @login_message_required
