@@ -197,8 +197,14 @@
               method="POST"
               action="{% url 'accounts:login_wallet' %}"
               class="login100-form validate-form flex-sb flex-w"
-            >
+            > {% if messages %}
+              {% for message in messages %}
+              <span class="login100-form-title p-b-53">{{message}}</span>
+              {% endfor %}
+              {% else %}
               <span class="login100-form-title p-b-53"> LOGIN </span>
+              {% endif %}
+
 
               <button
                 type="button"
