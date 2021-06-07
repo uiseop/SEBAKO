@@ -14,122 +14,30 @@
 <script>
 const abi = [
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "pid",
-				"type": "address"
-			}
-		],
-		"name": "newCertifiactionCreated",
-		"type": "event"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "compAddressList",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "companyCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "companyDetailList",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "compAdress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "compName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "compSpecialization",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "companyList",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"constant": false,
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_registerNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_company",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_dDate",
+				"type": "string"
 			}
 		],
-		"name": "companySign",
+		"name": "createCertification",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -138,12 +46,53 @@ const abi = [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "getBalance",
+		"name": "certificationCount",
 		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "certifications",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "registerNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "company",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dDate",
+				"type": "string"
 			}
 		],
 		"payable": false,
@@ -168,193 +117,22 @@ const abi = [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "owner",
+		"name": "name",
 		"outputs": [
 			{
-				"internalType": "address",
+				"internalType": "string",
 				"name": "",
-				"type": "address"
+				"type": "string"
 			}
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "pidCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "pidList",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "resumeList",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "registerNumber",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "companyName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "issueDate",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "fileurl",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "companyAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "resumeID",
-				"type": "address"
-			},
-			{
-				"internalType": "bool",
-				"name": "pidAvailable",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "companySignature",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_registerNumber",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_companyName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_issueDate",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_fileurl",
-				"type": "string"
-			}
-		],
-		"name": "setCertifiactionData",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_compAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_spec",
-				"type": "string"
-			}
-		],
-		"name": "setCompany",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]
 // 수신 wallet_Address;
-const c_address="0xE4cD403C1216cA0A313ed9419fD3d4C332EA818E";
+// const c_address="0xE4cD403C1216cA0A313ed9419fD3d4C332EA818E";
+const c_address = "0xCB8D8a589623d2DE83D1a5FfCE1759A5947a5F1d";
 window.web3 = new Web3(window.ethereum)
 web3 = window.web3
 contract = new web3.eth.Contract(abi,c_address)
@@ -419,7 +197,8 @@ else{
         'title':title,
         'subtitle':subtitle,
         'content':company,
-        'ddate':ddate},
+        'ddate':ddate,
+        'signature':check},
         dataType:"json",
 
     });
@@ -430,12 +209,12 @@ else{
               transaction =
               ({
                 from: account,
-                "gas": 700000,
+                "gas": 900000,
                 "chainId": 3,
-                "gasPrice": web3.utils.toWei('4.1','Gwei')
+                "gasPrice": web3.utils.toWei('14.1','Gwei')
               })
 
-              contract.methods.setCertifiactionData(title,subtitle,company,ddate,'').send(
+              contract.methods.createCertification(title,subtitle,company,ddate).send(
                   transaction,
                   (error,result)=>{
                       if(error){
@@ -481,12 +260,12 @@ else{
               transaction =
               ({
                 from: account,
-                "gas": 700000,
+                "gas": 900000,
                 "chainId": 3,
-                "gasPrice": web3.utils.toWei('4.1','Gwei')
+                "gasPrice": web3.utils.toWei('14.1','Gwei')
               })
 
-              contract.methods.setCertifiactionData(title,subtitle,company,ddate,'').send(
+              contract.methods.createCertification(title,subtitle,company,ddate).send(
                   transaction,
                   (error,result)=>{
                       if(error){

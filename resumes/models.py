@@ -52,6 +52,9 @@ class Resume(models.Model): # 자격증 작성 필드
     issure = models.CharField(max_length=30, verbose_name='발급처')
     dateAcq = models.DateField(verbose_name='취득일')
 
+    signature = models.CharField(max_length=10,blank=True, verbose_name='인증')
+    domain = models.URLField(blank=True, verbose_name='이더넷')
+
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 

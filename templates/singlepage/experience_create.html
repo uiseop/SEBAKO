@@ -20,6 +20,226 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="{% static 'css/prostyle.css' %}" rel="stylesheet"/>
+<!--    web3 연결, jquery연결-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+
+
+    <script>
+    const abi = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_business",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_work",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_startDay",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_finishDay",
+				"type": "string"
+			}
+		],
+		"name": "createCareer",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "careerCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "careers",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "business",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "work",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "startDay",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "finishDay",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_count",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+    const c_address = "0x2a74F7e8b410EB020C7b7A7fF7fFEb20235C9619";
+    window.web3 = new Web3(window.ethereum)
+    web3 = window.web3
+    contract = new web3.eth.Contract(abi,c_address)
+
+    function waitForReceipt(hash, cb) {
+        web3.eth.getTransactionReceipt(hash, function (err, receipt) {
+          if (err) {
+            error(err);
+          }
+          if (receipt !== null) {
+            // Transaction went through
+            if (cb) {
+              cb(receipt);
+            }
+          } else {
+            // Try again in 1 second
+            window.setTimeout(function () {
+              waitForReceipt(hash, cb);
+            }, 1000);
+          }
+        });
+      }
+
+//FOR CHANGING PAGE
+
+
+    function append(){
+
+    let job=$("#job").val();
+    let business=$("#business").val();
+    let work=$("#work").val();
+    let startDay = $("#startDay").val();
+    let finishDay=$("#finishDay").val();
+
+    if(job==''||business==''||work==''||startDay==''||finishDay==''){
+        alert('모든 값을 작성하여주세요');
+    }
+
+    else{
+        $("#rec_url").text("RECEIPT IS LOADING......")
+        $.ajax({
+            type: "POST",
+            url: "{% url 'singlepage:created_career_db' %}",
+            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+            'job':job,
+            'business':business,
+            'work':work,
+            'startDay':startDay,
+            'finishDay':finishDay},
+            dataType:"json",
+        });
+
+        web3.eth.getAccounts(function get(err, res){
+              account=res[0]
+              console.log(account)
+              transaction =
+              ({
+                from: account,
+                "gas": 900000,
+                "chainId": 3,
+                "gasPrice": web3.utils.toWei('14.1','Gwei')
+              })
+
+              contract.methods.createCareer(job,business,work,startDay,finishDay).send(
+                  transaction,
+                  (error,result)=>{
+                      if(error){
+                        console.log('hahah why not')
+                      }
+                      else{
+                        waitForReceipt(result, function(){
+                            console.log(result)
+                            var newUrl = "https://ropsten.etherscan.io/tx/" + result
+                            $("#rec_url").attr("href", newUrl)
+                            $("#rec_url").text(result)
+                            }
+                        )
+                      }
+                  }
+              );
+            });
+    }
+}
+    </script>
 
 </head>
 <body id="page-top">
@@ -81,26 +301,26 @@
           경력의 세부내용을 입력해주세요 :)</h1>
         <div class="row">
             <div class="col-md-12">
-                <form   class="probootstrap-form">
-                    <div class="form-group">
+                <div   class="probootstrap-form">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
                       <input type="text" class="form-control" name="job" id="job" placeholder="직무를 입력해주세요">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
                       <input type="text" class="form-control"name="business" id="business" placeholder="회사/장소를 입력해주세요">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
                       <input type="text" id="work" name="work" class="form-control" placeholder="담당한 업무 내용을 입력해주세요">
                     </div>
-                    <div class="form-group">
-                      <input type="text" id="startDay" name="startDay" class="form-control" placeholder="시작일을 입력해주세요 ex) 2019.01.01">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
+                      <input type="date" id="startDay" name="startDay" class="form-control" placeholder="시작일을 입력해주세요 ex) 2019.01.01">
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="finishDay" name="finishDay" class="form-control" placeholder="종료일을 입력해주세요 ex) 2021.12.31">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
+                        <input type="date" id="finishDay" name="finishDay" class="form-control" placeholder="종료일을 입력해주세요 ex) 2021.12.31">
                     </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-primary" value="등록하기" style="margin-top: 40px; font-family: 'Noto Sans KR', sans-serif; font-weight : 400; font-size:16px">
+                    <div class="form-group col-md-5" style="padding-left:0px;">
+                      <input type="submit" class="btn btn-primary" value="등록하기" onclick="append()" style="margin-top: 40px; font-family: 'Noto Sans KR', sans-serif; font-weight : 400; font-size:16px">
                     </div>
-                  </form>
+                  </div>
                   <div class="container" style="margin-bottom: 100px; margin-left:-18px; ">
                     <h2 id="receipt" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 24px;">
                       등록하기 버튼을 누르면 경력이 블록체인에 등록됩니다<br>등록이 완료되면 아래에 링크가 생성됩니다</h2>

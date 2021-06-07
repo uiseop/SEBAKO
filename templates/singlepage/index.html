@@ -26,7 +26,8 @@ profile은 글 작성자의 프로필을 불러온다-->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
           rel="stylesheet" type="text/css"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
@@ -43,23 +44,37 @@ profile은 글 작성자의 프로필을 불러온다-->
 
 
     </script>
+    <style>
+      .spinner {
+        animation: spin 2s linear infinite;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
 </head>
 <body id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-third fixed-top" id="mainNav">
     {% if user.person.pk == person.pk %}
-    <a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
-        <span class="d-block d-lg-none">{{ profile.korName }}</span>
-        <span class="d-none d-lg-block">
-            {% if profile.image_hash%}
-            <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
-                 src="https://ipfs.io/ipfs/{{profile.image_hash}}"/></span>
 
-        {% else %}
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
-             src="{% static 'assets/img/face.png' %}" alt="..."/></span>
-        {% endif %}
+    <span class="d-block d-lg-none" style="font-weight:bold; color:white;">{{ profile.korName }}</span>
+    {% if profile.image_hash%}
+    <a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                 src="https://ipfs.io/ipfs/{{profile.image_hash}}"/>
     </a>
+    {% else %}
+    <a class="navbar-brand js-scroll-trigger " href="#">
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+             src="{% static 'assets/img/face.png' %}" alt="..."/>
+            {% endif %}
+        </a>
     {% else %}
     <div class="navbar-brand js-scroll-trigger">
         {% if profile.korName %}
@@ -111,8 +126,6 @@ profile은 글 작성자의 프로필을 불러온다-->
                 {{ profile.korName }}
                 {% if profile.engName %}
                 <span class="text-primary">{{ profile.engName }}</span>
-                {% else %}
-                <span class="text-primary">영어이름을 설정해보세요!</span>
                 {% endif %}
             </h1>
             <div class="subheading mb-5" style="font-size : 30px">
@@ -195,9 +208,20 @@ profile은 글 작성자의 프로필을 불러온다-->
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0" style="font-weight:bold;">{{resume.title}}</h3>
-                    <div class="subheading mb-3" style="font-weight:bold;">{{resume.issure}}</div>
+                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">{{resume.issure}}</div>
 
-                    <p style="font-weight:30%;">{{resume.regiNum}}</p>
+                    <p style="font-weight:bold;">{{resume.regiNum}}</p>
+                </div>
+                <div class="col-md-2">
+                    {% if resume.signature == 'True' %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if resume.signature == 'False' %}
+                    <img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if resume.signature == '' %}
+                    <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
+                    {% endif %}
                 </div>
                 <div class="flex-shrink-0">
                     <span class="text-primary" style="font-weight:bold">{{resume.dateAcq}}</span><br><br>
@@ -232,11 +256,11 @@ profile은 글 작성자의 프로필을 불러온다-->
             {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">자격증명</h3>
-                    <div class="subheading mb-3">·자격증 발급처 ·자격증 취득일</div>
-                    <p>당신의 이력서를 보다 안전하고 편리하게 관리해드립니다</p>
+                    <h3 class="mb-0" style="font-weight:bold">자격증명</h3>
+                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">자격증 발급처</div>
+                    <p style="font-weight:bold;">당신의 이력서를 보다 안전하고 편리하게 관리해드립니다</p>
                 </div>
-                <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
+                <div class="flex-shrink-0"><span class="text-primary" style="font-weight:bold;">자격증 취득일 20xx-xx</span></div>
             </div>
             {% endif %}
             <br>
@@ -263,6 +287,7 @@ profile은 글 작성자의 프로필을 불러온다-->
             {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
+                    <h5 class="mb-0">※예시입니다※</h5>
                     <h3 class="mb-0">Senior Web Developer</h3>
                     <div class="subheading mb-3">Intelitec Solutions</div>
                     <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the
@@ -271,37 +296,6 @@ profile은 글 작성자의 프로필을 불러온다-->
                         touchpoints for offshoring.</p>
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Web Developer</h3>
-                    <div class="subheading mb-3">Intelitec Solutions</div>
-                    <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.
-                        Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion
-                        along the information highway will close the loop on focusing solely on the bottom line.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">December 2011 - March 2013</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Junior Web Designer</h3>
-                    <div class="subheading mb-3">Shout! Media Productions</div>
-                    <p>Podcasting operational change management inside of workflows to establish a framework. Taking
-                        seamless key performance indicators offline to maximise the long tail. Keeping your eye on the
-                        ball while performing a deep dive on the start-up mentality to derive convergence on
-                        cross-platform integration.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">July 2010 - December 2011</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Web Design Intern</h3>
-                    <div class="subheading mb-3">Shout! Media Productions</div>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically
-                        procrastinate B2C users after installed base benefits. Dramatically visualize customer directed
-                        convergence without revolutionary ROI.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">September 2008 - June 2010</span></div>
             </div>
             {% endif %}
             <br>
@@ -329,20 +323,13 @@ profile은 글 작성자의 프로필을 불러온다-->
             {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
+                    <h5 class="mb-0">※예시입니다※</h5>
                     <h3 class="mb-0">University of Colorado Boulder</h3>
                     <div class="subheading mb-3">Bachelor of Science</div>
                     <div>Computer Science - Web Development Track</div>
                     <p>GPA: 3.23</p>
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary">August 2006 - May 2010</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">James Buchanan High School</h3>
-                    <div class="subheading mb-3">Technology Magnet Program</div>
-                    <p>GPA: 3.56</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">August 2002 - May 2006</span></div>
             </div>
             {% endif %}
             <br>

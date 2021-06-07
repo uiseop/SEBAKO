@@ -110,35 +110,82 @@ def created_resume_db(request):
     regiNum = request.POST['subtitle']
     issure = request.POST['content']
     dateAcq = request.POST['ddate']
+    try:
+        # API를 통한 통신이 이뤄졋을 경우
+        if request.POST['signature']:
+            resume = Resume(
+                user=person,
+                title=title,
+                regiNum=regiNum,
+                issure=issure,
+                dateAcq=dateAcq,
+                signature='True'
+            )
+            message = resume
+            context = {
+                'message': message,
+            }
+            resume.save()
+            return HttpResponse(status=201)
+    except:
+        # 블록체인에 올리기만 했을경우
+        resume = Resume(
+            user = person,
+            title = title,
+            regiNum = regiNum,
+            issure = issure,
+            dateAcq = dateAcq,
+        )
+        message = resume
+        context = {
+            'message':message,
+        }
+        resume.save()
+        return HttpResponse(status=201)
 
-    resume = Resume(
-        user = person,
-        title = title,
-        regiNum = regiNum,
-        issure = issure,
-        dateAcq = dateAcq,
+def created_career_db(request):
+    # let job=$("#job").val();
+    # let business=$("#business").val();
+    # let work=$("#work").val();
+    # let startDay = $("#startDay").val();
+    # let finishDay=$("#finishDay").val();
+
+    user = request.user
+    person = get_object_or_404(Person,user=user)
+    job = request.POST['job']
+    business = request.POST['business']
+    work = request.POST['work']
+    startDay = request.POST['startDay']
+    finishDay = request.POST['finishDay']
+    career = Experience(
+        user=person,
+        title=job,
+        comapny=business,
+        text=work,
+        dateFrom=startDay,
+        dateEnd=finishDay
     )
-    message = resume
+    message = career
     context = {
-        'message':message,
+        'message': message,
     }
-    resume.save()
+    career.save()
     return HttpResponse(status=201)
+
+
 
 def check_Certificate(request):
     # ['title','regiNum','issure','dateAcq','file_hash',]
     user = request.user.person.user
     person = get_object_or_404(Person,user_id=user)
     profile = get_object_or_404(Profile,user_id=person)
-    name = profile.korName
+    # name = profile.korName
     regiNumber = request.POST['subtitle']
     company = request.POST['content']
     # url = "http://data.kca.kr/api/v1/cq/certificate/check?apiKey=2fd824fae641032fa79d9db55f3be972cf40be4f703334fb5991e485b40705ab&name=송치윤&no=189010149"
 
-    url22 = "http://data.kca.kr/api/v1/cq/certificate/check?apiKey=2fd824fae641032fa79d9db55f3be972cf40be4f703334fb5991e485b40705ab&name="+name+"&no="+regiNumber
+    url22 = "http://data.kca.kr/api/v1/cq/certificate/check?apiKey=2fd824fae641032fa79d9db55f3be972cf40be4f703334fb5991e485b40705ab&name=송치윤"+"&no="+regiNumber
     print(url22)
-
-
 
     res = requests.get(url22)
 
