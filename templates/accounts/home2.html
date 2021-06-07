@@ -35,24 +35,24 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px" >
                     About</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     Services</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     Contact</a></li>
                 {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     로그아웃</a></li>
                 {% if user.person.is_user %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     내 정보</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.profile.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     인증관리</a></li>
                 {% endif %}
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:checkMeta()" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 20px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:checkMeta()" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     로그인</a></li>
                 {% endif %}
             </ul>
@@ -64,12 +64,12 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-10 align-self-end">
-                <h1 class="text-white font-weight-bold" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 700; font-size : 85px; line-height:160%">
+                <h1 class="text-white font-weight-bold" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 700; font-size : 74px; line-height:160%">
                     당신의 경력을<br>더욱 쉽고 간편하게</h1>
                 <hr class="divider my-4"/>
             </div>
             <div class="col-lg-8 align-self-baseline">
-                <h2 class="text-light mt-0" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 25px; line-height:200%">
+                <h2 class="text-light mt-0" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 24px; line-height:200%">
                     학력 · 자격증 · 자기소개서 · 아르바이트 경험까지<br>당신의 이력을 관리해드립니다</h3><br>
                 <a class="btn btn-secondary btn-xl js-scroll-trigger" href="#about" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px">
                     자세히 알아보기</a>
@@ -176,7 +176,7 @@
             <div class="col-lg-5 ml-auto text-center mb-5 mb-lg-0">
                 <i class="fas fa-comments fa-6x text-muted"></i>
                 <br><br>
-                <ul class="text-soblue mb-5 h3" style="text-align:left; font-family: 'Noto Sans KR', sans-serif; font-weight : 400 bold; font-size : 24px">
+                <ul class="text-soblue mb-5 h3" style="text-align:left; font-family: 'Noto Sans KR', sans-serif; font-weight : 400 bold; font-size : 24px; line-height:200%">
                     <li>이의섭 - <a href="mailto:bono521@naver.com">bono521@naver.com</a></li>
                     <li>이찬혁 - <a href="mailto:dlcksgur7@naver.com">dlcksgur7@naver.com</a></li>
                     <li>정재욱 - <a href="mailto:jw755482@gmail.com">jw755482@gmail.com</a> </li>
