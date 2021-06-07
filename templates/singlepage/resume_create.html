@@ -359,44 +359,6 @@ window.web3 = new Web3(window.ethereum)
 web3 = window.web3
 contract = new web3.eth.Contract(abi,c_address)
 
-    //IMAGE AND IPFS
-  var ipfsHash;
-  function setIpsfHash(hash){
-    ipfsHash = hash;
-  }
-  function getIpfsHash(){
-    return ipfsHash;
-  }
-  const ipfs = window.IpfsHttpClient('ipfs.infura.io', '5001', { protocol: 'https' });
-  $("document").ready(function(){
-
-    $("#upload").change(function() {
-       $("#link").text("당신의 프로필을 안전하게 IPFS네트워크에 올리고 있습니다...")
-       var reader = new FileReader();
-            reader.onload = function (e) {
-
-                const magic_array_buffer_converted_to_buffer = buffer.Buffer(reader.result);
-                ipfs.add(magic_array_buffer_converted_to_buffer, (err, result) => {
-
-              let ipfsLink = "<a href='https://ipfs.io/ipfs/" + result[0].hash + "'>ipfs.io/ipfs/" + result[0].hash + "</a>";
-              var image_hash = document.getElementById('image_hash');
-              $("#hash").text("IPFS HASH:"+result[0].hash)
-
-              $("#link").text("IPFS 네트워크에 성공적으로 등록되었습니다. 등록하기를 눌러주세요!")
-              image_hash.value = result[0].hash
-              ipfsHash = result[0].hash
-
-
-              setIpsfHash(ipfsHash);
-
-
-                })
-            }
-            reader.readAsArrayBuffer(this.files[0]);
-
-    });
-});
-
 function waitForReceipt(hash, cb) {
     web3.eth.getTransactionReceipt(hash, function (err, receipt) {
       if (err) {
@@ -417,18 +379,15 @@ function waitForReceipt(hash, cb) {
   }
 
 //FOR CHANGING PAGE
-<<<<<<< HEAD
+
 function append(){
 
-    var sale;
     let title=$("#title").val();
     let subtitle=$("#subtitle").val();
     let company=$("#content").val();
     let ddate = $("#ddate").val();
     let for_sale=$("#for_sale").prop("checked");
-    console.log(for_sale);
-    let comba = 'haha';
-    console.log(comba);
+
 
     let check = false;
     console.log('haha' + title,subtitle,company,ddate);
@@ -493,38 +452,29 @@ else{
                       }
                   }
               );
-=======
-      function append(){
->>>>>>> 21400d2525cbf6835c2d669a19dd54828e747bdf
-
-        var sale;
-        let title=$("#title").val();
-        let subtitle=$("#subtitle").val();
-        let company=$("#content").val();
-        let ddate = $("#ddate").val();
-        let filehash = $("#image_hash").val();
-        console.log('haha' + title,subtitle,company,ddate,filehash);
-        if(title==''||subtitle==''||company==''||ddate==''||filehash==''){
-            alert('모든 값을 작성하여주세요');
+            });
         }
-
-
         else{
-        $("#rec_url").text("RECEIPT IS LOADING......")
-        $.ajax({
-            type: "POST",
-            url: "{% url 'singlepage:created_resume_db' %}",
-            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
-            'title':title,
-            'subtitle':subtitle,
-            'content':company,
-            'ddate':ddate,
-            'filehash':filehash},
-            dataType:"json",
+            console.log('불합격');
+            alert('정보가 옳바르지 않습니다');
+        }
+    }
+});
+    }
+else{
+    $("#rec_url").text("RECEIPT IS LOADING......")
+    $.ajax({
+        type: "POST",
+        url: "{% url 'singlepage:created_resume_db' %}",
+        data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+        'title':title,
+        'subtitle':subtitle,
+        'content':company,
+        'ddate':ddate},
+        dataType:"json",
 
-        });
+    });
 
-<<<<<<< HEAD
     web3.eth.getAccounts(function get(err, res){
               account=res[0]
               console.log(account)
@@ -535,40 +485,29 @@ else{
                 "chainId": 3,
                 "gasPrice": web3.utils.toWei('4.1','Gwei')
               })
-=======
-        web3.eth.getAccounts(function get(err, res){
-                  account=res[0]
-                  console.log(account)
-                  transaction =
-                  ({
-                    from: account,
-                    "gas": 300000,
-                    "chainId": 3,
-                    "gasPrice": web3.utils.toWei('4.1','Gwei')
-                  })
->>>>>>> 21400d2525cbf6835c2d669a19dd54828e747bdf
 
-                  contract.methods.setCertifiactionData(title,subtitle,company,ddate,filehash).send(
-                      transaction,
-                      (error,result)=>{
-                          if(error){
-                            console.log('hahah why not')
-                          }
-                          else{
-                            waitForReceipt(result, function(){
-                                console.log(result)
-                                var newUrl = "https://ropsten.etherscan.io/tx/" + result
-                                $("#rec_url").attr("href", newUrl)
-                                $("#rec_url").text(result)
-                                }
-                            )
-                          }
+              contract.methods.setCertifiactionData(title,subtitle,company,ddate,'').send(
+                  transaction,
+                  (error,result)=>{
+                      if(error){
+                        console.log('hahah why not')
                       }
-                  );
+                      else{
+                        waitForReceipt(result, function(){
+                            console.log(result)
+                            var newUrl = "https://ropsten.etherscan.io/tx/" + result
+                            $("#rec_url").attr("href", newUrl)
+                            $("#rec_url").text(result)
+                            }
+                        )
+                      }
+                  }
+              );
+            });
+    }
+}
+}
 
-        });
-        }
-      }
 </script>
 <head>
     <meta charset="UTF-8">
@@ -641,6 +580,11 @@ else{
                 취득한 자격증을 한눈에</li>
               <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 200; font-size : 20px; line-height:140%; color:white;">
                 이더리움 네트워크에 저장되어 <br>안전하게 저장됩니다</li>
+                <h2 class="h1" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 40px; line-height:140%">
+              WARNING</h2>
+            <ul class="list-unstyled probootstrap-light mb-4">
+              <li class="h5" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 200; font-size : 20px; line-height:140%; color:white;">
+                  한번 등록한 정보는 이후에 삭제 및 수정이 어렵습니다</li>
               <li><a href='/singlepage/{{profile.pk}}'>Go Back</a></li>
 
             </ul>
@@ -657,7 +601,7 @@ else{
                   <input type="text" class="form-control" name="title"id="title" placeholder="자격증명">
                 </div>
                 <div class="form-group col-md-5" style="padding-left:0px">
-                  <input type="text" class="form-control"name="subtitle" id="subtitle" placeholder="자격증 번호">
+                  <input type="text" class="form-control"name="subtitle" id="subtitle" placeholder="자격증 번호">숫자만 입력해주세요</input>
                 </div>
                 <div class="form-group col-md-5" style="padding-left:0px">
                   <input type="text" id="content"name="content" class="form-control" placeholder="발행기관">
@@ -666,19 +610,11 @@ else{
                   <input type="date" id="ddate" name="ddate" class="form-control" placeholder="취득일">
                 </div>
 
-                <div class="form-group" style="margin-top: 20px; text-align: center;">
-                    <label hidden style="font-size: 30px">SELL THIS BLOG</label><input hidden style="width: 20px; height: 20px; margin-left: 30px" id="for_sale" name="for_sale" type="checkbox" checked data-toggle="toggle" data-on="YES" data-off="NO" data-size="md">
+                <div class="form-group" style="margin-top: 20px; text-align: left;">
+                    <label  style="font-size: 15px">한국방송통신전파진흥원 발행 자격증입니까?</label><input  style="width: 20px; height: 15px; margin-left: 15px" id="for_sale" name="for_sale" type="checkbox">
                 </div>
 
 
-                <div>
-                  <input type="file" id="upload"><br>
-                </div>
-                <div col-md-5>
-                <h4 id="hash" style="font-style: italic; font-weight: bold; margin-top: 20px"></h4>
-
-                 <h4 id="link" style="font-style: italic; font-weight: bold; text-align: center; margin-top: 20px"></h4>
-                  <input type="hidden" name="image_hash" id="image_hash">
                 </div>
                 <div class="form-group">
                   <input type="submit" class="btn btn-primary" onclick="append()" value="등록하기" style="margin-top: 25px; font-family: 'Noto Sans KR', sans-serif; font-weight : 400; font-size:16px">

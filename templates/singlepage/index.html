@@ -2,6 +2,8 @@
 {% load static %}
 <html lang="en">
 <head>
+    <!-- Bootstrap core JS-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
@@ -32,9 +34,9 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!--    이미지 변경 팝업 JavaScripts-->
     <script>
         function popup(){
-            var url = "picture_popup/";
+            var url = "https://ipfs.io/ipfs/{{profile.image_hash}}";
             var name = "popup test";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            var option = "width = 500, height = 500, top = 100, left = 200"
             window.open(url, name, option);
         }
 
@@ -122,10 +124,26 @@ profile은 글 작성자의 프로필을 불러온다-->
             <br><br><br>
             <div class="social-icons">
                 <!--                        소셜 주소가 있을경우 우리는 github만 사용-->
-                <a class="social-icon" href="#"><i class="fab fa-instagram"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-github"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-facebook-f"></i></a>
+                {% if profile.insta %}
+                <a class="social-icon"  href="{{profile.insta}}"><i class="fab fa-instagram"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-instagram"></i></a>
+                {% endif %}
+                {% if profile.github %}
+                <a class="social-icon " href="{{profile.github}}"><i class="fab fa-github"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-github"></i></a>
+                {% endif %}
+                {% if profile.blog %}
+                <a class="social-icon" href="{{profile.blog}}"><i class="fab fa-twitter"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-twitter"></i></a>
+                {% endif %}
+                {% if profile.facebook %}
+                <a class="social-icon"  href="{{profile.facebook}}"><i class="fab fa-facebook-f"></i></a>
+                {% else %}
+                <a class="social-icon disableLink" style="background-color:#E6E6E6;"><i class="fab fa-facebook-f"></i></a>
+                {% endif %}
             </div>
             <br>
             <br>
@@ -171,22 +189,22 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!--            certificate-->
     <section class="resume-section" id="certificate">
         <div class="resume-section-content">
-            <h2 class="mb-5">Certificate (자격증 등록하기)</h2>
+            <h2 class="mb-5">자격증</h2>
             {% if resume_list.all %}
             {% for resume in resume_list.all %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">{{resume.title}}</h3>
-                    <div class="subheading mb-3">·{{resume.issure}} ·{{resume.dateAcq}}</div>
+                    <h3 class="mb-0" style="font-weight:bold;">{{resume.title}}</h3>
+                    <div class="subheading mb-3" style="font-weight:bold;">{{resume.issure}}</div>
 
-                    <p>{{resume.regiNum}}</p>
+                    <p style="font-weight:30%;">{{resume.regiNum}}</p>
                 </div>
-<<<<<<< HEAD
                 <div class="flex-shrink-0">
                     <span class="text-primary" style="font-weight:bold">{{resume.dateAcq}}</span><br><br>
                     <p id="resume_id" hidden class="resume_id">{{resume.id}}</p>
 <!--                    {% url 'singlepage:delete_resume' person.pk resume.id %}-->
                     <a class="delete{{resume.id}} mb-3 btn btn-primary white" >삭제하기</a>
+
                     <script>
                         $(document).ready(function(){
                             $(".delete{{resume.id}}").on('click', function() {
@@ -201,12 +219,15 @@ profile은 글 작성자의 프로필을 불러온다-->
                         });
                     </script>
 
+
                 </div>
 
-=======
-                <div class="flex-shrink-0"><span class="text-primary">{{resume.dateAcq}} - Present</span></div>
->>>>>>> 21400d2525cbf6835c2d669a19dd54828e747bdf
+
+
+<!--                <div class="flex-shrink-0"><span class="text-primary">{{resume.dateAcq}} - Present</span></div>-->
             </div>
+            <hr class="m-0"/>
+            <br><br>
             {% endfor %}
             {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -227,7 +248,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Experience-->
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
-            <h2 class="mb-5">Experience (인증받을 경력 작성하기)</h2>
+            <h2 class="mb-5">경력</h2>
             {% if experience_list.all %}
             {% for experience in experience_list.all %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -292,7 +313,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Education-->
     <section class="resume-section" id="education">
         <div class="resume-section-content">
-            <h2 class="mb-5">Education</h2>
+            <h2 class="mb-5">학력</h2>
             {% if education_list.all %}
             {% for edu in education_list.all %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -377,7 +398,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Interests-->
     <section class="resume-section" id="interests">
         <div class="resume-section-content">
-            <h2 class="mb-5">Interests</h2>
+            <h2 class="mb-5">취미/관심</h2>
             <p>Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid
                 skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free
                 climbing, and kayaking.</p>
@@ -393,7 +414,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     <!-- Awards-->
     <section class="resume-section" id="awards">
         <div class="resume-section-content">
-            <h2 class="mb-5">Awards & Certifications</h2>
+            <h2 class="mb-5">수상경력</h2>
             <ul class="fa-ul mb-0">
                 <li>
                     <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
@@ -441,8 +462,7 @@ profile은 글 작성자의 프로필을 불러온다-->
     </section>
 </div>
 
-<!-- Bootstrap core JS-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
