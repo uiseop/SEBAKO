@@ -3781,9 +3781,7 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
   color: #32609e;
 }
 
-.nav-link a:hover {
-  background-color: #32609e;
-}
+
 
 .nav-link.disabled {
   color: #6c757d;
@@ -9328,10 +9326,7 @@ hr.light {
   color: #32609e;
 }
 
-#mainNav .navbar-nav .nav-item a:hover {
-  background-color: #32609e;
-  
-}
+
 
 #mainNav .navbar-nav .nav-item .nav-link.active {
   color: #32609e !important;
