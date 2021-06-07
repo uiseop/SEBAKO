@@ -31,6 +31,7 @@ urlpatterns = [
     # path('index/', accounts.views.index, name='index'),
     path('singlepage/',include('singlepage.urls')),
     path('resume/', include('resumes.urls')),
+    path('managepage/',include('managepage.urls')),
 
 ]
 

@@ -15,6 +15,7 @@ class Person(models.Model):
 class Company(models.Model):
     is_company = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='지갑주소')
+    name = models.CharField(max_length=30, verbose_name='회사이름')
 
 class Profile(models.Model):
     user_id = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='아이디', db_column='user_id')

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from accounts import views
-from accounts.views import personal_signUp
+from accounts.views import personal_signUp, company_signUp
 
 app_name = 'accounts'
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path('login_personal/', views.login_personal, name='login_personal'),
     path('login_company/', views.login_company, name='login_company'),
     path('print/',personal_signUp, name='printconsole'),
+    path('print2/',company_signUp,name='print2console'),
     
     path('logout/', views.logout, name='logout'),
 ]

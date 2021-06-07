@@ -158,8 +158,10 @@ def company_signUp(request):
         user = User.objects.create_user(
             username=request.POST['walletAddress']
         )
-        company = Company(user=user)
+        company = Company(user=user,
+                          name=request.POST['compName'])
         company.save()
+        auth.login(request,user)
         return redirect('home')
     else:
         render(request, 'accounts/signup_company.html')
@@ -167,19 +169,16 @@ def company_signUp(request):
 def login_wallet(request):
     if request.method == 'POST':
         username = request.POST['walletAddress']
-        print(username)
-        print(username)
-        print(username)
+
         try:
             if User.objects.get(username=username):
+                print(username)
+                print(username)
+                print(username)
                 user = User.objects.get(username=username)
-                if Person.objects.get(user=user):
-                    auth.login(request,user)
-                    # 유저모델과 1:1 연결한 PERSON모델의 pk로 연결함으로써 오류를 방지함
-                    return redirect('singlepage:page_detail', user.person.pk)
-                else:
-                    auth.login(request,user)
-                    return redirect('home')
+
+                auth.login(request,user)
+                return redirect('home')
 
         except:
             messages.info(request,'회원가입을 먼저 진행해주세요')
