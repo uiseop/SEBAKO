@@ -206,10 +206,10 @@ profile은 글 작성자의 프로필을 불러온다-->
                     <span class="text-primary" style="font-weight:bold">{{resume.dateAcq}}</span><br><br>
                     <p id="resume_id" hidden class="resume_id">{{resume.id}}</p>
 <!--                    {% url 'singlepage:delete_resume' person.pk resume.id %}-->
-                    <a class="delete mb-3 btn btn-primary white" >삭제하기</a>
+                    <a class="delete{{resume.id}} mb-3 btn btn-primary white" >삭제하기</a>
                     <script>
                         $(document).ready(function(){
-                            $(".delete").on('click', function() {
+                            $(".delete{{resume.id}}").on('click', function() {
                                 var conf = confirm("삭제하셔도 블록체인에 기록이 남습니다. \n정말로 삭제하시겠습니까?")
                                 if(conf){
                                     location.href = '{% url 'singlepage:delete_resume' person.pk resume.id %}';
