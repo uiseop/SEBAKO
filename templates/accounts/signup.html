@@ -36,7 +36,11 @@
     <link href="{% static 'css/util.css' %}" rel="stylesheet" />
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
   </head>
-
+  {% if user.is_authenticated %}
+    <script type="text/javascript">
+      window.location.href = '{% url 'home' %}';
+    </script>
+    {% endif %}
   <body id="page-top">
     <!-- Navigation-->
     <nav

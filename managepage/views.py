@@ -975,33 +975,3 @@ def signCertification(request,pid):
         'companys':comps
     }
     return render(request, 'managepage/index.html',context)
-
-def waitingList(request):
-    return render(request,'managepage/index.html')
-
-# def get_certifications_from_contract():
-#     contract_function = contract.functions['certificationCount']
-#     certificationCount = contract_function().call()
-#
-#     certifications = []
-#     for i in range(certificationCount):
-#         cert = contract.functions.certifications(i+1).call()
-#         certifications.append(cert)
-#     return certifications
-#
-# def certifications(request):
-#
-#     cs = get_certifications_from_contract()
-#
-#     cs.sort(key=lambda x:x[0])
-#
-#     paginator = Paginator(cs,5)
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#
-#     context={
-#         'page':page_obj,
-#         'cs':cs
-#     }
-#
-#     return render(request,'managepage/index.html',context)

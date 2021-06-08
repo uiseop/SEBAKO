@@ -14,7 +14,7 @@ from web3 import Web3
 
 from accounts.decorators import login_message_required
 from accounts.models import SNS, Profile, Person
-from managepage.views import getCertificationId, getCareerId, getEducationId, certifi_contract
+from managepage.views import getCertificationId, getCareerId, getEducationId, certifi_contract, getCompanyId
 from resumes.models import SelfIntro, Experience, Education, Resume
 from singlepage.forms import snsForm, ProfileForm, ResumeForm, ExperienceForm, EduForm
 
@@ -906,8 +906,7 @@ def PageDetail(request, pk):
         'resume_list': resume_list
     }
 
-    return render(request, 'singlepage/index.html',
-                  context)
+    return render(request, 'singlepage/index.html',context)
 
 
 
@@ -942,6 +941,16 @@ def create_sns(request, pk):
 
 
 def create_resume(request, pk):
+    compList = []
+    compids = getCompanyId()
+
+    for comp in compids:
+        company = certifi_contract.functions.companyDetailList(comp).call()
+        compList.append(company)
+    llList = []
+    for data in compList:
+        llList.append(data)
+
     person = get_object_or_404(Person,pk=pk)
     profile = get_object_or_404(Profile,user_id=person)
     if request.method == 'POST':
@@ -954,7 +963,7 @@ def create_resume(request, pk):
         return render(request, 'singlepage/resume_create.html', {'form': form})
     else:
         form = ResumeForm()
-        return render(request, 'singlepage/resume_create.html', {'person':person,'profile':profile,'form': form})
+        return render(request, 'singlepage/resume_create.html', {'person':person,'profile':profile,'form': form, 'datas':llList})
 
 def created_resume_db(request):
     # ['title','regiNum','issure','dateAcq','file_hash',]
@@ -1059,7 +1068,7 @@ def create_school_db(request):
     return HttpResponse(status=201)
 
 
-
+# API 를 통한 자격증명 (서버가 맛탱이가 감)
 def check_Certificate(request):
     # ['title','regiNum','issure','dateAcq','file_hash',]
     user = request.user.person.user
@@ -1079,6 +1088,7 @@ def check_Certificate(request):
     print(soup)
     return HttpResponse(soup)
 
+# 자체 DB를 사용하는 방식 (블록체인 네트워크로 대체)
 def delete_resume(request, resume_id,pk):
     user = request.user.person.user
     resume = Resume.objects.get(id=resume_id)
@@ -1098,6 +1108,17 @@ def delete_edu(request, edu_id,pk):
     return redirect('singlepage:page_detail', pk=pk)
 
 def create_experience(request, pk):
+    compList = []
+    compids = getCompanyId()
+
+    for comp in compids:
+        company = certifi_contract.functions.companyDetailList(comp).call()
+        compList.append(company)
+    llList = []
+    for data in compList:
+        llList.append(data)
+
+
     person = get_object_or_404(Person, pk=pk)
     profile = get_object_or_404(Profile, user_id=person)
     if request.method == 'POST':
@@ -1111,10 +1132,20 @@ def create_experience(request, pk):
     else:
         form = ExperienceForm()
         print('hahaha')
-        return render(request, 'singlepage/experience_create.html', {'form': form, 'profile':profile})
+        return render(request, 'singlepage/experience_create.html', {'form': form, 'profile':profile, 'datas':llList})
 
 
 def create_edu(request, pk):
+    compList = []
+    compids = getCompanyId()
+
+    for comp in compids:
+        company = certifi_contract.functions.companyDetailList(comp).call()
+        compList.append(company)
+    llList = []
+    for data in compList:
+        llList.append(data)
+
     person = get_object_or_404(Person, pk=pk)
     profile = get_object_or_404(Profile, user_id=person)
     if request.method == 'POST':
@@ -1128,7 +1159,7 @@ def create_edu(request, pk):
     else:
         form = EduForm()
         print('hahaha')
-        return render(request, 'singlepage/edu_create.html', {'form': form, 'profile':profile})
+        return render(request, 'singlepage/edu_create.html', {'form': form, 'profile':profile, 'datas':llList})
 
 def create_intro(request, pk):
     person = get_object_or_404(Person, pk=pk)

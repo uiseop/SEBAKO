@@ -62,19 +62,20 @@ profile은 글 작성자의 프로필을 불러온다-->
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-third fixed-top" id="mainNav">
     {% if user.person.pk == person.pk %}
-
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
     <span class="d-block d-lg-none" style="font-weight:bold; color:white;">{{ profile.korName }}</span>
     {% if profile.image_hash%}
-    <a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
+    <span class="d-none d-lg-block"><a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
             <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
                  src="https://ipfs.io/ipfs/{{profile.image_hash}}"/>
-    </a>
+    </a></span>
     {% else %}
-    <a class="navbar-brand js-scroll-trigger " href="#">
+    <span class="d-none d-lg-block"><a class="navbar-brand js-scroll-trigger " href="#">
             <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
              src="{% static 'assets/img/face.png' %}" alt="..."/>
-            {% endif %}
-        </a>
+    </a></span>
+    {% endif %}
+    </a>>
     {% else %}
     <div class="navbar-brand js-scroll-trigger">
         {% if profile.korName %}
@@ -104,7 +105,6 @@ profile은 글 작성자의 프로필을 불러온다-->
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#certificate">Certificate </a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
             <br><br>
             <li class="nav-item"><a style="float:center" class="nav-link" href="{% url 'accounts:logout' %}">로그아웃</a> <a style="float:center"
@@ -202,8 +202,8 @@ profile은 글 작성자의 프로필을 불러온다-->
     <section class="resume-section" id="certificate">
         <div class="resume-section-content">
             <h2 class="mb-5">자격증</h2>
-            {% if resume_list.all %}
-            {% for resume in resume_list.all %}
+            {% if resume_list %}
+            {% for resume in resume_list %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0" style="font-weight:bold;">{{resume.title}}</h3>
@@ -243,6 +243,36 @@ profile은 글 작성자의 프로필을 불러온다-->
                     </script>
 
 
+                </div>
+
+
+
+<!--                <div class="flex-shrink-0"><span class="text-primary">{{resume.dateAcq}} - Present</span></div>-->
+            </div>
+            <hr class="m-0"/>
+            {% endfor %}
+            {% elif datas %}
+            {% for data in datas %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
+                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">{{data.3}}</div>
+
+                    <p style="font-weight:bold;">{{data.2}}</p>
+                </div>
+                <div class="col-md-2">
+                    {% if data.8 == True %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if data.7 == False %}
+                    <img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if data.8 == False %}
+                    <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
+                    {% endif %}
+                </div>
+                <div class="flex-shrink-0">
+                    <span class="text-primary" style="font-weight:bold">{{data.4}}</span><br><br>
                 </div>
 
 
@@ -312,6 +342,33 @@ profile은 글 작성자의 프로필을 불러온다-->
             <hr class="m-0"/>
             <br><br>
             {% endfor %}
+            {% elif cdatas %}
+            {% for data in cdatas %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
+                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;" >{{data.2}}</div>
+                    <p>{{data.3}}</p>
+                </div>
+                <div class="col-md-0">
+                    {% if data.9 == True %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if data.8 == False %}
+                    <img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if data.9 == False %}
+                    <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
+                    {% endif %}
+                </div>
+                <div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">{{data.4}} - {{data.5}}</span><br><br>
+                    </div>
+            </div>
+            <hr class="m-0"/>
+            <br><br>
+            {% endfor %}
+
+
             {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
@@ -376,6 +433,31 @@ profile은 글 작성자의 프로필을 불러온다-->
             <hr class="m-0"/>
             <br><br>
             {% endfor %}
+            {% elif edatas %}
+            {% for data in edatas %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
+                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">{{data.2}}</div>
+                    <p style="font-weight:bold;">GPA: {{data.3}}</p>
+                </div>
+                <div class="col-md-0">
+                    {% if data.8 == True %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if data.7 == False %}
+                    <img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;">
+                    {% endif %}
+                    {% if data.8 == False %}
+                    <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
+                    {% endif %}
+                </div>
+                <div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">{{edu.dateEnd}}</span><br>
+                    </div>
+            </div>
+            <hr class="m-0"/>
+            <br><br>
+            {% endfor %}
             {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
@@ -394,56 +476,7 @@ profile은 글 작성자의 프로필을 불러온다-->
         </div>
     </section>
     <hr class="m-0"/>
-    <!-- Awards-->
-    <section class="resume-section" id="awards">
-        <div class="resume-section-content">
-            <h2 class="mb-5">수상경력</h2>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    Google Analytics Certified Developer
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    Mobile Web Specialist - Google Certification
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - University of Colorado Boulder - Emerging Tech Competition 2009
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - University of Colorado Boulder - Adobe Creative Jam 2008 (UI Design Category)
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    2
-                    <sup>nd</sup>
-                    Place - University of Colorado Boulder - Emerging Tech Competition 2008
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - James Buchanan High School - Hackathon 2006
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    3
-                    <sup>rd</sup>
-                    Place - James Buchanan High School - Hackathon 2005
-                </li>
-            </ul>
-            <br>
-            <br>
-            <a type="button" class="btn btn-primary" href="#">수정하기</a>
-        </div>
-    </section>
-    <hr class="m-0"/>
+
     <!-- Interests-->
     <section class="resume-section" id="interests">
         <div class="resume-section-content">

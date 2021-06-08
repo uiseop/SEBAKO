@@ -9,9 +9,12 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    
+    {% if user.is_authenticated %}
+    <script type="text/javascript">
+      window.location.href = '{% url 'home' %}';
+    </script>
+    {% endif %}
     <title>SEBAKO-로그인</title>
-
     <script
       src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
       crossorigin="anonymous"

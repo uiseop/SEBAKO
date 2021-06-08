@@ -119,10 +119,16 @@ def login(request):
 
 
 def login_personal(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     return render(request, 'accounts/login_personal.html')
 
 
 def login_company(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     return render(request, 'accounts/login_company.html')
 
 
@@ -132,6 +138,9 @@ def logout(request):
 
 
 def personal_signUp(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         print(request.POST['walletAddress'])
         print(request.POST['walletAddress'])
@@ -154,6 +163,9 @@ def personal_signUp(request):
         render(request, 'accounts/signup.html')
 
 def company_signUp(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     username = request.POST['walletAddress']
     compName = request.POST['compName']
     user = User.objects.create_user(
@@ -169,6 +181,9 @@ def company_signUp(request):
     return HttpResponse(status=201)
 
 def login_wallet(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         username = request.POST['walletAddress']
 
