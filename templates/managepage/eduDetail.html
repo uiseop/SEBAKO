@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>인증처리</title>
+    <title>Title</title>
         <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
     <!-- Font Awesome icons (free version)-->
@@ -51,60 +51,56 @@
       </div>
      </nav>
 <!--      ...nav end...-->
+
+
+
   <section class="mb-5" style="margin-top: 50px">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mb-5">
-          <h1 class="display-4" style="font-weight:bold">처리할 요청</h1><br>
-            <h3 class="display-6" style="font-weight:bold">{{user.company.name}}</h3>
+        <div class="col-md-7 mb-5">
+          <h1 class="display-4" style="font-weight:bold;">요청중인 경력 목록</h1>
         </div>
       </div>
     </div>
   </section>
-<div class="container" style="margin-top:-60px;">
-   <div class="card text-center">
-     <div class="card text-center">
 
-  <div class="card-header float-center" style="font-weight:bold">
-    자격증
-  </div>
-         {% for p in page %}
-  <div class="card-body">
-     <div class="row d-flex justify-content-between">
-      <div>
-      <p style="font-size:20px; font-weight: bold; text-align: left;" >이름 : {{p.1}}{{p}} {{cs}}</p>
-      <p style="font-size:20px; font-weight: bold; text-align: left;" >자격증명 : 정처기</p>
-      <p style="font-size:20px; font-weight: bold; text-align: left;" >자격번호 : 123456</p>
-      <p style="font-size:20px; font-weight: bold; text-align: left;" >&nbsp취득일&nbsp&nbsp: 123456</p>
-        {%endfor%}
-      </div>
 
-       <div>
-      <p style="font-size:20px; font-weight: bold; text-align: left;" >Insurance Received : 뭐야</p>
-      <p style="font-size:20px; font-weight: bold; text-align: left;" >Donations Received : 이건</p>
-      </div>
 
-    </div>
-
-      </div>
-    </div>
-
-  <div class="card-footer text-muted">
-
-      <div>
-         <h3 style="float: left;">Signed and Approved By : 회사이름 넣으면 될듯</h3>
-        <a href="#" class="btn btn-primary btn-sm" style="font-size:20px; float:right;">인증하기</a><br><br>
-        <a href="#" class="btn btn-danger btn-sm" style="font-size:20px;float:right;">거절하기</a><br>
-      </div>
-      </div>
-      </div>
-
-    </div>
+<div class=" pl-md-10 pb-5 pl-0 probootstrap-inside" style="margin-right: 100px">
+<div class="container">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th style="text-align:center;">성명</th>
+      <th style="text-align:center;">학교명</th>
+      <th style="text-align:center;">전공</th>
+      <th style="text-align:center">학점</th>
+      <th style="text-align:center">졸업연도</th>
+      <th colspan="2" style="text-align:center;">처리</th>
+    </tr>
+  </thead>
+  {% for data in datas %}
+  <tbody>
+    <tr>
+      <td style="text-align:center">{{data.0}}</td>
+      <td style="text-align:center">{{data.1}}</td>
+      <td style="text-align:center">{{data.2}}</td>
+      <td style="text-align:center">{{data.3}}</td>
+      <td style="text-align:center">{{data.4}}</td>
+        <td align="center"><button class="btn btn-primary">YES</button></td>
+        <td align="center"><button class="btn btn-danger">NO</button></td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
 </div>
-  </div>
-  <br>
 </div>
+      </div>
+    </div>
+  </section>
 
  </div>
 </body>
 </html>
+
+

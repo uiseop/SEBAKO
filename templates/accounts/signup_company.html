@@ -43,43 +43,23 @@
     <script>
     const abi = [
 	{
+		"anonymous": false,
 		"inputs": [
 			{
+				"indexed": true,
 				"internalType": "address",
-				"name": "_pid",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
 				"type": "address"
 			}
 		],
-		"name": "companySignCaree",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companySignCerti",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companySignEdu",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		"name": "OwnershipTransferred",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -137,128 +117,6 @@
 		],
 		"name": "newEducationCreated",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_job",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_compName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_content",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_startDate",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_endDate",
-				"type": "string"
-			}
-		],
-		"name": "setCareerData",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_certiName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_certiNumb",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_compName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_accDate",
-				"type": "string"
-			}
-		],
-		"name": "setCertificationData",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_compAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "setCompany",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_schoolName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_major",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_gpa",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_accDate",
-				"type": "string"
-			}
-		],
-		"name": "setEducationData",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -494,6 +352,84 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectCaree",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectCerti",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectEdu",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCaree",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCerti",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignEdu",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -596,6 +532,19 @@
 	},
 	{
 		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "pidCount",
 		"outputs": [
 			{
@@ -625,10 +574,152 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_content",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_startDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_endDate",
+				"type": "string"
+			}
+		],
+		"name": "setCareerData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiNumb",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setCertificationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_compAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setCompany",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_schoolName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_gpa",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setEducationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
 ]
 
-    const c_address = "0x2b223c30712B3A198913CF69A721C5406C9Eac2D";
+    const c_address = "0xED111aBCE5A36F48bed94B18a995D78B4069f1b5";
     window.web3 = new Web3(window.ethereum)
     web3 = window.web3
     contract = new web3.eth.Contract(abi,c_address)
@@ -666,14 +757,6 @@
 
     else{
         $("#rec_url").text("RECEIPT IS LOADING......")
-        $.ajax({
-            type: "POST",
-            url: "{% url 'accounts:print2console' %}",
-            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
-            'walletAddress':walletAddress,
-            'compName':compName},
-            dataType:"json",
-        });
 
         web3.eth.getAccounts(function get(err, res){
               account=res[0]
@@ -693,6 +776,14 @@
                         console.log('hahah why not')
                       }
                       else{
+                        $.ajax({
+                            type: "POST",
+                            url: "{% url 'accounts:print2console' %}",
+                            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+                            'walletAddress':walletAddress,
+                            'compName':compName},
+                            dataType:"json",
+                        });
                         waitForReceipt(result, function(){
                             console.log(result)
                             var newUrl = "https://ropsten.etherscan.io/tx/" + result
@@ -889,7 +980,6 @@
                   name="walletAddress"
                   id="showAccount"
                   type="text"
-                  readonly
                 />
 
                 <span class="focus-input100"></span>

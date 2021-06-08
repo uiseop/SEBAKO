@@ -48,7 +48,7 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/singlepage/{{user.person.pk}}/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     내 정보</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/managepage/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/managepage/{{user.company.pk}}" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 18px">
                     인증관리</a></li>
                 {% endif %}
                 {% else %}
