@@ -1,8 +1,8 @@
 from django.urls import path
 
-from managepage.views import waitingList
+from managepage.views import waitingList, certifications
 
 app_name = 'managepage'
 urlpatterns = [
-    path('', waitingList, name='waitig_list'),
+    path('', certifications, name='waitig_list'),
 ]

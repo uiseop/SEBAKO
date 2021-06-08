@@ -154,17 +154,19 @@ def personal_signUp(request):
         render(request, 'accounts/signup.html')
 
 def company_signUp(request):
-    if request.method == 'POST':
-        user = User.objects.create_user(
-            username=request.POST['walletAddress']
-        )
-        company = Company(user=user,
-                          name=request.POST['compName'])
-        company.save()
-        auth.login(request,user)
-        return redirect('home')
-    else:
-        render(request, 'accounts/signup_company.html')
+    username = request.POST['walletAddress']
+    compName = request.POST['compName']
+    user = User.objects.create_user(
+        username=username
+    )
+    company = Company(user=user,
+                      name=compName)
+    company.save()
+    messages = company
+    context = {
+        'message':messages
+    }
+    return HttpResponse(status=201)
 
 def login_wallet(request):
     if request.method == 'POST':

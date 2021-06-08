@@ -35,6 +35,678 @@
     <link href="{% static 'css/stylesHome.css' %}" rel="stylesheet" />
     <link href="{% static 'css/util.css' %}" rel="stylesheet" />
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+<!--    web3 연결, jquery연결-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+
+
+    <script>
+    const abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCaree",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCerti",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignEdu",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "cid",
+				"type": "address"
+			}
+		],
+		"name": "newCareerCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "pid",
+				"type": "address"
+			}
+		],
+		"name": "newCertificationCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "eid",
+				"type": "address"
+			}
+		],
+		"name": "newEducationCreated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_content",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_startDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_endDate",
+				"type": "string"
+			}
+		],
+		"name": "setCareerData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiNumb",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setCertificationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_compAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setCompany",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_schoolName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_gpa",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setEducationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "careerList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "content",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "startDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "endDate",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "careeID",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "companyAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "cidAvailable",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "companySignature",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "certificationList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "certiName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "certiNumb",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "accDate",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "certiID",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "companyAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "pidAvailable",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "companySignature",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "cidCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "cidList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "compAddressList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "companyCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "companyDetailList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "compAdress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "compName",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "companyList",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "educationList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "schoolName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "gpa",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "accDate",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "eduID",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "companyAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "eidAvailable",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "companySignature",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "eidCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "eidList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "pidCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pidList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+    const c_address = "0x2b223c30712B3A198913CF69A721C5406C9Eac2D";
+    window.web3 = new Web3(window.ethereum)
+    web3 = window.web3
+    contract = new web3.eth.Contract(abi,c_address)
+
+    function waitForReceipt(hash, cb) {
+        web3.eth.getTransactionReceipt(hash, function (err, receipt) {
+          if (err) {
+            error(err);
+          }
+          if (receipt !== null) {
+            // Transaction went through
+            if (cb) {
+              cb(receipt);
+            }
+          } else {
+            // Try again in 1 second
+            window.setTimeout(function () {
+              waitForReceipt(hash, cb);
+            }, 1000);
+          }
+        });
+      }
+
+//FOR CHANGING PAGE
+
+
+    function append(){
+
+    let compName=$("#compName").val();
+    let walletAddress = $("#showAccount").val();
+
+    if(compName==''||walletAddress==''){
+        alert('모든 항목을 기입해주세요');
+    }
+
+    else{
+        $("#rec_url").text("RECEIPT IS LOADING......")
+        $.ajax({
+            type: "POST",
+            url: "{% url 'accounts:print2console' %}",
+            data: {'csrfmiddlewaretoken': '{{csrf_token}}',
+            'walletAddress':walletAddress,
+            'compName':compName},
+            dataType:"json",
+        });
+
+        web3.eth.getAccounts(function get(err, res){
+              account=res[0]
+              console.log(account)
+              transaction =
+              ({
+                from: account,
+                "gas": 900000,
+                "chainId": 3,
+                "gasPrice": web3.utils.toWei('14.1','Gwei')
+              })
+
+              contract.methods.setCompany(walletAddress,compName).send(
+                  transaction,
+                  (error,result)=>{
+                      if(error){
+                        console.log('hahah why not')
+                      }
+                      else{
+                        waitForReceipt(result, function(){
+                            console.log(result)
+                            var newUrl = "https://ropsten.etherscan.io/tx/" + result
+                            $("#rec_url").attr("href", newUrl)
+                            $("#rec_url").text(result)
+                            }
+                        )
+                      }
+                  }
+              );
+            });
+    }
+}
+    </script>
   </head>
 
   <body id="page-top">
@@ -200,9 +872,7 @@
             >
               ETH 지갑주소 조회
             </button>
-            <form
-              method="POST"
-              action="{% url 'accounts:print2console' %}"
+            <div
               class="login100-form validate-form flex-sb flex-w"
             >
               {% csrf_token %}
@@ -241,9 +911,10 @@
                   type="submit"
                   class="login100-form-btn"
                   value="회원가입"
+                  onclick="append()"
                 />
               </div>
-            </form>
+            </div>
 
             <div class="w-full text-center p-t-55">
               <span class="txt2">이미 회원이신가요? </span>&nbsp;
