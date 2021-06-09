@@ -33,6 +33,84 @@
     <script>
     const abi = [
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectCaree",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectCerti",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectEdu",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCaree",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCerti",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignEdu",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -107,6 +185,148 @@
 		],
 		"name": "newEducationCreated",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_content",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_startDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_endDate",
+				"type": "string"
+			}
+		],
+		"name": "setCareerData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiNumb",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setCertificationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_compAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setCompany",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_schoolName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_gpa",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setEducationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -342,84 +562,6 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companyRejectCaree",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companyRejectCerti",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companyRejectEdu",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companySignCaree",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companySignCerti",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_pid",
-				"type": "address"
-			}
-		],
-		"name": "companySignEdu",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -564,148 +706,6 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_job",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_compName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_content",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_startDate",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_endDate",
-				"type": "string"
-			}
-		],
-		"name": "setCareerData",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_certiName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_certiNumb",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_compName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_accDate",
-				"type": "string"
-			}
-		],
-		"name": "setCertificationData",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_compAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "setCompany",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_schoolName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_major",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_gpa",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_accDate",
-				"type": "string"
-			}
-		],
-		"name": "setEducationData",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	}
 ]
 
@@ -761,7 +761,7 @@
                 "gasPrice": web3.utils.toWei('14.1','Gwei')
               })
 
-              contract.methods.createEducation(school,major,startDay,gdp).send(
+              contract.methods.setEducationData('{{profile.korName}}',school,major,startDay,gdp).send(
                   transaction,
                   (error,result)=>{
                       if(error){
