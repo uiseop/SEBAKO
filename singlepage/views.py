@@ -877,22 +877,25 @@ def PageDetail(request, pk):
     new_clist = []
     new_elist = []
     for data in certificationList:
-        if data[0] == profile.korName:
-            new_list.append(data)
-        else:
-            continue
+        if profile.korName != '':
+            if data[0] == profile.korName:
+                new_list.append(data)
+            else:
+                continue
 
     for data in careerList:
-        if data[0] == profile.korName:
-            new_clist.append(data)
-        else:
-            continue
+        if profile.korName != '':
+            if data[0] == profile.korName:
+                new_clist.append(data)
+            else:
+                continue
 
     for data in educationList:
-        if data[0] == profile.korName:
-            new_elist.append(data)
-        else:
-            continue
+        if profile.korName != '':
+            if data[0] == profile.korName:
+                new_elist.append(data)
+            else:
+                continue
 
     context = {
         "datas":new_list,
