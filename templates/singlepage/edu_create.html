@@ -809,15 +809,16 @@
   <!-- END nav -->
 
   <br><br><br>
-  <section class="mb-5" style="margin-top: 50px">
+<section class="mb-5" style="margin-top: 50px">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mb-5">
+        <div class="col-md-5 mb-2">
           <h1 class="display-4" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 700; font-size : 70px; line-height:140%">
-            학력 등록</h1><br>
+			자격증 등록</h1><br>
+        </div>
+        <div class="col-md-12">
             <p class="display-6" style="font-family: 'Noto Sans KR', sans-serif; font-weight : 500; font-size : 20px; line-height:140%">
-			현재 검증가능 기관들 목록 : {% for data in datas %}{{data.1}} &nbsp</p>{%endfor%}<br>
-
+			현재 검증가능 기관들 목록<br> {% for data in datas %}{{data.1}}<br>{%endfor%} </p><br>
         </div>
       </div>
     </div>
