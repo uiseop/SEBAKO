@@ -16,7 +16,12 @@ profile은 글 작성자의 프로필을 불러온다-->
     {% else %}
     <title>당신의 프로필을 만들어보세요!</title>
     {% endif %}
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -59,21 +64,23 @@ profile은 글 작성자의 프로필을 불러온다-->
     </style>
 </head>
 <body id="page-top">
-<!-- Navigation-->
+<!-- Navigation Start-->
+<!--    현재 로그인한 유저는 user.peson이며 프로필의 소유자는 person으로 알 수 있음
+profile은 글 작성자의 프로필을 불러온다-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-third fixed-top" id="mainNav">
     {% if user.person.pk == person.pk %}
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
     <span class="d-block d-lg-none" style="font-weight:bold; color:white;">{{ profile.korName }}</span>
     {% if profile.image_hash%}
-    <span class="d-none d-lg-block"><a class="navbar-brand js-scroll-trigger" href="javascript:popup()">
+    <span class="d-none d-lg-block">
             <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
-                 src="https://ipfs.io/ipfs/{{profile.image_hash}}"/>
-    </a></span>
+                 src="https://ipfs.io/ipfs/{{profile.image_hash}}" onclick="javascript:popup()"/>
+    </span>
     {% else %}
-    <span class="d-none d-lg-block"><a class="navbar-brand js-scroll-trigger " href="#">
+    <span class="d-none d-lg-block">
             <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
              src="{% static 'assets/img/face.png' %}" alt="..."/>
-    </a></span>
+    </span>
     {% endif %}
     </a>>
     {% else %}
