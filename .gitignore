@@ -162,7 +162,6 @@ Thumbs.db
 .idea/
 secrets.py
 secrets.json
-.env.dev
-docker-compose.dev.yml
+
 .env.prod
 .env.prod.db
