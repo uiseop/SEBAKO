@@ -32,6 +32,7 @@
 ![image](https://user-images.githubusercontent.com/75655047/121512081-4e867480-ca24-11eb-8d90-5110de64238b.png)
 
 2. Metamask 실행 -> Ropsten 테스트 네트워크에 연결 -> 구매 ->  포시트 테스트에서 Ether얻기(계약 요청시에 필요)
+
 ![image](https://user-images.githubusercontent.com/75655047/121511130-4aa62280-ca23-11eb-8854-f1856ea48504.png)
 3. 회원가입 및 개인 프로필 작성
 4. 등록된 기관목록을 확인하고 요청을 보내기
