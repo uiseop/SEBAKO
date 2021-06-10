@@ -359,7 +359,7 @@ profile은 글 작성자의 프로필을 불러온다-->
                 <div class="flex-grow-1">
                     <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
                     <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;" >{{data.2}}</div>
-                    <p>{{data.3}}</p>
+                    <p style="font-weight:bold;">{{data.3}}</p>
                 </div>
                 <div class="col-md-0">
                     {% if data.9 == True %}
@@ -455,7 +455,7 @@ profile은 글 작성자의 프로필을 불러온다-->
                 <div class="flex-grow-1">
                     <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
                     <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">{{data.2}}</div>
-                    <p style="font-weight:bold;">GPA: {{data.3}}</p>
+                    <p style="font-weight:bold;">GPA: {{data.4}}</p>
                 </div>
                 <div class="col-md-0">
                     {% if data.8 == True %}
@@ -468,7 +468,7 @@ profile은 글 작성자의 프로필을 불러온다-->
                     <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
                     {% endif %}
                 </div>
-                <div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">{{edu.dateEnd}}</span><br>
+                <div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">{{data.3}}</span><br>
                     </div>
             </div>
             <hr class="m-0"/>
