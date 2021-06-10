@@ -914,8 +914,10 @@ def certificationDatabase(request,pk):
             continue
 
     for data in careerList:
-        if data[8] == False and data[7] == True and data[2] == request.user.company.name:
+        print(data)
+        if data[9] == False and data[8] == True and data[2] == request.user.company.name:
             new_clist.append(data)
+            print(new_clist)
         else:
             continue
 

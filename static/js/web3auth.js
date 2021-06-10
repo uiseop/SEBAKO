@@ -31,12 +31,15 @@ async function checkMeta(){
 
 //const etherbtn = document.getElementById('etherbtn')
 const ethereumButton = document.querySelector('.enableEthereumButton')
+
 const showAccount = document.querySelector('#showAccount')
 //const sendEthButton = document.querySelector('.sendEthButton')
 //const showBalance = document.querySelector('.showBalance')
 ethereumButton.addEventListener('click', () => {
   getAccount()
 })
+
+
 
 async function getAccount(){
   const accounts = await ethereum.request({method: 'eth_requestAccounts'})
@@ -47,36 +50,14 @@ async function getAccount(){
   console.log(showAccount)
   console.log(showAccount)
 
-//  const balance = await ethereum
-//  .request({
-//    method: 'eth_getBalance',
-//    params: [account,"latest"]
-//  });
-//  console.log(balance)
-//  const read = parseInt(balance)/ 10**18
-//  console.log(read.toFixed(5))
-//  showBalance.innerText = read.toFixed(5)
-
   const value = 200
   console.log(value)
-
-
-//  sendEthButton.addEventListener('click', () => {
-//    ethereum
-//      .request({
-//        method: 'eth_sendTransaction',
-//        params: [
-//          {
-//            from: account,
-//            to: '0xE4cD403C1216cA0A313ed9419fD3d4C332EA818E',
-//            value: Web3.utils.toHex(value)
-//          }
-//        ],
-//      })
-//      .then((txHash) => console.log(txHash))
-//      .catch((error) => console.error)
-//  })
+    window.location
 }
+
+
+
+
 
 function loadData(){
   ethereum.enable().then(function (accounts) {

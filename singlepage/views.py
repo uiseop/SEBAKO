@@ -884,6 +884,7 @@ def PageDetail(request, pk):
                 continue
 
     for data in careerList:
+        print(data)
         if profile.korName != '':
             if data[0] == profile.korName:
                 new_clist.append(data)

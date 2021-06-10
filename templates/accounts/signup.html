@@ -77,7 +77,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="#services"
+                href="/#about"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -93,7 +93,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="#services"
+                href="/#services"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -109,7 +109,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="#contact"
+                href="/#contact"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -216,19 +216,33 @@
               </button>
 
               <button
-                onclick="alert('기업회원 로그인은 관리자에게 문의해주세요')"
-                class="btn-face m-b-20"
+                class="enableEthereumButton2 btn-face m-b-20"
               >
                 기업 회원
               </button>
+              <script>
+                const DevButton = document.querySelector('.enableEthereumButton2')
+
+DevButton.addEventListener('click', () => {
+  console.log('hello DEV');
+  getDEVAccount()
+})
+
+async function getDEVAccount(){
+  const accounts = await ethereum.request({method: 'eth_requestAccounts'})
+  const account = accounts[0]
+  if(account != '0xef877539c18f3f0149b5c08acba5938d77552d57'){
+    alert('관리자 계정이 아닙니다')
+  }
+  else{
+    window.location.href = '{% url 'accounts:signup_company' %}';
+  }
+}
+              </script>
 
               <div class="p-t-31 p-b-9">
                 <span class="txt1" style="font-size: large"> ID </span>
 
-                <button
-                  type="button"
-                  class="enableEthereumButton txt2 bo1 m-l-5"
-                ></button>
               </div>
               <div class="wrap-input100 validate-input">
                 <input
@@ -236,6 +250,7 @@
                   name="walletAddress"
                   id="showAccount"
                   type="text"
+                  readonly
                 />
 
                 <span class="focus-input100"></span>

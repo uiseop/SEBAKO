@@ -836,7 +836,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="#services"
+                href="/#about"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -852,7 +852,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="#services"
+                href="/#services"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -868,7 +868,7 @@
             <li class="nav-item">
               <a
                 class="nav-link js-scroll-trigger"
-                href="#contact"
+                href="/#contact"
                 style="
                   font-family: 'Noto Sans KR', sans-serif;
                   font-weight: 500;
@@ -1003,11 +1003,29 @@
 
               <div class="container-login100-form-btn m-t-17">
                 <input
-                  type="submit"
-                  class="login100-form-btn"
+                  type="button"
+                  class="enableEthereumButton2 login100-form-btn"
                   value="회원가입"
-                  onclick="append()"
                 />
+                  <script>
+                                      const DevButton = document.querySelector('.enableEthereumButton2')
+
+DevButton.addEventListener('click', () => {
+  console.log('hello DEV');
+  getDEVAccount()
+})
+
+async function getDEVAccount(){
+  const accounts = await ethereum.request({method: 'eth_requestAccounts'})
+  const account = accounts[0]
+  if(account != '0xef877539c18f3f0149b5c08acba5938d77552d57'){
+    alert('관리자 계정이 아닙니다')
+  }
+  else{
+    javascript:append();
+  }
+}
+                  </script>
               </div>
             </div>
 
