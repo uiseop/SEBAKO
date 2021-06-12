@@ -20,6 +20,10 @@ profile은 글 작성자의 프로필을 불러온다-->
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+    <!--    web3 연결, jquery연결-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
     <!-- Font Awesome icons (free version)-->
@@ -258,38 +262,9 @@ profile은 글 작성자의 프로필을 불러온다-->
             </div>
             <hr class="m-0"/>
             {% endfor %}
-            {% elif datas %}
-            {% for data in datas %}
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
-                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">{{data.3}}</div>
+            {% endif %}
+            <div id="certiTable"></div>
 
-                    <p style="font-weight:bold;">{{data.2}}</p>
-                </div>
-                <div class="col-md-2">
-                    {% if data.8 == True %}
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;">
-
-                    {% elif data.7 == False %}
-                    <img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;">
-
-                    {% elif data.8 == False %}
-                    <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
-                    {% endif %}
-                </div>
-                <div class="flex-shrink-0">
-                    <span class="text-primary" style="font-weight:bold">{{data.4}}</span><br><br>
-                </div>
-
-
-
-<!--                <div class="flex-shrink-0"><span class="text-primary">{{resume.dateAcq}} - Present</span></div>-->
-            </div>
-            <hr class="m-0"/>
-            <br><br>
-            {% endfor %}
-            {% else %}
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0" style="font-weight:bold">자격증명</h3>
@@ -298,7 +273,7 @@ profile은 글 작성자의 프로필을 불러온다-->
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary" style="font-weight:bold;">자격증 취득일 20xx-xx</span></div>
             </div>
-            {% endif %}
+
             <br>
             <br>
             {% if profile.korName %}
@@ -353,34 +328,8 @@ profile은 글 작성자의 프로필을 불러온다-->
             <hr class="m-0"/>
             <br><br>
             {% endfor %}
-            {% elif cdatas %}
-            {% for data in cdatas %}
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
-                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;" >{{data.2}}</div>
-                    <p style="font-weight:bold;">{{data.3}}</p>
-                </div>
-                <div class="col-md-0">
-                    {% if data.9 == True %}
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;">
-
-                    {% elif data.8 == False %}
-                    <img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;">
-
-                    {% elif data.9 == False %}
-                    <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
-                    {% endif %}
-                </div>
-                <div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">{{data.4}} - {{data.5}}</span><br><br>
-                    </div>
-            </div>
-            <hr class="m-0"/>
-            <br><br>
-            {% endfor %}
-
-
-            {% else %}
+            {% endif %}
+            <div id="careeTable"></div>
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h5 class="mb-0">※예시입니다※</h5>
@@ -393,7 +342,7 @@ profile은 글 작성자의 프로필을 불러온다-->
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
             </div>
-            {% endif %}
+
             <br>
             <br>
             {% if profile.korName %}
@@ -449,32 +398,8 @@ profile은 글 작성자의 프로필을 불러온다-->
             <hr class="m-0"/>
             <br><br>
             {% endfor %}
-            {% elif edatas %}
-            {% for data in edatas %}
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0" style="font-weight:bold;">{{data.1}}</h3>
-                    <div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">{{data.2}}</div>
-                    <p style="font-weight:bold;">GPA: {{data.4}}</p>
-                </div>
-                <div class="col-md-0">
-                    {% if data.8 == True %}
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;">
-
-                    {% elif data.7 == False %}
-                    <img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;">
-
-                    {% elif data.8 == False %}
-                    <i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i>
-                    {% endif %}
-                </div>
-                <div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">{{data.3}}</span><br>
-                    </div>
-            </div>
-            <hr class="m-0"/>
-            <br><br>
-            {% endfor %}
-            {% else %}
+            {% endif %}
+            <div id="eduTable"></div>
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h5 class="mb-0">※예시입니다※</h5>
@@ -485,7 +410,6 @@ profile은 글 작성자의 프로필을 불러온다-->
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary">August 2006 - May 2010</span></div>
             </div>
-            {% endif %}
             <br>
             <br>
 
@@ -511,15 +435,872 @@ profile은 글 작성자의 프로필을 불러온다-->
     </section>
     <hr class="m-0"/>
 </div>
+<script>
+const abi = [
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "cid",
+				"type": "address"
+			}
+		],
+		"name": "newCareerCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "pid",
+				"type": "address"
+			}
+		],
+		"name": "newCertificationCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "eid",
+				"type": "address"
+			}
+		],
+		"name": "newEducationCreated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "careerList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "content",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "startDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "endDate",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "careeID",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "companyAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "cidAvailable",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "companySignature",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "certificationList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "certiName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "certiNumb",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "accDate",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "certiID",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "companyAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "pidAvailable",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "companySignature",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "cidCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "cidList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "compAddressList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "companyCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "companyDetailList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "compAdress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "compName",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "companyList",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectCaree",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectCerti",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companyRejectEdu",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCaree",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignCerti",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pid",
+				"type": "address"
+			}
+		],
+		"name": "companySignEdu",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "educationList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "schoolName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "gpa",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "accDate",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "eduID",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "companyAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "eidAvailable",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "companySignature",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "eidCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "eidList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "pidCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pidList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_job",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_content",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_startDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_endDate",
+				"type": "string"
+			}
+		],
+		"name": "setCareerData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_certiNumb",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_compName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setCertificationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_compAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setCompany",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_schoolName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_major",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_gpa",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_accDate",
+				"type": "string"
+			}
+		],
+		"name": "setEducationData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
 
+const address = "0xED111aBCE5A36F48bed94B18a995D78B4069f1b5"
+  window.web3 = new Web3(window.ethereum)
+  web3 = window.web3
+  contract = new web3.eth.Contract(abi,address)
+  contract.methods.pidCount.call((err,res)=>{
+    if(err){
+      return console.log(err)
+    }
+    else{
+      return console.log(res.toString())
+    }
+  })
+function waitForReceipt(hash, cb) {
+    web3.eth.getTransactionReceipt(hash, function (err, receipt) {
+      if (err) {
+        error(err);
+      }
+      if (receipt !== null) {
+        // Transaction went through
+        if (cb) {
+          cb(receipt);
+        }
+      } else {
+        // Try again in 1 second
+        window.setTimeout(function () {
+          waitForReceipt(hash, cb);
+        }, 1000);
+      }
+    });
+}
+
+
+window.onload = loadBlockData();
+var certificationList = new Array();
+
+
+function loadBlockData(){
+
+ var certiTable = document.getElementById('certiTable');
+ var careeTable = document.getElementById('careeTable');
+ var eduTable = document.getElementById('eduTable');
+
+
+ contract.methods.pidCount().call((err,res)=>{
+    if(err){
+      return console.log(err)
+    }
+    else{
+      for(var i=1; i<Number(res)+1; i++){
+
+        contract.methods.pidList(i).call((err1,pid)=>{
+        if(err1){
+          return console.log(err1)
+        }
+        else{
+          // pidList.push(pid);
+          contract.methods.certificationList(pid).call((err2,certification)=>{
+            if(err2){
+              return console.log(err2)
+            }
+            else{
+              if('{{profile.korName}}' != "" && certification[0] === '{{profile.korName}}'){
+                console.log(certification);
+
+                if(certification[8] === true ){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + certification[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">' + certification[3] + '</div><p style="font-weight:bold;">' + certification[2] + '</p></div><div class="col-md-2"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;"></div><div class="flex-shrink-0"><span class="text-primary" style="font-weight:bold">' + certification[4] + '</span><br><br></div></div><hr class="m-0"/><br><br>'
+                  certiTable.innerHTML += row;
+                }
+                else if(certification[7] === false){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + certification[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">' + certification[3] + '</div><p style="font-weight:bold;">' + certification[2] + '</p></div><div class="col-md-2"><img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;"></div><div class="flex-shrink-0"><span class="text-primary" style="font-weight:bold">' + certification[4] + '</span><br><br></div></div><hr class="m-0"/><br><br>'
+                  certiTable.innerHTML += row;
+                }
+                else if(certification[8] === false){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + certification[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">' + certification[3] + '</div><p style="font-weight:bold;">' + certification[2] + '</p></div><div class="col-md-2"><i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i></div><div class="flex-shrink-0"><span class="text-primary" style="font-weight:bold">' + certification[4] + '</span><br><br></div></div><hr class="m-0"/><br><br>'
+                  certiTable.innerHTML += row;
+                }
+
+                // certificationList.push(certification[5]);
+
+              }
+            }
+          })
+        }
+      	});
+	}
+	}
+  console.log(certificationList)
+  })
+
+  contract.methods.cidCount().call((err,res)=>{
+    if(err){
+      return console.log(err)
+    }
+    else{
+      for(var i=1; i<Number(res)+1; i++){
+
+        contract.methods.cidList(i).call((err1,cid)=>{
+        if(err1){
+          return console.log(err1)
+        }
+        else{
+          contract.methods.careerList(cid).call((err2,career)=>{
+            if(err2){
+              return console.log(err2)
+            }
+            else{
+              if('{{profile.korName}}' != "" && career[0] === '{{profile.korName}}'){
+                var row = '<tr><td style="text-align:center; font-weight:bold;">' + career[0] + '</td><td style="text-align:center; font-weight:bold;">' + career[1] + '</td><td style="text-align:center; font-weight:bold;">' + career[2] + '</td><td style="text-align:center; font-weight:bold;">' + career[3] + '</td><td style="text-align:center; font-weight:bold;">' + career[4] + '</td><td align="center"><button class="yes' + career[5] + ' btn btn-primary">YES</button></td><td align="center"><button class="no' + career[5] + ' btn btn-danger">NO</button></td></tr>'
+                if(career[9] === true ){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + career[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;" >' + career[2] + '</div><p style="font-weight:bold;">'+ career[3] + '</p></div><div class="col-md-0"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;"></div><div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">' + career[4] + ' - ' + career[5] + '</span><br><br></div></div><hr class="m-0"/><br><br>'
+                  careeTable.innerHTML += row;
+                }
+                else if(career[8] === false){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + career[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;" >' + career[2] + '</div><p style="font-weight:bold;">'+ career[3] + '</p></div><div class="col-md-0"><img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;"></div><div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">' + career[4] + ' - ' + career[5] + '</span><br><br></div></div><hr class="m-0"/><br><br>'
+                  careeTable.innerHTML += row;
+                }
+                else if(career[9] === false){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + career[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;" >' + career[2] + '</div><p style="font-weight:bold;">'+ career[3] + '</p></div><div class="col-md-0"><i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i></div><div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">' + career[4] + ' - ' + career[5] + '</span><br><br></div></div><hr class="m-0"/><br><br>'
+                  careeTable.innerHTML += row;
+                }
+
+              }
+            }
+          })
+        }
+      	});
+	}
+	}
+  })
+
+    contract.methods.eidCount().call((err,res)=>{
+    if(err){
+      return console.log(err)
+    }
+    else{
+      for(var i=1; i<Number(res)+1; i++){
+
+        contract.methods.eidList(i).call((err1,eid)=>{
+        if(err1){
+          return console.log(err1)
+        }
+        else{
+          // pidList.push(pid);
+          contract.methods.educationList(eid).call((err2,education)=>{
+            if(err2){
+              return console.log(err2)
+            }
+            else{
+              //console.log(certification[0],certification[1],certification[2]);
+              if('{{profile.korName}}' != "" && education[0] === '{{profile.korName}}'){
+
+                if(education[8] === true ){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + education[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">' + education[2] + '</div><p style="font-weight:bold;">GPA: ' + education[4] +'</p></div><div class="col-md-0"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Gnome-application-certificate.svg" style="width:auto; height:120px;"></div><div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">' + education[3] + '</span><br></div></div><hr class="m-0"/><br><br>'
+                  eduTable.innerHTML += row;
+                }
+                else if(education[7] === false){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + education[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">' + education[2] + '</div><p style="font-weight:bold;">GPA: ' + education[4] +'</p></div><div class="col-md-0"><img src="https://cdn.pixabay.com/photo/2020/06/02/12/02/rejected-5250678_960_720.png" style="width:auto; height:120px;"></div><div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">' + education[3] + '</span><br></div></div><hr class="m-0"/><br><br>'
+                  eduTable.innerHTML += row;
+                }
+                else if(education[8] === false){
+                  var row = '<div class="d-flex flex-column flex-md-row justify-content-between mb-5"><div class="flex-grow-1"><h3 class="mb-0" style="font-weight:bold;">' + education[1] + '</h3><div class="subheading mb-3" style="font-weight:bold; margin-top:10px;">' + education[2] + '</div><p style="font-weight:bold;">GPA: ' + education[4] +'</p></div><div class="col-md-0"><i style="margin-top:19px;" class="fas fa-spinner fa-5x spinner"></i></div><div class="flex-shrink-0"><span style="font-weight:bold;" class="text-primary">' + education[3] + '</span><br></div></div><hr class="m-0"/><br><br>'
+                  eduTable.innerHTML += row;
+                }
+
+              }
+            }
+          })
+        }
+      	});
+	}
+	}
+  })
+
+
+
+
+
+}
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <!-- Core theme JS-->
 <script src="{% static 'js/scripts.js' %}"></script>
-<!--web3 JS-->
-<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
-<script src="{% static 'js/web3auth.js' %}"></script>
+<!--&lt;!&ndash;web3 JS&ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>-->
+<!--<script src="{% static 'js/web3auth.js' %}"></script>-->
 </body>
 </html>

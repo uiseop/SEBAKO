@@ -30,6 +30,343 @@
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
 
 
+</head>
+<body id="page-top">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navbar-dark" style="height:70px;">
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="index.html">Health</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="probootstrap-nav">
+            <a class="navbar-brand js-scroll-trigger" href="/">SEBAKO</a>
+          <ul class="navbar-nav ml-auto">
+                  {% if user.is_active %}
+                  <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 30px">
+                    로그아웃</a></li>
+                  <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 10px">
+                      {{user.company.name}}</a></li>
+                  {% else %}
+                  <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/login" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 10px">
+                    로그인</a></li>
+                  {% endif %}
+          </ul>
+        </div>
+      </div>
+     </nav>
+<!--      ...nav end...-->
+
+
+
+  <section class="mb-5" style="margin-top: 50px">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 mb-5">
+          <h1 class="display-4" style="font-weight:bold;">요청중인 자격증 목록</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+<div class=" pl-md-10 pb-5 pl-0 probootstrap-inside" style="margin-right: 100px">
+<div class="container">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th style=" text-align:center;">성명</th>
+      <th style="text-align:center;">자격증명</th>
+      <th style=" text-align:center;">자격증번호</th>
+      <th style=" text-align:center">발급처</th>
+      <th style=" text-align:center">취득일</th>
+<!--      <th style="width:130px; text-align:center">요청 ID</th>-->
+      <th colspan="2" style="text-align:center;">처리</th>
+    </tr>
+  </thead>
+  <tbody id="certiTable">
+<script>
+              $(document).ready(function(){
+    $(".yes{{data.5}}").on('click',function(e){
+        e.preventDefault();
+
+        web3.eth.getAccounts(function get(err, res){
+          account = res[0]
+
+         transaction =
+        ({
+          from: account,
+          "gas": 900000,
+          "chainId": 3,
+          'gasPrice': web3.utils.toWei('60','Gwei'),
+        })
+
+
+        contract.methods.companySignCerti("{{data.5}}").send(
+          transaction,
+          (error,result)=>{
+            if(error){
+              console.log(error)
+            }
+            else{
+              waitForReceipt(result, function(){
+                console.log(result)
+              })
+            }
+          }
+        )
+      })
+    });
+});
+
+$(document).ready(function(){
+    $(".no{{data.5}}").on('click',function(e){
+        e.preventDefault();
+
+        web3.eth.getAccounts(function get(err, res){
+          account = res[0]
+
+         transaction =
+        ({
+          from: account,
+          "gas": 900000,
+          "chainId": 3,
+          'gasPrice': web3.utils.toWei('60','Gwei'),
+        })
+
+
+        contract.methods.companyRejectCerti("{{data.5}}").send(
+          transaction,
+          (error,result)=>{
+            if(error){
+              console.log(error)
+            }
+            else{
+              waitForReceipt(result, function(){
+                console.log(result)
+              })
+            }
+          }
+        )
+      })
+    });
+});
+        </script>
+<!--    </tr>-->
+  </tbody>
+</table>
+</div>
+</div>
+<!--      자격증 목록 끝-->
+
+  <section class="mb-5" style="margin-top: 50px">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 mb-5">
+          <h1 class="display-4" style="font-weight:bold;">요청중인 경력 목록</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<div class=" pl-md-10 pb-5 pl-0 probootstrap-inside" style="margin-right: 100px">
+<div class="container">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th style="text-align:center;">성명</th>
+      <th style="text-align:center;">직무</th>
+      <th style="text-align:center;">회사명</th>
+      <th style="text-align:center">근무내용</th>
+      <th style="text-align:center">기간</th>
+      <th colspan="2" style="text-align:center;">처리</th>
+    </tr>
+  </thead>
+  <tbody id="careeTable">
+
+
+        <script>
+
+              $(document).ready(function(){
+    $(".yes{{data.6}}").on('click',function(e){
+        e.preventDefault();
+
+        web3.eth.getAccounts(function get(err, res){
+          account = res[0]
+
+         transaction =
+        ({
+          from: account,
+          "gas": 900000,
+          "chainId": 3,
+          'gasPrice': web3.utils.toWei('60','Gwei'),
+        })
+
+
+        contract.methods.companySignCaree("{{data.6}}").send(
+          transaction,
+          (error,result)=>{
+            if(error){
+              console.log(error)
+            }
+            else{
+              waitForReceipt(result, function(){
+                console.log(result)
+              })
+            }
+          }
+        )
+      })
+    });
+});
+
+$(document).ready(function(){
+    $(".no{{data.6}}").on('click',function(e){
+        e.preventDefault();
+
+        web3.eth.getAccounts(function get(err, res){
+          account = res[0]
+
+         transaction =
+        ({
+          from: account,
+          "gas": 900000,
+          "chainId": 3,
+          'gasPrice': web3.utils.toWei('60','Gwei'),
+        })
+
+
+        contract.methods.companyRejectCaree("{{data.6}}").send(
+          transaction,
+          (error,result)=>{
+            if(error){
+              console.log(error)
+            }
+            else{
+              waitForReceipt(result, function(){
+                console.log(result)
+              })
+            }
+          }
+        )
+      })
+    });
+});
+        </script>
+
+  </tbody>
+</table>
+</div>
+</div>
+<!--요청중인 경력 목록 끝-->
+  <section class="mb-5" style="margin-top: 50px">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 mb-5">
+          <h1 class="display-4" style="font-weight:bold;">요청중인 학력 목록</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<div class=" pl-md-10 pb-5 pl-0 probootstrap-inside" style="margin-right: 100px">
+<div class="container">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th style="text-align:center;">성명</th>
+      <th style="text-align:center;">학교명</th>
+      <th style="text-align:center;">전공</th>
+      <th style="text-align:center">학점</th>
+      <th style="text-align:center">졸업연도</th>
+      <th colspan="2" style="text-align:center;">처리</th>
+    </tr>
+  </thead>
+  <tbody id="eduTable">
+        <script>
+
+              $(document).ready(function(){
+    $(".yes{{data.5}}").on('click',function(e){
+        e.preventDefault();
+
+        web3.eth.getAccounts(function get(err, res){
+          account = res[0]
+
+         transaction =
+        ({
+          from: account,
+          "gas": 900000,
+          "chainId": 3,
+          'gasPrice': web3.utils.toWei('60','Gwei'),
+        })
+
+
+        contract.methods.companySignEdu("{{data.5}}").send(
+          transaction,
+          (error,result)=>{
+            if(error){
+              console.log(error)
+            }
+            else{
+              waitForReceipt(result, function(){
+                console.log(result)
+              })
+            }
+          }
+        )
+      })
+    });
+});
+
+$(document).ready(function(){
+    $(".no{{data.5}}").on('click',function(e){
+        e.preventDefault();
+
+        web3.eth.getAccounts(function get(err, res){
+          account = res[0]
+
+         transaction =
+        ({
+          from: account,
+          "gas": 900000,
+          "chainId": 3,
+          'gasPrice': web3.utils.toWei('60','Gwei'),
+        })
+
+
+        contract.methods.companyRejectEdu("{{data.5}}").send(
+          transaction,
+          (error,result)=>{
+            if(error){
+              console.log(error)
+            }
+            else{
+              waitForReceipt(result, function(){
+                console.log(result)
+              })
+            }
+          }
+        )
+      })
+    });
+});
+        </script>
+  </tbody>
+
+</table>
+</div>
+</div>
+
+
+
+</div>
 <script >
 const abi = [
 	{
@@ -713,14 +1050,7 @@ const address = "0xED111aBCE5A36F48bed94B18a995D78B4069f1b5"
   window.web3 = new Web3(window.ethereum)
   web3 = window.web3
   contract = new web3.eth.Contract(abi,address)
-  contract.methods.pidCount.call((err,res)=>{
-    if(err){
-      return console.log(err)
-    }
-    else{
-      return console.log(res.toString())
-    }
-  })
+
 function waitForReceipt(hash, cb) {
     web3.eth.getTransactionReceipt(hash, function (err, receipt) {
       if (err) {
@@ -740,375 +1070,330 @@ function waitForReceipt(hash, cb) {
     });
 }
 
+
+
+function buttonClickCerti(bt){
+  web3.eth.getAccounts(function (error, res) {
+    account = res[0]
+
+    transaction =
+      ({
+        from: account,
+        "gas": 900000,
+        "chainId": 3,
+        'gasPrice': web3.utils.toWei('60','Gwei'),
+      })
+
+      contract.methods.companySignCerti(bt.value).send(
+        transaction,
+        (error,result)=>{
+          if(error){
+            console.log(error)
+          }
+          else{
+            waitForReceipt(result, function(){
+              console.log(result)
+            })
+          }
+        }
+      )
+  });
+}
+
+function buttonClickCaree(bt){
+  web3.eth.getAccounts(function (error, res) {
+    account = res[0]
+
+    transaction =
+      ({
+        from: account,
+        "gas": 900000,
+        "chainId": 3,
+        'gasPrice': web3.utils.toWei('60','Gwei'),
+      })
+
+      contract.methods.companySignCaree(bt.value).send(
+        transaction,
+        (error,result)=>{
+          if(error){
+            console.log(error)
+          }
+          else{
+            waitForReceipt(result, function(){
+              console.log(result)
+            })
+          }
+        }
+      )
+  });
+}
+
+function buttonClickEdu(bt){
+  web3.eth.getAccounts(function (error, res) {
+    account = res[0]
+
+    transaction =
+      ({
+        from: account,
+        "gas": 900000,
+        "chainId": 3,
+        'gasPrice': web3.utils.toWei('60','Gwei'),
+      })
+
+      contract.methods.companySignEdu(bt.value).send(
+        transaction,
+        (error,result)=>{
+          if(error){
+            console.log(error)
+          }
+          else{
+            waitForReceipt(result, function(){
+              console.log(result)
+            })
+          }
+        }
+      )
+  });
+}
+
+function buttonRegiCerti(bt){
+  web3.eth.getAccounts(function (error, res) {
+    account = res[0]
+
+    transaction =
+      ({
+        from: account,
+        "gas": 900000,
+        "chainId": 3,
+        'gasPrice': web3.utils.toWei('60','Gwei'),
+      })
+
+      contract.methods.companyRejectCerti(bt.value).send(
+        transaction,
+        (error,result)=>{
+          if(error){
+            console.log(error)
+          }
+          else{
+            waitForReceipt(result, function(){
+              console.log(result)
+            })
+          }
+        }
+      )
+  });
+}
+
+function buttonRegiCaree(bt){
+  web3.eth.getAccounts(function (error, res) {
+    account = res[0]
+
+    transaction =
+      ({
+        from: account,
+        "gas": 900000,
+        "chainId": 3,
+        'gasPrice': web3.utils.toWei('60','Gwei'),
+      })
+
+      contract.methods.companyRejectCaree(bt.value).send(
+        transaction,
+        (error,result)=>{
+          if(error){
+            console.log(error)
+          }
+          else{
+            waitForReceipt(result, function(){
+              console.log(result)
+            })
+          }
+        }
+      )
+  });
+}
+
+function buttonRegiEdu(bt){
+  web3.eth.getAccounts(function (error, res) {
+    account = res[0]
+
+    transaction =
+      ({
+        from: account,
+        "gas": 900000,
+        "chainId": 3,
+        'gasPrice': web3.utils.toWei('60','Gwei'),
+      })
+
+      contract.methods.companyRejectEdu(bt.value).send(
+        transaction,
+        (error,result)=>{
+          if(error){
+            console.log(error)
+          }
+          else{
+            waitForReceipt(result, function(){
+              console.log(result)
+            })
+          }
+        }
+      )
+  });
+}
+
+$(document).ready(function(){
+  $(".no{{data.6}}").on('click',function(e){
+      e.preventDefault();
+
+      web3.eth.getAccounts(function get(err, res){
+        account = res[0]
+
+       transaction =
+      ({
+        from: account,
+        "gas": 900000,
+        "chainId": 3,
+        'gasPrice': web3.utils.toWei('60','Gwei'),
+      })
+
+
+      contract.methods.companyRejectCaree("{{data.6}}").send(
+        transaction,
+        (error,result)=>{
+          if(error){
+            console.log(error)
+          }
+          else{
+            waitForReceipt(result, function(){
+              console.log(result)
+            })
+          }
+        }
+      )
+    })
+  });
+});
+
+window.onload = loadBlockData();
+var certificationList = new Array();
+
+
+function loadBlockData(){
+
+ var certiTable = document.getElementById('certiTable');
+ var careeTable = document.getElementById('careeTable');
+ var eduTable = document.getElementById('eduTable');
+
+
+ contract.methods.pidCount().call((err,res)=>{
+    if(err){
+      return console.log(err)
+    }
+    else{
+      for(var i=1; i<Number(res)+1; i++){
+
+        contract.methods.pidList(i).call((err1,pid)=>{
+        if(err1){
+          return console.log(err1)
+        }
+        else{
+          // pidList.push(pid);
+          contract.methods.certificationList(pid).call((err2,certification)=>{
+            if(err2){
+              return console.log(err2)
+            }
+            else{
+              //console.log(certification[0],certification[1],certification[2]);
+              if(certification[8] === false && certification[7] === true && certification[3] === '{{user.company.name}}'){
+
+                var row = '<tr><td style="text-align:center; font-weight:bold;">' + certification[0] + '</td><td style="text-align:center; font-weight:bold;">' + certification[1] + '</td><td style="text-align:center; font-weight:bold;">' + certification[2] + '</td><td style="text-align:center; font-weight:bold;">' + certification[3] + '</td><td style="text-align:center; font-weight:bold;">' + certification[4] + '</td><td align="center"><button value=' + certification[5] + ' onclick="buttonClickCerti(this)" class="yes' + certification[5] + ' btn btn-primary">YES</button></td><td align="center"><button value=' + certification[5] + ' onclick=buttonRegiCerti(this) class="no' + certification[5] + ' btn btn-danger">NO</button></td></tr>'
+                certiTable.innerHTML += row;
+
+                certificationList.push(certification[5]);
+
+              }
+            }
+          })
+        }
+      	});
+	}
+	}
+  console.log(certificationList)
+  })
+
+  contract.methods.cidCount().call((err,res)=>{
+    if(err){
+      return console.log(err)
+    }
+    else{
+      for(var i=1; i<Number(res)+1; i++){
+
+        contract.methods.cidList(i).call((err1,cid)=>{
+        if(err1){
+          return console.log(err1)
+        }
+        else{
+          // pidList.push(pid);
+          contract.methods.careerList(cid).call((err2,career)=>{
+            if(err2){
+              return console.log(err2)
+            }
+            else{
+              //console.log(certification[0],certification[1],certification[2]);
+              if(career[9] === false && career[8] === true && career[2] == '{{user.company.name}}'){
+                var row = '<tr><td style="text-align:center; font-weight:bold;">' + career[0] + '</td><td style="text-align:center; font-weight:bold;">' + career[1] + '</td><td style="text-align:center; font-weight:bold;">' + career[2] + '</td><td style="text-align:center; font-weight:bold;">' + career[3] + '</td><td style="text-align:center; font-weight:bold;">' + career[4] + ' ~ ' + career[5] + '</td><td align="center"><button value=' + career[6] + ' onclick="buttonClickCaree(this)" class="yes' + career[6] + ' btn btn-primary">YES</button></td><td align="center"><button value=' + career[6] + ' onclick="buttonRegiCaree(this)" class="no' + career[6] + ' btn btn-danger">NO</button></td></tr>'
+                careeTable.innerHTML += row;
+                console.log(111,career);
+
+              }
+            }
+          })
+        }
+      	});
+	}
+	}
+  })
+
+  contract.methods.eidCount().call((err,res)=>{
+    if(err){
+      return console.log(err)
+    }
+    else{
+      for(var i=1; i<Number(res)+1; i++){
+
+        contract.methods.eidList(i).call((err1,eid)=>{
+        if(err1){
+          return console.log(err1)
+        }
+        else{
+          // pidList.push(pid);
+          contract.methods.educationList(eid).call((err2,education)=>{
+            if(err2){
+              return console.log(err2)
+            }
+            else{
+              //console.log(certification[0],certification[1],certification[2]);
+              if(education[8] === false && education[7] === true && education[1] == '{{user.company.name}}'){
+                var row = '<tr><td style="text-align:center; font-weight:bold;">' + education[0] + '</td><td style="text-align:center; font-weight:bold;">' + education[1] + '</td><td style="text-align:center; font-weight:bold;">' + education[2] + '</td><td style="text-align:center; font-weight:bold;">' + education[3] + '</td><td style="text-align:center; font-weight:bold;">' + education[4] + '</td><td align="center"><button value=' + education[5] + ' onclick="buttonClickEdu(this)" class="yes' + education[5] + ' btn btn-primary">YES</button></td><td align="center"><button value=' + education[5] + ' onclick="buttonRegiEdu(this)" class="no' + education[5] + ' btn btn-danger">NO</button></td></tr>'
+                eduTable.innerHTML += row;
+                console.log(111,education);
+
+              }
+            }
+          })
+        }
+      	});
+	}
+	}
+  })
+
+
+
+
+
+}
+
+
 </script>
-</head>
-<body id="page-top">
-  <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navbar-dark" style="height:70px;">
-      <div class="container-fluid">
-        <!-- <a class="navbar-brand" href="index.html">Health</a> -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="probootstrap-nav">
-            <a class="navbar-brand js-scroll-trigger" href="/">SEBAKO</a>
-          <ul class="navbar-nav ml-auto">
-                  {% if user.is_active %}
-                  <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/logout" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 30px">
-                    로그아웃</a></li>
-                  <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 10px">
-                      {{user.company.name}}</a></li>
-                  {% else %}
-                  <li class="nav-item"><a class="nav-link js-scroll-trigger" style="font-weight:bold;" href="/accounts/login" style="font-family: 'Noto Sans KR', sans-serif; font-weight : bold; font-size : 10px">
-                    로그인</a></li>
-                  {% endif %}
-          </ul>
-        </div>
-      </div>
-     </nav>
-<!--      ...nav end...-->
-
-
-
-  <section class="mb-5" style="margin-top: 50px">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 mb-5">
-          <h1 class="display-4" style="font-weight:bold;">요청중인 자격증 목록</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
-<div class=" pl-md-10 pb-5 pl-0 probootstrap-inside" style="margin-right: 100px">
-<div class="container">
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th style=" text-align:center;">성명</th>
-      <th style="text-align:center;">자격증명</th>
-      <th style=" text-align:center;">자격증번호</th>
-      <th style=" text-align:center">발급처</th>
-      <th style=" text-align:center">취득일</th>
-<!--      <th style="width:130px; text-align:center">요청 ID</th>-->
-      <th colspan="2" style="text-align:center;">처리</th>
-    </tr>
-  </thead>
-  {% for data in datas %}
-  <tbody>
-    <tr>
-      <td style="text-align:center">{{data.0}}</td>
-      <td style="text-align:center">{{data.1}}</td>
-      <td style="text-align:center">{{data.2}}</td>
-      <td style="text-align:center">{{data.3}}</td>
-      <td style="text-align:center">{{data.4}}</td>
-<!--      <td style="text-align:center">{{data.5}}</td>-->
-        <td align="center"><button class="yes{{data.5}} btn btn-primary">YES</button></td>
-        <td align="center"><button class="no{{data.5}} btn btn-danger">NO</button></td>
-        <script>
-
-
-              $(document).ready(function(){
-    $(".yes{{data.5}}").on('click',function(e){
-        e.preventDefault();
-
-        web3.eth.getAccounts(function get(err, res){
-          account = res[0]
-
-         transaction =
-        ({
-          from: account,
-          "gas": 900000,
-          "chainId": 3,
-          'gasPrice': web3.utils.toWei('60','Gwei'),
-        })
-
-
-        contract.methods.companySignCerti("{{data.5}}").send(
-          transaction,
-          (error,result)=>{
-            if(error){
-              console.log(error)
-            }
-            else{
-              waitForReceipt(result, function(){
-                console.log(result)
-              })
-            }
-          }
-        )
-      })
-    });
-});
-
-$(document).ready(function(){
-    $(".no{{data.5}}").on('click',function(e){
-        e.preventDefault();
-
-        web3.eth.getAccounts(function get(err, res){
-          account = res[0]
-
-         transaction =
-        ({
-          from: account,
-          "gas": 900000,
-          "chainId": 3,
-          'gasPrice': web3.utils.toWei('60','Gwei'),
-        })
-
-
-        contract.methods.companyRejectCerti("{{data.5}}").send(
-          transaction,
-          (error,result)=>{
-            if(error){
-              console.log(error)
-            }
-            else{
-              waitForReceipt(result, function(){
-                console.log(result)
-              })
-            }
-          }
-        )
-      })
-    });
-});
-        </script>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
-</div>
-</div>
-<!--      자격증 목록 끝-->
-
-  <section class="mb-5" style="margin-top: 50px">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 mb-5">
-          <h1 class="display-4" style="font-weight:bold;">요청중인 경력 목록</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-<div class=" pl-md-10 pb-5 pl-0 probootstrap-inside" style="margin-right: 100px">
-<div class="container">
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th style="text-align:center;">성명</th>
-      <th style="text-align:center;">직무</th>
-      <th style="text-align:center;">회사명</th>
-      <th style="text-align:center">근무내용</th>
-      <th style="text-align:center">기간</th>
-      <th colspan="2" style="text-align:center;">처리</th>
-    </tr>
-  </thead>
-  {% for data in cdatas %}
-  <tbody>
-    <tr>
-      <td style="text-align:center">{{data.0}}</td>
-      <td style="text-align:center">{{data.1}}</td>
-      <td style="text-align:center">{{data.2}}</td>
-      <td style="text-align:center">{{data.3}}</td>
-      <td style="text-align:center">{{data.4}} ~ {{data.5}}</td>
-        <td align="center"><button class="yes{{data.6}} btn btn-primary">YES</button></td>
-        <td align="center"><button class="no{{data.6}} btn btn-danger">NO</button></td>
-        <script>
-
-              $(document).ready(function(){
-    $(".yes{{data.6}}").on('click',function(e){
-        e.preventDefault();
-
-        web3.eth.getAccounts(function get(err, res){
-          account = res[0]
-
-         transaction =
-        ({
-          from: account,
-          "gas": 900000,
-          "chainId": 3,
-          'gasPrice': web3.utils.toWei('60','Gwei'),
-        })
-
-
-        contract.methods.companySignCaree("{{data.6}}").send(
-          transaction,
-          (error,result)=>{
-            if(error){
-              console.log(error)
-            }
-            else{
-              waitForReceipt(result, function(){
-                console.log(result)
-              })
-            }
-          }
-        )
-      })
-    });
-});
-
-$(document).ready(function(){
-    $(".no{{data.6}}").on('click',function(e){
-        e.preventDefault();
-
-        web3.eth.getAccounts(function get(err, res){
-          account = res[0]
-
-         transaction =
-        ({
-          from: account,
-          "gas": 900000,
-          "chainId": 3,
-          'gasPrice': web3.utils.toWei('60','Gwei'),
-        })
-
-
-        contract.methods.companyRejectCaree("{{data.6}}").send(
-          transaction,
-          (error,result)=>{
-            if(error){
-              console.log(error)
-            }
-            else{
-              waitForReceipt(result, function(){
-                console.log(result)
-              })
-            }
-          }
-        )
-      })
-    });
-});
-        </script>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
-</div>
-</div>
-<!--요청중인 경력 목록 끝-->
-  <section class="mb-5" style="margin-top: 50px">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 mb-5">
-          <h1 class="display-4" style="font-weight:bold;">요청중인 학력 목록</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-<div class=" pl-md-10 pb-5 pl-0 probootstrap-inside" style="margin-right: 100px">
-<div class="container">
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th style="text-align:center;">성명</th>
-      <th style="text-align:center;">학교명</th>
-      <th style="text-align:center;">전공</th>
-      <th style="text-align:center">학점</th>
-      <th style="text-align:center">졸업연도</th>
-      <th colspan="2" style="text-align:center;">처리</th>
-    </tr>
-  </thead>
-  {% for data in edatas %}
-  <tbody>
-    <tr>
-      <td style="text-align:center">{{data.0}}</td>
-      <td style="text-align:center">{{data.1}}</td>
-      <td style="text-align:center">{{data.2}}</td>
-      <td style="text-align:center">{{data.4}}</td>
-      <td style="text-align:center">{{data.3}}</td>
-        <td align="center"><button class="yes{{data.5}} btn btn-primary">YES</button></td>
-        <td align="center"><button class="no{{data.5}} btn btn-danger">NO</button></td>
-        <script>
-
-              $(document).ready(function(){
-    $(".yes{{data.5}}").on('click',function(e){
-        e.preventDefault();
-
-        web3.eth.getAccounts(function get(err, res){
-          account = res[0]
-
-         transaction =
-        ({
-          from: account,
-          "gas": 900000,
-          "chainId": 3,
-          'gasPrice': web3.utils.toWei('60','Gwei'),
-        })
-
-
-        contract.methods.companySignEdu("{{data.5}}").send(
-          transaction,
-          (error,result)=>{
-            if(error){
-              console.log(error)
-            }
-            else{
-              waitForReceipt(result, function(){
-                console.log(result)
-              })
-            }
-          }
-        )
-      })
-    });
-});
-
-$(document).ready(function(){
-    $(".no{{data.5}}").on('click',function(e){
-        e.preventDefault();
-
-        web3.eth.getAccounts(function get(err, res){
-          account = res[0]
-
-         transaction =
-        ({
-          from: account,
-          "gas": 900000,
-          "chainId": 3,
-          'gasPrice': web3.utils.toWei('60','Gwei'),
-        })
-
-
-        contract.methods.companyRejectEdu("{{data.5}}").send(
-          transaction,
-          (error,result)=>{
-            if(error){
-              console.log(error)
-            }
-            else{
-              waitForReceipt(result, function(){
-                console.log(result)
-              })
-            }
-          }
-        )
-      })
-    });
-});
-        </script>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
-</div>
-</div>
-
-
-
-</div>
 
 </body>
 </html>

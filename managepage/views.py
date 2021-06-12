@@ -1,3 +1,4 @@
+import asyncio
 import json
 
 from django.core.paginator import Paginator
@@ -811,7 +812,7 @@ certifi_address = web3.toChecksumAddress(certifi_address)
 
 contract = web3.eth.contract(address=contract_address,abi=abi)
 certifi_contract = web3.eth.contract(address=certifi_address,abi=abi2)
-print(contract)
+
 
 def getCompanyId():
     compIds = []
@@ -889,47 +890,29 @@ def certificationDatabase(request,pk):
     certificationList = []
     careerList = []
     educationList = []
-    pids = getCertificationId()
-    cids = getCareerId()
-    eids = getEducationId()
-    for pid in pids:
-        certification = certifi_contract.functions.certificationList(pid).call()
-        certificationList.append(certification)
+    # pids = getCertificationId()
+    # cids = getCareerId()
+    # eids = getEducationId()
+    # companyname = request.user.company.name
+    # for pid in pids:
+    #     certification = certifi_contract.functions.certificationList(pid).call()
+    #     if certification[8] == False and certification[7] == True and certification[3] == companyname:
+    #         certificationList.append(certification)
 
-    for cid in cids:
-        career = certifi_contract.functions.careerList(cid).call()
-        careerList.append(career)
+    # for cid in cids:
+    #     career = certifi_contract.functions.careerList(cid).call()
+    #     if career[9] == False and career[8] == True and career[2] == companyname:
+    #         careerList.append(career)
+    #
+    # for eid in eids:
+    #     education = certifi_contract.functions.educationList(eid).call()
+    #     if education[8] == False and education[7] == True and education[1] == companyname:
+    #         educationList.append(education)
 
-    for eid in eids:
-        education = certifi_contract.functions.educationList(eid).call()
-        educationList.append(education)
-
-    new_list = []
-    new_clist = []
-    new_elist = []
-    for data in certificationList:
-        if data[8] == False and data[7] == True and data[3] == request.user.company.name:
-            new_list.append(data)
-        else:
-            continue
-
-    for data in careerList:
-        print(data)
-        if data[9] == False and data[8] == True and data[2] == request.user.company.name:
-            new_clist.append(data)
-            print(new_clist)
-        else:
-            continue
-
-    for data in educationList:
-        if data[8] == False and data[7] == True and data[1] == request.user.company.name:
-            new_elist.append(data)
-        else:
-            continue
     context = {
-        "datas":new_list,
-        "cdatas":new_clist,
-        "edatas":new_elist
+        "datas":certificationList,
+        "cdatas":careerList,
+        "edatas":educationList
     }
     return render(request, 'managepage/indexDetail.html',context)
 

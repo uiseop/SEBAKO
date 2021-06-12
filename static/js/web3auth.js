@@ -1,7 +1,6 @@
 console.log('hi its web3 its very funny')
 var idx = 0;
 console.log(idx)
-window.onload = loadData()
 async function updateIdx(){
     idx = await loadData();
     console.log(idx)

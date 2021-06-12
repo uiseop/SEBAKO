@@ -858,45 +858,44 @@ def PageDetail(request, pk):
     certificationList = []
     careerList = []
     educationList = []
-    pids = getCertificationId()
-    cids = getCareerId()
-    eids = getEducationId()
-    for pid in pids:
-        certification = certifi_contract.functions.certificationList(pid).call()
-        certificationList.append(certification)
-
-    for cid in cids:
-        career = certifi_contract.functions.careerList(cid).call()
-        careerList.append(career)
-
-    for eid in eids:
-        education = certifi_contract.functions.educationList(eid).call()
-        educationList.append(education)
-
+    # pids = getCertificationId()
+    # cids = getCareerId()
+    # eids = getEducationId()
+    # for pid in pids:
+    #     certification = certifi_contract.functions.certificationList(pid).call()
+    #     certificationList.append(certification)
+    #
+    # # for cid in cids:
+    # #     career = certifi_contract.functions.careerList(cid).call()
+    # #     careerList.append(career)
+    # #
+    # # for eid in eids:
+    # #     education = certifi_contract.functions.educationList(eid).call()
+    # #     educationList.append(education)
+    #
     new_list = []
     new_clist = []
     new_elist = []
-    for data in certificationList:
-        if profile.korName != '':
-            if data[0] == profile.korName:
-                new_list.append(data)
-            else:
-                continue
-
-    for data in careerList:
-        print(data)
-        if profile.korName != '':
-            if data[0] == profile.korName:
-                new_clist.append(data)
-            else:
-                continue
-
-    for data in educationList:
-        if profile.korName != '':
-            if data[0] == profile.korName:
-                new_elist.append(data)
-            else:
-                continue
+    # for data in certificationList:
+    #     if profile.korName != '':
+    #         if data[0] == profile.korName:
+    #             new_list.append(data)
+    #         else:
+    #             continue
+    #
+    # for data in careerList:
+    #     if profile.korName != '':
+    #         if data[0] == profile.korName:
+    #             new_clist.append(data)
+    #         else:
+    #             continue
+    #
+    # for data in educationList:
+    #     if profile.korName != '':
+    #         if data[0] == profile.korName:
+    #             new_elist.append(data)
+    #         else:
+    #             continue
 
     context = {
         "datas":new_list,
