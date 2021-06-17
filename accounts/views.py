@@ -10,7 +10,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from accounts.forms import personForm
 from accounts.models import Profile, Person, SNS, Company
 
-
+# 메인페이지
 def home(request):
     return render(request, 'accounts/home2.html')
     # return render(request, 'zzsignup.html')
@@ -24,11 +24,11 @@ def detail(request, pk):
 def index(request):
     return render(request, 'accounts/index.html')
 
-
+# 회원가입 페이지
 def signup(request):
     return render(request, 'accounts/signup.html')
 
-
+# ID,PW를 통한 기업 회원가입
 def signup_company(request):
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
@@ -65,7 +65,7 @@ def signup_company(request):
         return render(request, 'accounts/signup_personal.html')
     return render(request, 'accounts/signup_company.html')
 
-
+# ID,PW를 통한 개인 회원가입
 def signup_personal(request):
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
@@ -102,7 +102,7 @@ def signup_personal(request):
         return render(request, 'accounts/signup_personal.html')
     return render(request, 'accounts/signup_personal.html')
 
-
+# ID,PW를 통한 로그인
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -131,12 +131,12 @@ def login_company(request):
 
     return render(request, 'accounts/login_company.html')
 
-
+# 기본 제공 로그아웃
 def logout(request):
     auth.logout(request)
     return redirect('home')
 
-
+# web3 모듈을 통해 지갑아이디로 일반회원 회원가입
 def personal_signUp(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -180,6 +180,7 @@ def company_signUp(request):
     }
     return HttpResponse(status=201)
 
+# web3 모듈을 통해 지갑아이디로 통한 로그인
 def login_wallet(request):
     if request.user.is_authenticated:
         return redirect('home')

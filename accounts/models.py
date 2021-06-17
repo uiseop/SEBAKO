@@ -7,16 +7,16 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
-
+# 일반회원
 class Person(models.Model):
     is_user = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='지갑주소')
-
+# 기업회원
 class Company(models.Model):
     is_company = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='지갑주소')
     name = models.CharField(max_length=30, verbose_name='회사이름')
-
+# 일반회원 프로필 - 일반회원을 외례키로 상속받음
 class Profile(models.Model):
     user_id = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='아이디', db_column='user_id')
     korName = models.CharField(max_length=30, verbose_name='한글이름')
