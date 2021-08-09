@@ -27,6 +27,10 @@ https://www.youtube.com/watch?v=tP9QR3QGE1k&list=PLysGR-hSRFyFPPrBvG87TBiEMkuRcL
 * **기업회원**은 해당 기업이름으로 요청된 인증사항들(자격증, 경력, 학력)에 대해 승인/거절을 할 수 있습니다. 혹은 API를 지원하여 자동으로 처리가 되도록 요청할수 있습니다.
 * **개인회원**은 개인의 인증받고싶은 사항들에 대해 요청을 보낼 수 있고, 등록된 개인지갑을 활용해 요청에 대한 처리 결과를 확인할 수 있습니다.
 
+## 프로젝트 개인 역할 및 결과물 소개
+![Screenshot_20210809-232139_Office](https://user-images.githubusercontent.com/75655047/128722156-37b7400e-d1da-498e-82df-4c7d21ecf2c7.jpg)
+
+
 ## 사용방법
 1. Metamask 설치 및 개인지갑 생성
 
